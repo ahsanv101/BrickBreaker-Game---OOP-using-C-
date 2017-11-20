@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="BrickBreaker" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/BrickBreaker" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/BrickBreaker" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="MINGW_Lib/include/SDL2" />
+		</Compiler>
+		<Linker>
+			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image" />
+			<Add directory="MINGW_Lib/lib" />
+		</Linker>
+		<Unit filename="Classes/Ball.cpp" />
+		<Unit filename="Classes/Ball.h" />
+		<Unit filename="Classes/Bat.cpp" />
+		<Unit filename="Classes/Bat.h" />
+		<Unit filename="Classes/Board.cpp" />
+		<Unit filename="Classes/Board.h" />
+		<Unit filename="Classes/Brick.h" />
+		<Unit filename="Classes/Bricks.cpp" />
+		<Unit filename="Classes/Bricks.h" />
+		<Unit filename="Classes/Fire.cpp" />
+		<Unit filename="Classes/Fire.h" />
+		<Unit filename="Classes/GamePlay.cpp" />
+		<Unit filename="Classes/GamePlay.h" />
+		<Unit filename="Classes/LTexture.cpp" />
+		<Unit filename="Classes/LTexture.h" />
+		<Unit filename="Classes/Node.h" />
+		<Unit filename="Classes/NormalBall.cpp" />
+		<Unit filename="Classes/NormalBall.h" />
+		<Unit filename="Classes/NormalFire.cpp" />
+		<Unit filename="Classes/NormalFire.h" />
+		<Unit filename="Classes/Object.cpp" />
+		<Unit filename="Classes/Object.h" />
+		<Unit filename="Classes/Point.cpp" />
+		<Unit filename="Classes/Point.h" />
+		<Unit filename="Classes/Queue.cpp" />
+		<Unit filename="Classes/Queue.h" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
