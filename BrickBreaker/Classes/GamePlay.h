@@ -5,21 +5,55 @@
 #include "Board.h"
 #include "LTexture.h"
 
+
+#include"Queue.h"
+#include"Object.h"
+
+
+// Define the dimensions of the board and bricks
+#define BOARD_WIDTH 12
+#define BOARD_HEIGHT 8
+#define BOARD_BRWIDTH 63
+#define BOARD_BRHEIGHT 31
+
+#include <typeinfo>
+
+
+
 class GamePlay
 {
-    public:
+        public:
 
+
+        void Update(float delta);
+
+        void CreateLevel();
+
+        float brickoffsetx, brickoffsety;
+
+        // Define the two-dimensional array of bricks
+        //Brick bricks[BOARD_WIDTH][BOARD_HEIGHT];
+        Queue brickstorender;
+
+
+        SDL_Texture* bricktexture;
+        SDL_Texture* sidetexture;
+
+
+
+
+        float x, y , width, height;
         const int SCREEN_WIDTH = 1000;
         const int SCREEN_HEIGHT = 650;
         const int speed = 5;
         Bat* bat;
         Ball* ball;
-        Board* board1;
-        Board* board2;
-        Board* board3;
+
         GamePlay();
+        GamePlay(SDL_Renderer* gRenderer);
+
         ~GamePlay();
-        void Render(long int& frame, SDL_Renderer* gRenderer);
+        void Render(SDL_Renderer* renderer, float delta);
 
 
     private:

@@ -10,6 +10,7 @@
 #include "Classes/Board.h"
 #include "Classes/NormalBall.h"
 #include "Classes/GamePlay.h"
+#include "ScreenManager.h"
 
 
 //Pre defined screen width and height
@@ -63,11 +64,12 @@ int main( int argc, char* args[] )
 
     /* generate secret number between 1 and 10: */
     int random =0;
-
+    GamePlay* game  = new GamePlay(gRenderer);
     Bat* bat = new Bat(&gSpriteSheetTexture, SCREEN_WIDTH/2, 630);
     NormalBall* ball = new NormalBall(&gSpriteSheetTexture, bat->x,bat->y-23);
-    Board* board = new Board(gRenderer);
-    board->CreateLevel();
+    game->CreateLevel();
+    //Board* board = new Board(gRenderer);
+    //board->CreateLevel();
     bool shoot = false;
     while( !quit )                          //While application is running
     {
@@ -107,7 +109,7 @@ int main( int argc, char* args[] )
         xSpriteSheetTexture.Render(0, 0, 0, 0.0, NULL, SDL_FLIP_NONE, gRenderer);
         bat->Render(frame, gRenderer);
         ball->Render(frame,gRenderer);
-        board->Render(0.1f);
+        game->Render(gRenderer,0.1f);
         if (shoot){
             ball->Move(1,-1);
         }
