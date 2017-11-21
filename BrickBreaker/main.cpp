@@ -23,18 +23,19 @@ bool loadMedia();
 void close();
 
 SDL_Window* gWindow = NULL;
-
 SDL_Renderer* gRenderer = NULL;
-
 LTexture gSpriteSheetTexture;
 LTexture tSpriteSheetTexture;
 LTexture lSpriteSheetTexture;
 LTexture xSpriteSheetTexture;
+
+//All Screens will implement this protocol to get rendered on through main
+ScreenManager* currentManager = NULL;
+
 bool init();
 bool loadMedia();
 void close();
 bool checkCollision( SDL_Rect , SDL_Rect  );
-bool asd = false;
 
 int main( int argc, char* args[] )
 {
@@ -42,67 +43,49 @@ int main( int argc, char* args[] )
 	if( !init() )
 	{
 		printf( "Failed to initialize!\n" );
+		close();
+		return -1;
 	}
-	else
-	{
-		//Load media
-		if( !loadMedia() )
-		{
-			printf( "Failed to load media!\n" );
-		}
-		else
-		{
+    //Load media
+    if( !loadMedia() )
+    {
+        printf( "Failed to load media!\n" );
+        close();
+        return -2;
+    }
+    bool quit = false;                      //Main loop flag
+    SDL_Event e;                            //Event handler
 
-			bool quit = false;                      //Main loop flag
+    long int frame = 0;                     //Current animation frame
 
-			SDL_Event e;                            //Event handler
+    /* initialize random seed: */
+    srand (time(NULL));
 
-			long int frame = 0;                     //Current animation frame
+    /* generate secret number between 1 and 10: */
+    int random =0;
 
-			/* initialize random seed: */
-            srand (time(NULL));
-
-            /* generate secret number between 1 and 10: */
-            int random =0;
-
-            Bat* bat = new Bat(&gSpriteSheetTexture, SCREEN_WIDTH/2, 630);
-            NormalBall* ball = new NormalBall(&gSpriteSheetTexture, bat->x,bat->y-23);
-            Board* board = new Board(gRenderer);
-			board->CreateLevel();
-            bool shoot = false;
-			while( !quit )                          //While application is running
-			{
-//			    if(frame%20 == 0)
-//                {
-//                    random = rand() % SCREEN_WIDTH;
-//                    Ep=new Enemy(&gSpriteSheetTexture,random,0);
-//
-//                    q.Enqueue(Ep);
-//
-//                }
-
-				while( SDL_PollEvent( &e ) != 0 )   //Handle events on queue
-				{
-					//User requests quit
-					if( e.type == SDL_QUIT )
-					{
-						quit = true;
-					}
-					const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
-
-
-
-
-                    if(currentKeyStates[ SDL_SCANCODE_SPACE ])
-                    {
-
-                       shoot = true;
-                    }
-				}
-				const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
-				if(currentKeyStates[ SDL_SCANCODE_RIGHT ])
-
-                {
+    Bat* bat = new Bat(&gSpriteSheetTexture, SCREEN_WIDTH/2, 630);
+    NormalBall* ball = new NormalBall(&gSpriteSheetTexture, bat->x,bat->y-23);
+    Board* board = new Board(gRenderer);
+    board->CreateLevel();
+    bool shoot = false;
+    while( !quit )                          //While application is running
+    {
+        while( SDL_PollEvent( &e ) != 0 )   //Handle events on queue
+        {
+            //User requests quit
+            if( e.type == SDL_QUIT )
+            {
+                quit = true;
+            }
+            const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
+            if(currentKeyStates[ SDL_SCANCODE_SPACE ])
+            {
+               shoot = true;
+            }
+        }
+        const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
+        if(currentKeyStates[ SDL_SCANCODE_RIGHT ]){
 //                        if (bat->Collides(side2) ){
 //
 //                        }
@@ -110,28 +93,24 @@ int main( int argc, char* args[] )
 //
 //                        }
 //                        else{
-                            bat->Move(RIGHT);
-
-                }
-
-                if(currentKeyStates[ SDL_SCANCODE_LEFT ])
-                {
+            bat->Move(RIGHT);
+        }
+        if(currentKeyStates[ SDL_SCANCODE_LEFT ]){
 
 //                        if (bat->Collides(side1) ){}
 //                        else if ( ball->x ==bat->x&& ball->y ==bat->y-23 ){}
 //                        else {
-                                bat->Move(LEFT);
-                }
-				SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0 );    //Clear screen
-				SDL_RenderClear( gRenderer );
-				xSpriteSheetTexture.Render(0, 0, 0, 0.0, NULL, SDL_FLIP_NONE, gRenderer);
-                bat->Render(frame, gRenderer);
-                ball->Render(frame,gRenderer);
-                board->Render(0.56f);
-                if (shoot)
-                    {
-                        ball->Move(1,-1);
-                    }
+            bat->Move(LEFT);
+        }
+        SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0 );    //Clear screen
+        SDL_RenderClear( gRenderer );
+        xSpriteSheetTexture.Render(0, 0, 0, 0.0, NULL, SDL_FLIP_NONE, gRenderer);
+        bat->Render(frame, gRenderer);
+        ball->Render(frame,gRenderer);
+        board->Render(0.1f);
+        if (shoot){
+            ball->Move(1,-1);
+        }
 //                if (ball->y<side3->y)
 //                    {
 //                        ball->y = side3->y;
@@ -154,29 +133,25 @@ int main( int argc, char* args[] )
 //                }
 //
 //
-                if (ball->Collide2(bat))
-                    {
-                        float ballcenterx = ball->x + ball->width / 2.0f;
-                        int hitx = ballcenterx - bat->x;
-                        if (hitx>0)
-                            {
-                                ball->SetDirection(-1,1);
-                            }
-                        else if (hitx<0)
-                            {
-                                ball->SetDirection(1,1);
-                            }
-                        else if (hitx==0)
-                            {
-                                ball->SetDirection(0,1);
-                            }
+        if (ball->Collide2(bat)){
+            float ballcenterx = ball->x + ball->width / 2.0f;
+            int hitx = ballcenterx - bat->x;
+            if (hitx>0){
+                ball->SetDirection(-1,1);
+            }
+            else if (hitx<0){
+                ball->SetDirection(1,1);
+            }
+            else if (hitx==0){
+                ball->SetDirection(0,1);
+            }
 
-                    }
+        }
 
-    //                    ball->y = bat->y-24;
-    //                   // ball->x =  bat->x;
-    //                    ball->diry*=-1;
-    //                    ball->dirx*=1;
+//                    ball->y = bat->y-24;
+//                   // ball->x =  bat->x;
+//                    ball->diry*=-1;
+//                    ball->dirx*=1;
 
 //                 if (ball->Collidesleft(side1))
 //                 {
@@ -191,117 +166,84 @@ int main( int argc, char* args[] )
 ////                     ball->dirx *= -1;
 //                 }
 
-
-//                cout<<ball->y<<endl;
-
-
-
-
-
-
-
-				SDL_RenderPresent( gRenderer );     //Update screen
-
-				++frame;
-
-
-			}
-			delete bat;
-			delete ball;
-		}
-	}
-
-	//Free resources and close SDL
-	close();
-
+        SDL_RenderPresent( gRenderer );     //Update screen
+        ++frame;
+    }
+    delete bat;
+    delete ball;
+    close();
 	return 0;
 }
 
 bool init()
 
 {
-	//Initialization flag
-	bool success = true;
-
 	//Initialize SDL
 	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
 	{
 		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
-		success = false;
+		return false;
 	}
-	else
-	{
-		//Set texture filtering to linear
-		if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
-		{
-			printf( "Warning: Linear texture filtering not enabled!" );
-		}
+    //Set texture filtering to linear
+    if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
+    {
+        printf( "Warning: Linear texture filtering not enabled!" );
+    }
 
-		//Create window
-		gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-		if( gWindow == NULL )
-		{
-			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
-			success = false;
-		}
-		else
-		{
-			//Create renderer for window
-			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-            if( gRenderer == NULL )
-            {
-                printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
-                success = false;
-            }
-			else
-			{
-				//Initialize renderer color
-				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+    //Create window
+    gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+    if( gWindow == NULL )
+    {
+        printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
+        return false;
+    }
+    //Create renderer for window
+    gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+    if( gRenderer == NULL )
+    {
+        printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
+        return false;
+    }
 
-				//Initialize PNG loading
-				int imgFlags = IMG_INIT_PNG;
-				if( !( IMG_Init( imgFlags ) & imgFlags ) )
-				{
-					printf( "SDL_image could not initialize! SDL_mage Error: %s\n", IMG_GetError() );
-					success = false;
-				}
-			}
-		}
-	}
+    //Initialize renderer color
+    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
-	return success;
+    //Initialize PNG loading
+    int imgFlags = IMG_INIT_PNG;
+    if( !( IMG_Init( imgFlags ) & imgFlags ) )
+    {
+        printf( "SDL_image could not initialize! SDL_mage Error: %s\n", IMG_GetError() );
+        return false;
+    }
+
+	return true;
 }
 
 
 bool loadMedia()
 {
-	//Loading success flag
-	bool success = true;
-
 	//Load sprite sheet texture
 	if( !gSpriteSheetTexture.LoadFromFile( "Images/finalsprites.png", gRenderer  ) )
 	{
-		printf( "Failed to load sprite sheet texture!\n" );
-		success = false;
+		printf( "Failed to load sprite sheet texture finalsprites.png!\n" );
+		return false;
 	}
 	if( !tSpriteSheetTexture.LoadFromFile( "Images/final side 1 n 2.png", gRenderer  ) )
 	{
-		printf( "Failed to load sprite sheet texture!\n" );
-		success = false;
+		printf( "Failed to load sprite sheet texture final side 1 n 2.png!\n" );
+		return false;
 	}
 	if( !lSpriteSheetTexture.LoadFromFile( "Images/side 3 final.png", gRenderer  ) )
 	{
-		printf( "Failed to load sprite sheet texture!\n" );
-		success = false;
+		printf( "Failed to load sprite sheet texture side 3 final.png!\n" );
+		return false;
 	}
 	if( !xSpriteSheetTexture.LoadFromFile( "Images/bgimage.png", gRenderer  ) )
 	{
-		printf( "Failed to load sprite sheet texture!\n" );
-		success = false;
+		printf( "Failed to load sprite sheet texture bgimage.png!\n" );
+		return false;
 	}
-
-
-	return success;
+	return true;
 }
 
 void close()

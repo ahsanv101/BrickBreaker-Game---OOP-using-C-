@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="Classes" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="Classes" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -63,6 +65,8 @@
 		<Unit filename="Classes/Point.h" />
 		<Unit filename="Classes/Queue.cpp" />
 		<Unit filename="Classes/Queue.h" />
+		<Unit filename="Classes/ScreenManager.cpp" />
+		<Unit filename="Classes/ScreenManager.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
