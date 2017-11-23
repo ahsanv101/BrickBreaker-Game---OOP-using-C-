@@ -66,10 +66,9 @@ int main( int argc, char* args[] )
     int random =0;
     GamePlay* game  = new GamePlay(gRenderer);
     Bat* bat = new Bat(&gSpriteSheetTexture, SCREEN_WIDTH/2, 630);
-    NormalBall* ball = new NormalBall(&gSpriteSheetTexture, bat->x,bat->y-23);
+    NormalBall* ball = new NormalBall(&gSpriteSheetTexture, bat->x,bat->y-24);
     game->CreateLevel();
-    //Board* board = new Board(gRenderer);
-    //board->CreateLevel();
+
     bool shoot = false;
     while( !quit )                          //While application is running
     {
@@ -89,7 +88,7 @@ int main( int argc, char* args[] )
         const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
         if(currentKeyStates[ SDL_SCANCODE_RIGHT ] ){
             if(bat->x+bat->width/2>=game->side3.x){}
-            else if (ball->x == bat->x && ball->y == bat->y-23){}
+            else if (ball->x == bat->x && ball->y == bat->y-24){}
 
 //                        else if ( ball->x ==bat->x && ball->y ==bat->y-23 ){
 //
@@ -104,7 +103,7 @@ int main( int argc, char* args[] )
 //                        else if ( ball->x ==bat->x&& ball->y ==bat->y-23 ){}
 //                        else {
             if (bat->x-bat->width/2<=game->side1.x+game->side1.w){}
-            else if (ball->x == bat->x && ball->y == bat->y-23){}
+            else if (ball->x == bat->x && ball->y == bat->y-24){}
             else
                 bat->Move(LEFT);
         }
@@ -113,11 +112,24 @@ int main( int argc, char* args[] )
         xSpriteSheetTexture.Render(0, 0, 0, 0.0, NULL, SDL_FLIP_NONE, gRenderer);
         bat->Render(frame, gRenderer);
         ball->Render(frame,gRenderer);
+
         game->Render(gRenderer,0.1f);
+        if(ball->y>SCREEN_HEIGHT)
+        {
+            delete ball;
+            NormalBall* ball2 = new NormalBall(&gSpriteSheetTexture, bat->x,bat->y-24);
+            SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0 );    //Clear screen
+            SDL_RenderClear( gRenderer );
+             ball2->Render(frame,gRenderer);
+             shoot = false;
+
+        }
         if (shoot)
             {
-                ball->Move(-1,-1);
+                ball->Move(-1,1);
+
             }
+
                  if (ball->y-ball->width/2<=game->side2.y+game->side2.h)
                     {
                         //ball->SetDirection(-1,-1);
