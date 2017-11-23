@@ -54,6 +54,9 @@ class GamePlay
 
         ~GamePlay();
         void Render(SDL_Renderer* renderer, float delta);
+        SDL_Rect side1;
+        SDL_Rect side2;
+        SDL_Rect side3;
 
 
     private:

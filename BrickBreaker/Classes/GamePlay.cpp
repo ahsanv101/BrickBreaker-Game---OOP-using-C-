@@ -15,6 +15,19 @@ LTexture pSpriteSheetTexture;
 //LTexture xSpriteSheetTexture;
 GamePlay::GamePlay(SDL_Renderer* renderer)
 {
+
+        this->side1.h=650;
+        this->side1.w=5;
+        this->side1.x=0;
+        this->side1.y=0;
+        this->side2.h=5;
+        this->side2.w=1000;
+        this->side2.x=0;
+        this->side2.y=0;
+        this->side3.h=650;
+        this->side3.w=5;
+        this->side3.x=1000-5;
+        this->side3.y=0;
         bat = new Bat(&kSpriteSheetTexture, (float)SCREEN_WIDTH/2, 630);
         ball = new NormalBall(&vSpriteSheetTexture, bat->x, bat->y-23);
         SDL_Surface* surface = IMG_Load("images/finalsprites.png");
@@ -53,6 +66,10 @@ GamePlay::~GamePlay()
 void GamePlay::Render( SDL_Renderer* renderer,float delta)
 {
 //    bat->Render(frame,renderer);
+    SDL_SetRenderDrawColor( renderer,100,100,100, 255 );
+    SDL_RenderFillRect(renderer,&(this->side1));
+    SDL_RenderFillRect(renderer,&(this->side2));
+    SDL_RenderFillRect(renderer,&(this->side3));
     int j=0;
     Node* temp = brickstorender.returnhead();
     while(temp!=NULL){

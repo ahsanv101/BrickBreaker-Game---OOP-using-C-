@@ -87,22 +87,26 @@ int main( int argc, char* args[] )
             }
         }
         const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
-        if(currentKeyStates[ SDL_SCANCODE_RIGHT ]){
-//                        if (bat->Collides(side2) ){
-//
-//                        }
+        if(currentKeyStates[ SDL_SCANCODE_RIGHT ] ){
+            if(bat->x+bat->width/2>=game->side3.x){}
+            else if (ball->x == bat->x && ball->y == bat->y-23){}
+
 //                        else if ( ball->x ==bat->x && ball->y ==bat->y-23 ){
 //
 //                        }
 //                        else{
-            bat->Move(RIGHT);
+            else
+                bat->Move(RIGHT);
         }
         if(currentKeyStates[ SDL_SCANCODE_LEFT ]){
 
 //                        if (bat->Collides(side1) ){}
 //                        else if ( ball->x ==bat->x&& ball->y ==bat->y-23 ){}
 //                        else {
-            bat->Move(LEFT);
+            if (bat->x-bat->width/2<=game->side1.x+game->side1.w){}
+            else if (ball->x == bat->x && ball->y == bat->y-23){}
+            else
+                bat->Move(LEFT);
         }
         SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0 );    //Clear screen
         SDL_RenderClear( gRenderer );
@@ -110,20 +114,26 @@ int main( int argc, char* args[] )
         bat->Render(frame, gRenderer);
         ball->Render(frame,gRenderer);
         game->Render(gRenderer,0.1f);
-        if (shoot){
-            ball->Move(1,-1);
-        }
-//                if (ball->y<side3->y)
-//                    {
-//                        ball->y = side3->y;
-//                        ball->diry *= -1;
-//                    }
-//                if (ball->x+ball->width<=side1->x)
-//                    {
-//                        ball->x = side1->x;
-//                        ball->dirx *= -1;
-//                    }
-//                else if(ball->x-ball->width>=side2->x+side2->width)
+        if (shoot)
+            {
+                ball->Move(-1,-1);
+            }
+                 if (ball->y-ball->width/2<=game->side2.y+game->side2.h)
+                    {
+                        //ball->SetDirection(-1,-1);
+
+                        ball->diry *= -1;
+                    }
+                if (ball->x-ball->width/2<=game->side1.x+game->side1.w)
+                    {
+
+                        ball->dirx *= -1;
+                    }
+                  if(ball->x+ball->width/2>=game->side3.x+game->side3.w)
+                    {
+
+                        ball->dirx *= -1;
+                    }
 //                    {
 //
 //                        ball->x = side2->x + side2->width - ball->width;
@@ -136,19 +146,25 @@ int main( int argc, char* args[] )
 //
 //
         if (ball->Collide2(bat)){
-            float ballcenterx = ball->x + ball->width / 2.0f;
-            int hitx = ballcenterx - bat->x;
-            if (hitx>0){
-                ball->SetDirection(-1,1);
-            }
-            else if (hitx<0){
-                ball->SetDirection(1,1);
-            }
-            else if (hitx==0){
-                ball->SetDirection(0,1);
-            }
+//            float ballcenterx = ball->x + ball->width / 2.0f;
+//            int hitx = ballcenterx - bat->x;
+//           // cout<<bat->x<<endl;
+//            cout<<hitx<<endl;
+//            if (hitx>0){
+//                ///ball->SetDirection(1,1);
+                ball->diry *= -1;
+//            }
+//            else if (hitx<0){
+//                //ball->SetDirection(-1,1);
+//                ball->diry *= -1;
+//            }
+//            else if (hitx==0){
+//                //ball->SetDirection(0,1);
+//                ball->diry *= -1;
+//            }
 
         }
+
 
 //                    ball->y = bat->y-24;
 //                   // ball->x =  bat->x;

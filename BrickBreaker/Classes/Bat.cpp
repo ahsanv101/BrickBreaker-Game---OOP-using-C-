@@ -115,13 +115,13 @@ void Bat::Move(int direction)
 
     if(direction==LEFT )
     {
-        speedx = -5;
+        speedx = -8;
         x=x+speedx;
     }
 
     if(direction==RIGHT)
     {
-        speedx = 5;
+        speedx = 8;
         x=x+speedx;
     }
 
