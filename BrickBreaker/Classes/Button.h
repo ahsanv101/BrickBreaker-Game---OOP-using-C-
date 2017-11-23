@@ -16,6 +16,7 @@ class Button
         Button(std::string, Point, LTexture*);
         void Draw(SDL_Renderer*);
         void shiftOriginToCenter();
+        bool pointLiesInBounds(int x, int y);
 
     private:
         Word word;

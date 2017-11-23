@@ -21,7 +21,6 @@ private:
 public:
     Character();
     Character(LTexture* image, float x, float y, char i);
-    ~Character();
     virtual void Render(SDL_Renderer* gRenderer, bool debug);
     void SetPosition(Point&);
     void SetPosition(int, int);

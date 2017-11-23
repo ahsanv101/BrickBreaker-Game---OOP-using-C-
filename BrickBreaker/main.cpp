@@ -113,18 +113,14 @@ int main( int argc, char* args[] )
             }
         }
         const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
-        currentManager->keyboardClick(currentKeyStates, &currentManager);
+        currentManager->keyboardEvent(currentKeyStates, &currentManager);
 
-        SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0 );    //Clear screen
-        SDL_RenderClear( gRenderer );
+        SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0 );
+        SDL_RenderClear(gRenderer);
         currentManager->show();
-        SDL_RenderPresent( gRenderer );     //Update screen
+        SDL_RenderPresent(gRenderer);
         ++frame;
     }
-
-//    delete ball2;
-    delete bat;
-    delete ball;
     close();
 	return 0;
 }

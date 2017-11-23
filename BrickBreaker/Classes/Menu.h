@@ -13,7 +13,7 @@ class Menu : public ScreenManager
         Menu(SDL_Renderer* renderer);
         void show();
         void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer);
-        void keyboardClick(const Uint8 event, ScreenManager** selfPointer);
+        void keyboardEvent(const Uint8* event, ScreenManager** selfPointer);
         ~Menu();
 
     private:

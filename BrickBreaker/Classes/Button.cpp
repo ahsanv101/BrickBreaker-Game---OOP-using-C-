@@ -38,9 +38,16 @@ void Button::Draw(SDL_Renderer* gRenderer){
 }
 void Button::shiftOriginToCenter(){
     int length = this->word.length;
-    int wordWidth = length*44;
-    this->center.y += 32;
-    this->center.x += (wordWidth/2)+64;
+    int wordWidth = length*40;
+    this->center.y += 30;
+    this->center.x += (wordWidth/2)+20;
     word.x = this->center.x+20;
     word.y = this->center.y;
+}
+bool Button::pointLiesInBounds(int x, int y){
+    int length = this->word.length;
+    int wordWidth_2 = length*20;
+    bool isInXRange = x > center.x-wordWidth_2 && x < center.x+wordWidth_2;
+    bool isInYRange = y > center.y-30 && y < center.y+30;
+    return isInXRange && isInYRange;
 }

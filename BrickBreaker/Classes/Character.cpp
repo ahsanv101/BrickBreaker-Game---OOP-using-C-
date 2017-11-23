@@ -74,12 +74,6 @@ Character::Character(LTexture* image, float x, float y, char i)
     this->height = spriteClips.h;
 }
 
-Character::~Character()
-{
-    char n = character_value + 97;
-    std::cout<<"\nCharacter "<<n<<" Destroyed";
-}
-
 void Character::Render(SDL_Renderer* gRenderer, bool debug)
 {
 

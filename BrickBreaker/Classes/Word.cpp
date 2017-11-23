@@ -21,7 +21,13 @@ Word::Word(LTexture* image, float x, float y, std::string str)
 
 }
 Word::Word(){
-
+    chars = NULL;
+    length = 0;
+    x = 0.0f;
+    y=0.0f;
+    spriteSheetTexture = NULL;
+    gRenderer = NULL;
+    str = "";
 }
 void Word::Render(SDL_Renderer* gRenderer, bool debug)
 {

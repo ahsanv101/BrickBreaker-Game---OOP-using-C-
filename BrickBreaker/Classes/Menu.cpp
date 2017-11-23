@@ -1,5 +1,6 @@
 #include "Menu.h"
-#include"Button.h"
+#include "Button.h"
+#include <iostream>
 
 Menu::Menu(){
     renderer = NULL;
@@ -22,9 +23,26 @@ void Menu::show(){
     exitGame.Draw(renderer);
 }
 void Menu::click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer){
+    if(eventType == ClickDown){
+        if(newGame.pointLiesInBounds(x,y)){
+            std::cout<<"New Game Button Down"<<std::endl;
+        }else if(loadGame.pointLiesInBounds(x,y)){
+            std::cout<<"Load Game Button Down"<<std::endl;
+        }else if(exitGame.pointLiesInBounds(x,y)){
+            std::cout<<"Exit Game Button Down"<<std::endl;
+        }
+    }else if(eventType == ClickUp){
 
+        if(newGame.pointLiesInBounds(x,y)){
+            std::cout<<"New Game Button Up"<<std::endl;
+        }else if(loadGame.pointLiesInBounds(x,y)){
+            std::cout<<"Load Game Button Up"<<std::endl;
+        }else if(exitGame.pointLiesInBounds(x,y)){
+            std::cout<<"Exit Game Button Up"<<std::endl;
+        }
+    }
 }
-void Menu::keyboardClick(const Uint8 event, ScreenManager** selfPointer){
+void Menu::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
 
 }
 Menu::~Menu(){
@@ -39,7 +57,7 @@ bool Menu::loadMedia()
 		printf( "Failed to load sprite sheet texture!\n" );
         return false;
 	}
-	if( !tSpriteSheetTexture.LoadFromFile( "Images/eg1.jpg", renderer  ) )
+	if( !tSpriteSheetTexture.LoadFromFile( "Images/bgimage.png", renderer  ) )
 	{
 		printf( "Failed to load sprite sheet texture!\n" );
 		return false;
