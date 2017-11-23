@@ -3,19 +3,21 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include "LTexture.h"
+#include "Statics.h"
 
 class ScreenManager
 {
     public:
         ScreenManager();
-        ScreenManager(SDL_Texture* backgroundImage);
-        virtual void show(SDL_Renderer*) = 0;
-        virtual void click(int x, int y, ScreenManager** selfPointer) = 0;
+        ScreenManager(SDL_Renderer* renderer);
+        virtual void show() = 0;
+        virtual void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer) = 0;
         virtual void keyboardClick(const Uint8 event, ScreenManager** selfPointer) = 0;
         virtual ~ScreenManager();
 
     protected:
-        SDL_Texture* backgroundImage;
+        SDL_Renderer* renderer;
 
 };
 

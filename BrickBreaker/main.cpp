@@ -11,6 +11,8 @@
 #include "Classes/NormalBall.h"
 #include "Classes/GamePlay.h"
 #include "ScreenManager.h"
+#include"Statics.h"
+#include "Menu.h"
 
 
 #include <iomanip>
@@ -21,8 +23,8 @@
 
 
 //Pre defined screen width and height
-const int SCREEN_WIDTH = 1000;
-const int SCREEN_HEIGHT = 650;
+
+
 
 bool init();
 
@@ -71,10 +73,7 @@ int main( int argc, char* args[] )
 
     /* generate secret number between 1 and 10: */
     int random =0;
-    GamePlay* game  = new GamePlay(gRenderer);
-    Bat* bat = new Bat(&gSpriteSheetTexture, SCREEN_WIDTH/2, 630);
-    NormalBall* ball = new NormalBall(&gSpriteSheetTexture, bat->x,bat->y-24);
-    game->CreateLevel();
+    currentManager = new Menu(gRenderer);
 
     bool shoot = false;
     while( !quit )                          //While application is running
@@ -86,132 +85,39 @@ int main( int argc, char* args[] )
             {
                 quit = true;
             }
-            const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
-            if(currentKeyStates[ SDL_SCANCODE_SPACE ])
+            if( e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP )
             {
-               shoot = true;
+                //Get mouse position
+                int x, y;
+                SDL_GetMouseState( &x, &y );
+                if(e.type ==  SDL_MOUSEMOTION)
+                {
+                    currentManager->click(x, y, MouseMotion, &currentManager);
+                }else if(e.type == SDL_MOUSEBUTTONDOWN)
+                {
+                    if (e.button.button == SDL_BUTTON_LEFT)
+                    {
+                        currentManager->click(x, y, ClickDown, &currentManager);
+                    }else{
+                        currentManager->click(x, y, RightClickDown, &currentManager);
+                    }
+                }else if(e.type == SDL_MOUSEBUTTONUP)
+                {
+                    if (e.button.button == SDL_BUTTON_LEFT)
+                    {
+                        currentManager->click(x, y, ClickUp, &currentManager);
+                    }else{
+                        currentManager->click(x, y, RightClickUp, &currentManager);
+                    }
+                }
             }
         }
         const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
-        if(currentKeyStates[ SDL_SCANCODE_RIGHT ] ){
-            if(bat->x+bat->width/2>=game->side3.x){}
-            else if (ball->x == bat->x && ball->y == bat->y-24){}
+        currentManager->keyboardClick(currentKeyStates, &currentManager);
 
-//                        else if ( ball->x ==bat->x && ball->y ==bat->y-23 ){
-//
-//                        }
-//                        else{
-            else
-                bat->Move(RIGHT);
-        }
-        if(currentKeyStates[ SDL_SCANCODE_LEFT ]){
-
-//                        if (bat->Collides(side1) ){}
-//                        else if ( ball->x ==bat->x&& ball->y ==bat->y-23 ){}
-//                        else {
-            if (bat->x-bat->width/2<=game->side1.x+game->side1.w){}
-            else if (ball->x == bat->x && ball->y == bat->y-24){}
-            else
-                bat->Move(LEFT);
-        }
         SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0 );    //Clear screen
         SDL_RenderClear( gRenderer );
-        xSpriteSheetTexture.Render(0, 0, 0, 0.0, NULL, SDL_FLIP_NONE, gRenderer);
-        bat->Render(frame, gRenderer);
-        ball->Render(frame,gRenderer);
-
-        game->Render(gRenderer,0.1f);
-        if(ball->y-ball->height/2>SCREEN_HEIGHT)
-        {
-            delete ball;
-            Sleep(1000);
-            NormalBall* ball2 = new NormalBall(&gSpriteSheetTexture, bat->x,bat->y-24);
-            //SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0 );    //Clear screen
-           // SDL_RenderClear( gRenderer );
-
-             ball2->Render(frame,gRenderer);
-             shoot = false;
-
-        }
-        //cout<<game->dstrect.x;
-        if( ball->y-ball->height/2<=game->dstrect.y+game->dstrect.h && ball->x+ball->width < game->dstrect.x+game->dstrect.w && ball->x && ball->x - ball->width>80){ball->diry *= -1;;}
-
-
-        //if(ball->y-ball->height/2==game->dstrect.y+game->dstrect.h){ball->diry *= -1;}
-
-        if (shoot)
-            {
-                ball->Move(1,1);
-
-            }
-
-
-                 if (ball->y-ball->height/2<=game->side2.y+game->side2.h)
-                    {
-                        //ball->SetDirection(-1,-1);
-
-                        ball->diry *= -1;
-                    }
-                if (ball->x-ball->width/2<=game->side1.x+game->side1.w)
-                    {
-
-                        ball->dirx *= -1;
-                    }
-                  if(ball->x+ball->width/2>=game->side3.x+game->side3.w)
-                    {
-
-                        ball->dirx *= -1;
-                    }
-//                    {
-//
-//                        ball->x = side2->x + side2->width - ball->width;
-//                        ball->dirx *= -1;
-//                    }
-//                if (!ball->Collides(side3))
-//                {
-//                    ball->SetDirection(1,-1);
-//                }
-//
-//
-        if (ball->Collide2(bat)){
-//            float ballcenterx = ball->x + ball->width / 2.0f;
-//            int hitx = ballcenterx - bat->x;
-//           // cout<<bat->x<<endl;
-//            cout<<hitx<<endl;
-//            if (hitx>0){
-//                ///ball->SetDirection(1,1);
-                ball->diry *= -1;
-//            }
-//            else if (hitx<0){
-//                //ball->SetDirection(-1,1);
-//                ball->diry *= -1;
-//            }
-//            else if (hitx==0){
-//                //ball->SetDirection(0,1);
-//                ball->diry *= -1;
-//            }
-
-        }
-
-
-//                    ball->y = bat->y-24;
-//                   // ball->x =  bat->x;
-//                    ball->diry*=-1;
-//                    ball->dirx*=1;
-
-//                 if (ball->Collidesleft(side1))
-//                 {
-////                        ball->x = side1->x;
-////                        ball->dirx *= -1;
-//                     //ball->SetDirection(-1,-1);
-//                 }
-//                 if (ball->Collidesright(side2))
-//                 {
-//
-////                     ball->x = side2->x + side2->width - ball->width;
-////                     ball->dirx *= -1;
-//                 }
-
+        currentManager->show();
         SDL_RenderPresent( gRenderer );     //Update screen
         ++frame;
     }

@@ -2,11 +2,11 @@
 
 ScreenManager::ScreenManager()
 {
-    this->backgroundImage = NULL;
+    this->renderer = NULL;
 }
-ScreenManager::ScreenManager(SDL_Texture* backgroundImage)
+ScreenManager::ScreenManager(SDL_Renderer* renderer)
 {
-    this->backgroundImage = backgroundImage;
+    this->renderer = renderer;
 }
 
 ScreenManager::~ScreenManager()
