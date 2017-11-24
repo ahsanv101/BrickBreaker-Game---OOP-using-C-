@@ -9,10 +9,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <time.h>
-LTexture kSpriteSheetTexture;
-LTexture vSpriteSheetTexture;
-LTexture pSpriteSheetTexture;
-//LTexture xSpriteSheetTexture;
+
 GamePlay::GamePlay(SDL_Renderer* renderer)
 {
     this->renderer = renderer;
@@ -29,8 +26,8 @@ GamePlay::GamePlay(SDL_Renderer* renderer)
     this->side3.w=5;
     this->side3.x=1000-5;
     this->side3.y=0;
-    bat = new Bat(&kSpriteSheetTexture, (float)SCREEN_WIDTH/2, 630);
-    ball = new NormalBall(&vSpriteSheetTexture, bat->x, bat->y-23);
+    bat = new Bat(&brickSpriteSheet, (float)SCREEN_WIDTH/2, 630);
+    ball = new NormalBall(&brickSpriteSheet, bat->x, bat->y-23);
 
 
     /*
@@ -46,6 +43,7 @@ GamePlay::GamePlay(SDL_Renderer* renderer)
     width = 768;
     height = 600;
 
+//    loadMedia();
     CreateLevel();
 }
 
@@ -62,71 +60,20 @@ GamePlay::~GamePlay(){
 
 void GamePlay::show()
 {
-//    bat->Render(frame,renderer);
-    SDL_SetRenderDrawColor(renderer,100,100,100, 255 );
-    SDL_RenderFillRect(renderer,&(this->side1));
-    SDL_RenderFillRect(renderer,&(this->side2));
-    SDL_RenderFillRect(renderer,&(this->side3));
-
-    int j=0;
-    Node* temp = brickstorender.returnhead();
-    while(temp!=NULL){
-        Brick brick = *temp->brick;
-        int i= temp->position%12;
-        j = temp->y;
-
-        temp=temp->next;
-
-        // Check if the brick exists
-        if(!brick.state)
-        {
-            continue;
-        }
-
-
-        SDL_Rect srcrect;
-        srcrect.x = 9 + (brick.type) * BOARD_BRWIDTH;
-        srcrect.y = 61 + ((0) * BOARD_BRHEIGHT);
-        srcrect.w = BOARD_BRWIDTH;
-        srcrect.h = BOARD_BRHEIGHT;
-
-        SDL_Rect dstrect;
-        dstrect.x = x + i * BOARD_BRWIDTH;
-        dstrect.y = y + j * BOARD_BRHEIGHT;
-        dstrect.w = BOARD_BRWIDTH;
-        dstrect.h = BOARD_BRHEIGHT;
-
-        brickSpriteSheet.Render(dstrect.x,dstrect.y,&srcrect,0.0,NULL,SDL_FLIP_NONE,renderer);
-    }
-/*
-
-    // Render sides
-    SDL_Rect dstrect;
-    dstrect.x = 0;
-    dstrect.y = 0;
-    dstrect.w = 16;
-    dstrect.h = 600;
-    SDL_RenderCopy(renderer, sidetexture, 0, &dstrect);
-
-    dstrect.x = 1024 - 16;
-    dstrect.y = 0;
-    dstrect.w = 16;
-    dstrect.h = 600;
-    SDL_RenderCopy(renderer, sidetexture, 0, &dstrect);
-    */
+    board->Display(renderer);
 }
 
 
 void GamePlay::CreateLevel() {
+    board = new Board(x, y, width, height, renderer);
 
     std::string content;
 	//opening file
     std::ifstream readfile;
     readfile.open("bricks.txt");
-    int j=0;
+    int j = 0;
     while (getline(readfile, content))
     {
-
         for(int i=0; i<content.length(); i++)
         {
             if(content[i]=='*')
@@ -138,26 +85,19 @@ void GamePlay::CreateLevel() {
                 brick->breaktype=bricktype;
                 brick->state = true;
                 //cout<<brick->breaktype<<endl;
-                brickstorender.Enqueue(brick, i, j);
+                board->Enqueue(brick, i, j);
             }
-            if(i>=content.length()-1 && j<BOARD_HEIGHT)
+            if(i==content.length()-1 && j<=BOARD_HEIGHT)
             {
                 j++;
 
             }
+        }
+        if(j > BOARD_HEIGHT){
+            break;
         }
     }
 }
 void GamePlay::click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer){}
 void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){}
 
-bool GamePlay::loadMedia()
-{
-	//Load sprite sheet texture
-	if( !brickSpriteSheet.LoadFromFile( "Images/finalsprites.png", renderer  ) )
-	{
-		printf( "Failed to load sprite sheet texture!\n" );
-        return false;
-	}
-	return true;
-}

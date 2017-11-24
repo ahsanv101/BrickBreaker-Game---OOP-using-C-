@@ -852,12 +852,16 @@
 	<stdio.h>
 	<iostream>
 
-1511163624 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\board.h
-	"Queue.h"
-	"Object.h"
-	<typeinfo>
+1511524725 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\board.h
+	"Node.h"
+	"Brick.h"
+	"LTexture.h"
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<iostream>
 
-1511165426 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\queue.h
+1511521208 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\queue.h
 	"Node.h"
 	"Brick.h"
 	<SDL.h>
@@ -883,14 +887,11 @@
 	"Bat.h"
 	"Board.h"
 
-1511165588 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\board.cpp
+1511525673 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\board.cpp
 	"Board.h"
-	<string>
-	<stdio.h>
+	"Statics.h"
+	<SDL.h>
 	<iostream>
-	<stdlib.h>
-	<fstream>
-	<time.h>
 
 1511160986 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\bricks.cpp
 
@@ -905,7 +906,7 @@
 	<iostream>
 	"LTexture.h"
 
-1511519832 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.cpp
+1511525954 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.cpp
 	"GamePlay.h"
 	"Bat.h"
 	"NormalBall.h"
@@ -917,13 +918,13 @@
 	<fstream>
 	<time.h>
 
-1511518790 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.h
+1511525919 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
 	"Ball.h"
 	"Board.h"
 	"LTexture.h"
 	"Statics.h"
-	"Queue.h"
+	"Board.h"
 	"Object.h"
 	"ScreenManager.h"
 	<typeinfo>
@@ -979,7 +980,7 @@
 	"LTexture.h"
 	"Statics.h"
 
-1511516622 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\main.cpp
+1511525758 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\main.cpp
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -2066,7 +2067,7 @@
 	"Character.h"
 	"Word.h"
 
-1511465021 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\statics.h
+1511523117 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\statics.h
 
 1511518582 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\menu.cpp
 	"Menu.h"

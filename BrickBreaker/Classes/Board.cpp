@@ -1,55 +1,102 @@
-
-#include "Board.h"
-#include<string>
-#include <stdio.h>
-#include <iostream>
-#include <stdlib.h>
-#include <fstream>
-#include <time.h>
+#include"Board.h"
+#include"Statics.h"
+#include<SDL.h>
+#include<iostream>
 
 using namespace std;
 
-Board::Board(SDL_Renderer* renderer): Object(renderer) {
-    SDL_Surface* surface = IMG_Load("images/finalsprites.png");
-    bricktexture = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_FreeSurface(surface);
-
-    /*
-    surface = IMG_Load("images/side.png");
-    sidetexture = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_FreeSurface(surface);
-    */
-
-    srand(time(0));
-
-    x = 16;
-    y = 0;
-    width = 768;
-    height = 600;
-
-    brickoffsetx = 0;
-    brickoffsety = 0;
+Board::Board()
+{
+    head = NULL;
+    tail = NULL;
+}
+Board::Board(float x, float y, float width, float height, SDL_Renderer* renderer)
+{
+    head = NULL;
+    tail = NULL;
+    this->x = x;
+    this->y = y;
+    this->width = width;
+    this->height = height;
+    this->renderer = renderer;
+    if(!loadMedia()){
+        std::cout<<"Error loading media in Board class";
+    }
 }
 
-Board::~Board() {
-    // Clean resources
-    SDL_DestroyTexture(bricktexture);
-    SDL_DestroyTexture(sidetexture);
+Board::~Board()
+{
+    while(head != NULL)
+    {
+        Node* temp = head;
+        head = head->next;
+        //cout<<"Deallocating value: "<<temp->data<<endl;
+        delete temp;
+    }
 }
 
-void Board::Update(float delta) {
-
+void Board::Enqueue(Brick* brick, int column, int row)
+{
+    if(head == NULL)
+    {
+        head = new Node;
+        head->brick = brick;
+        head->position = column;
+        head->y = row;
+        head->next = NULL;
+        head->prev = NULL;
+        tail = head;
+    }
+    else
+    {
+        tail->next = new Node;
+        tail->next->position = column;
+        tail->next->y = row;
+        tail->next->brick = brick;
+        tail->next->next = NULL;
+        tail->next->prev = tail;
+        tail = tail->next;
+    }
 }
 
-void Board::Render(float delta) {// Render bricks
-    int j=0;
-    Node* temp = brickstorender.returnhead();
+/*
+
+Brick* Board::Dequeue()
+{
+    int value = -1;
+    if(head != NULL)
+    //Brick* brick;
+    {
+        Brick* brick;
+        Node* temp = head;
+        brick = head->brick;
+        head = head->next;
+        if(head!=NULL)
+        {
+            head->prev = NULL;
+        }
+        return brick;
+        delete temp;
+    }
+}
+*/
+
+bool flag = true;
+void Board::Display(SDL_Renderer* gRenderer)
+{
+    // Render bricks
+    Node* temp = head;
+    if(flag){
+        flag = false;
+        cout<<gRenderer<<endl;
+    }
     while(temp!=NULL){
+
         Brick brick = *temp->brick;
         int i= temp->position%12;
-        j = temp->y;
+        int j = temp->y;
 
-        temp=temp->next;
+        temp = temp->next;
 
         // Check if the brick exists
         if(!brick.state)
@@ -59,69 +106,27 @@ void Board::Render(float delta) {// Render bricks
 
 
         SDL_Rect srcrect;
-
-        srcrect.x = 9 + (brick.type) * BOARD_BRWIDTH;
-        srcrect.y = 61 + ((0) * BOARD_BRHEIGHT);
+        srcrect.x = 9 + (brick.type * BOARD_BRWIDTH);
+        srcrect.y = 61 + ((brick.breaktype) * BOARD_BRHEIGHT);
         srcrect.w = BOARD_BRWIDTH;
         srcrect.h = BOARD_BRHEIGHT;
 
         SDL_Rect dstrect;
-        dstrect.x = brickoffsetx + x + i * BOARD_BRWIDTH;
-        dstrect.y = brickoffsety + y + j * BOARD_BRHEIGHT;
+        dstrect.x = x + (i * BOARD_BRWIDTH);
+        dstrect.y = y + (j * BOARD_BRHEIGHT);
         dstrect.w = BOARD_BRWIDTH;
         dstrect.h = BOARD_BRHEIGHT;
 
-        SDL_RenderCopy(renderer, bricktexture, &srcrect, &dstrect);
-    }
-/*
-
-    // Render sides
-    SDL_Rect dstrect;
-    dstrect.x = 0;
-    dstrect.y = 0;
-    dstrect.w = 16;
-    dstrect.h = 600;
-    SDL_RenderCopy(renderer, sidetexture, 0, &dstrect);
-
-    dstrect.x = 1024 - 16;
-    dstrect.y = 0;
-    dstrect.w = 16;
-    dstrect.h = 600;
-    SDL_RenderCopy(renderer, sidetexture, 0, &dstrect);
-    */
-}
-
-void Board::CreateLevel() {
-
-    std::string content;
-	//opening file
-    std::ifstream readfile;
-    readfile.open("bricks.txt");
-    int j=0;
-    while (getline(readfile, content))
-    {
-
-        for(int i=0; i<content.length(); i++)
-        {
-
-            if(content[i]=='*')
-            {
-                int bricktype = rand()%3;
-                //cout<<bricktype<<endl;
-                Brick* brick = new Brick;
-                brick->type=rand()%4;
-                brick->breaktype=bricktype;
-                brick->state = true;
-                //cout<<brick->breaktype<<endl;
-                brickstorender.Enqueue(brick, i, j);
-            }
-            if(i>=content.length()-1 && j<BOARD_HEIGHT)
-            {
-                j++;
-
-            }
-
-        }
+        brickSpriteSheet.Render(dstrect.x,dstrect.y,&srcrect,0.0,NULL,SDL_FLIP_NONE,gRenderer);
     }
 }
-
+bool Board::loadMedia()
+{
+	//Load sprite sheet texture
+	if( !brickSpriteSheet.LoadFromFile( "Images/finalsprites.png", renderer  ) )
+	{
+		printf( "Failed to load sprite sheet texture!\n" );
+        return false;
+	}
+	return true;
+}

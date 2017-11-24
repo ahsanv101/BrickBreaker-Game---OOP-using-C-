@@ -43,6 +43,8 @@
 		<Unit filename="Classes/Ball.h" />
 		<Unit filename="Classes/Bat.cpp" />
 		<Unit filename="Classes/Bat.h" />
+		<Unit filename="Classes/Board.cpp" />
+		<Unit filename="Classes/Board.h" />
 		<Unit filename="Classes/Brick.h" />
 		<Unit filename="Classes/Bricks.cpp" />
 		<Unit filename="Classes/Bricks.h" />
@@ -67,8 +69,6 @@
 		<Unit filename="Classes/Object.h" />
 		<Unit filename="Classes/Point.cpp" />
 		<Unit filename="Classes/Point.h" />
-		<Unit filename="Classes/Queue.cpp" />
-		<Unit filename="Classes/Queue.h" />
 		<Unit filename="Classes/ScreenManager.cpp" />
 		<Unit filename="Classes/ScreenManager.h" />
 		<Unit filename="Classes/Statics.h" />

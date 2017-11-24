@@ -5,16 +5,13 @@
 #include "Board.h"
 #include "LTexture.h"
 #include "Statics.h"
-#include "Queue.h"
+#include "Board.h"
 #include "Object.h"
 #include "ScreenManager.h"
 
 
 // Define the dimensions of the board and bricks
-#define BOARD_WIDTH 12
-#define BOARD_HEIGHT 8
-#define BOARD_BRWIDTH 63
-#define BOARD_BRHEIGHT 31
+
 
 #include <typeinfo>
 
@@ -31,9 +28,8 @@ class GamePlay : public ScreenManager
         ~GamePlay();
 
         void CreateLevel();
-        Queue brickstorender;
+        Board* board;
 
-        LTexture brickSpriteSheet;
         float x, y, width, height;
 
         Bat* bat;
@@ -46,6 +42,7 @@ class GamePlay : public ScreenManager
     private:
         SDL_Renderer* renderer;
         bool loadMedia();
+        LTexture brickSpriteSheet;
 };
 
 #endif // GAMEPLAY_H

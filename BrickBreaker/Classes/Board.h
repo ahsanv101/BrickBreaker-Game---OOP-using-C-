@@ -1,45 +1,27 @@
+#pragma once
+#include"Node.h"
+#include"Brick.h"
+#include"LTexture.h"
+#include <SDL.h>
+#include <SDL_image.h>
+#include <stdio.h>
+#include <iostream>
 
 
-#ifndef BOARD_H_
-#define BOARD_H_
-
-#include"Queue.h"
-#include"Object.h"
-
-
-// Define the dimensions of the board and bricks
-#define BOARD_WIDTH 12
-#define BOARD_HEIGHT 8
-#define BOARD_BRWIDTH 63
-#define BOARD_BRHEIGHT 31
-
-#include <typeinfo>
-
-
-
-
-
-class Board : public Object{
-public:
-    Board(SDL_Renderer* renderer);
-    ~Board();
-
-    void Update(float delta);
-    void Render(float delta);
-    void CreateLevel();
-
-    float brickoffsetx, brickoffsety;
-
-    // Define the two-dimensional array of bricks
-    //Brick bricks[BOARD_WIDTH][BOARD_HEIGHT];
-    Queue brickstorender;
-
+class Board
+{
 private:
-    SDL_Texture* bricktexture;
-    SDL_Texture* sidetexture;
+    Node* head;
+    Node* tail;
+    SDL_Renderer* renderer;
+    bool loadMedia();
+    LTexture brickSpriteSheet;
 
+public:
+    Board();
+    ~Board();
+    Board(float x, float y, float width, float height, SDL_Renderer* renderer);
+    void Enqueue(Brick* brick, int column, int row);
+    void Display(SDL_Renderer* gRenderer);
+    float x,y,width,height;
 };
-
-#endif
-
-
