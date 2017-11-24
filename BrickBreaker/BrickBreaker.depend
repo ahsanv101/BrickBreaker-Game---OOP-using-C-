@@ -1398,7 +1398,7 @@
 	<iostream>
 	"LTexture.h"
 
-1511456097 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.cpp
+1511504373 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.cpp
 	"GamePlay.h"
 	"Bat.h"
 	"NormalBall.h"
@@ -1410,7 +1410,7 @@
 	<fstream>
 	<time.h>
 
-1511454758 c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.h
+1511505216 c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
 	"Ball.h"
 	"Board.h"
@@ -1468,7 +1468,7 @@
 	<SDL.h>
 	<SDL_image.h>
 
-1511463730 source:c:\users\sn\desktop\mainproject\brickbreaker\main.cpp
+1511506464 source:c:\users\sn\desktop\mainproject\brickbreaker\main.cpp
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -1482,4 +1482,9 @@
 	"Classes/NormalBall.h"
 	"Classes/GamePlay.h"
 	"ScreenManager.h"
+	<iomanip>
+	<ctype.h>
+	<cstdlib>
+	<windows.h>
+	<conio.h>
 

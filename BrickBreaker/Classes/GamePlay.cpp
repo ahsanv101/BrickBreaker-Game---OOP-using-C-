@@ -93,7 +93,7 @@ void GamePlay::Render( SDL_Renderer* renderer,float delta)
         srcrect.w = BOARD_BRWIDTH;
         srcrect.h = BOARD_BRHEIGHT;
 
-        SDL_Rect dstrect;
+        //SDL_Rect dstrect;
         dstrect.x = brickoffsetx + x + i * BOARD_BRWIDTH;
         dstrect.y = brickoffsety + y + j * BOARD_BRHEIGHT;
         dstrect.w = BOARD_BRWIDTH;

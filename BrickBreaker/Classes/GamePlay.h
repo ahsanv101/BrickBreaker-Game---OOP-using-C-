@@ -47,6 +47,8 @@ class GamePlay
         const int SCREEN_HEIGHT = 650;
         const int speed = 5;
         Bat* bat;
+        SDL_Rect dstrect;
+        SDL_Rect srcrect;
         Ball* ball;
 
         GamePlay();

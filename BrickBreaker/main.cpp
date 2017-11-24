@@ -13,6 +13,13 @@
 #include "ScreenManager.h"
 
 
+#include <iomanip>
+#include <ctype.h>
+#include <cstdlib>
+#include <windows.h>
+#include <conio.h>
+
+
 //Pre defined screen width and height
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 650;
@@ -114,23 +121,32 @@ int main( int argc, char* args[] )
         ball->Render(frame,gRenderer);
 
         game->Render(gRenderer,0.1f);
-        if(ball->y>SCREEN_HEIGHT)
+        if(ball->y-ball->height/2>SCREEN_HEIGHT)
         {
             delete ball;
+            Sleep(1000);
             NormalBall* ball2 = new NormalBall(&gSpriteSheetTexture, bat->x,bat->y-24);
-            SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0 );    //Clear screen
-            SDL_RenderClear( gRenderer );
+            //SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0 );    //Clear screen
+           // SDL_RenderClear( gRenderer );
+
              ball2->Render(frame,gRenderer);
              shoot = false;
 
         }
+        //cout<<game->dstrect.x;
+        if( ball->y-ball->height/2<=game->dstrect.y+game->dstrect.h && ball->x+ball->width < game->dstrect.x+game->dstrect.w && ball->x && ball->x - ball->width>80){ball->diry *= -1;;}
+
+
+        //if(ball->y-ball->height/2==game->dstrect.y+game->dstrect.h){ball->diry *= -1;}
+
         if (shoot)
             {
-                ball->Move(-1,1);
+                ball->Move(1,1);
 
             }
 
-                 if (ball->y-ball->width/2<=game->side2.y+game->side2.h)
+
+                 if (ball->y-ball->height/2<=game->side2.y+game->side2.h)
                     {
                         //ball->SetDirection(-1,-1);
 
@@ -199,6 +215,8 @@ int main( int argc, char* args[] )
         SDL_RenderPresent( gRenderer );     //Update screen
         ++frame;
     }
+
+//    delete ball2;
     delete bat;
     delete ball;
     close();
