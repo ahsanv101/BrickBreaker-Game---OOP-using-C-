@@ -17,9 +17,11 @@ class Button
         void Draw(SDL_Renderer*);
         void shiftOriginToCenter();
         bool pointLiesInBounds(int x, int y);
+        void setIsClicked(bool flag);
 
     private:
         Word word;
         Point center;
         LTexture* spriteSheetTexture;
+        bool isClicked;
 };

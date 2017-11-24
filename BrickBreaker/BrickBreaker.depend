@@ -1918,7 +1918,7 @@
 	<iostream>
 	"LTexture.h"
 
-1511444715 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.cpp
+1511520049 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.cpp
 	"GamePlay.h"
 	"Bat.h"
 	"NormalBall.h"
@@ -1930,13 +1930,15 @@
 	<fstream>
 	<time.h>
 
-1511444715 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.h
+1511520049 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
 	"Ball.h"
 	"Board.h"
 	"LTexture.h"
+	"Statics.h"
 	"Queue.h"
 	"Object.h"
+	"ScreenManager.h"
 	<typeinfo>
 
 1511444715 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\normalball.h
@@ -1984,13 +1986,13 @@
 1511449276 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\screenmanager.cpp
 	"ScreenManager.h"
 
-1511449178 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\screenmanager.h
+1511518930 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\screenmanager.h
 	<SDL.h>
 	<SDL_image.h>
 	"LTexture.h"
 	"Statics.h"
 
-1511444716 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\main.cpp
+1511525006 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\main.cpp
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -2004,19 +2006,21 @@
 	"Classes/NormalBall.h"
 	"Classes/GamePlay.h"
 	"ScreenManager.h"
+	"Statics.h"
+	"Menu.h"
 	<iomanip>
 	<ctype.h>
 	<cstdlib>
 	<windows.h>
 	<conio.h>
 
-1511448915 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\button.cpp
+1511522412 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\button.cpp
 	"Button.h"
 	"Point.h"
 	<SDL.h>
 	<iostream>
 
-1511273367 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\button.h
+1511522412 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\button.h
 	<string>
 	"Character.h"
 	<SDL.h>
@@ -2026,7 +2030,7 @@
 	"LTexture.h"
 	"Word.h"
 
-1511271195 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\character.h
+1511518930 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\character.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -2044,22 +2048,24 @@
 	<iostream>
 	"LTexture.h"
 
-1511282295 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\character.cpp
+1511518930 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\character.cpp
 	"Character.h"
 	<iostream>
 
 1511449203 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\statics.h
 
-1511449227 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.cpp
+1511524887 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.cpp
 	"Menu.h"
 	"Button.h"
+	"GamePlay.h"
+	<iostream>
 
-1511449167 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.h
+1511525006 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.h
 	"ScreenManager.h"
 	"Button.h"
 	"Statics.h"
 
-1511274000 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\word.cpp
+1511518930 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\word.cpp
 	<string>
 	<iostream>
 	"LTexture.h"
