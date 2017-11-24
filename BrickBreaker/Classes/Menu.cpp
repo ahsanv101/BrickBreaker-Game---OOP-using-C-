@@ -1,5 +1,6 @@
 #include "Menu.h"
 #include "Button.h"
+#include "GamePlay.h"
 #include <iostream>
 
 Menu::Menu(){
@@ -35,6 +36,7 @@ void Menu::click(int x, int y, MouseEventType eventType, ScreenManager** selfPoi
 
         if(newGame.pointLiesInBounds(x,y)){
             std::cout<<"New Game Button Up"<<std::endl;
+            *selfPointer = new GamePlay(this->renderer);
         }else if(loadGame.pointLiesInBounds(x,y)){
             std::cout<<"Load Game Button Up"<<std::endl;
         }else if(exitGame.pointLiesInBounds(x,y)){

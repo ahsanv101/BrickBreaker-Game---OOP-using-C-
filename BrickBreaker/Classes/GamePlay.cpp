@@ -15,47 +15,44 @@ LTexture pSpriteSheetTexture;
 //LTexture xSpriteSheetTexture;
 GamePlay::GamePlay(SDL_Renderer* renderer)
 {
+    this->renderer = renderer;
 
-        this->side1.h=650;
-        this->side1.w=5;
-        this->side1.x=0;
-        this->side1.y=0;
-        this->side2.h=5;
-        this->side2.w=1000;
-        this->side2.x=0;
-        this->side2.y=0;
-        this->side3.h=650;
-        this->side3.w=5;
-        this->side3.x=1000-5;
-        this->side3.y=0;
-        bat = new Bat(&kSpriteSheetTexture, (float)SCREEN_WIDTH/2, 630);
-        ball = new NormalBall(&vSpriteSheetTexture, bat->x, bat->y-23);
-        SDL_Surface* surface = IMG_Load("images/finalsprites.png");
-        bricktexture = SDL_CreateTextureFromSurface(renderer, surface);
-        SDL_FreeSurface(surface);
+    this->side1.h=650;
+    this->side1.w=5;
+    this->side1.x=0;
+    this->side1.y=0;
+    this->side2.h=5;
+    this->side2.w=1000;
+    this->side2.x=0;
+    this->side2.y=0;
+    this->side3.h=650;
+    this->side3.w=5;
+    this->side3.x=1000-5;
+    this->side3.y=0;
+    bat = new Bat(&kSpriteSheetTexture, (float)SCREEN_WIDTH/2, 630);
+    ball = new NormalBall(&vSpriteSheetTexture, bat->x, bat->y-23);
 
-        /*
-        surface = IMG_Load("images/side.png");
-        sidetexture = SDL_CreateTextureFromSurface(renderer, surface);
-        SDL_FreeSurface(surface);
-        */
 
-        srand(time(0));
+    /*
+    surface = IMG_Load("images/side.png");
+    sidetexture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    */
 
-        x = 16;
-        y = 0;
-        width = 768;
-        height = 600;
+    srand(time(0));
 
-        brickoffsetx = 0;
-        brickoffsety = 0;
+    x = 16;
+    y = 0;
+    width = 768;
+    height = 600;
+
+    CreateLevel();
 }
 
 
 
-GamePlay::~GamePlay()
-{
-
+GamePlay::~GamePlay(){
+    //Free all images loaded
 }
 
 
@@ -63,13 +60,14 @@ GamePlay::~GamePlay()
 
 
 
-void GamePlay::Render( SDL_Renderer* renderer,float delta)
+void GamePlay::show()
 {
 //    bat->Render(frame,renderer);
-    SDL_SetRenderDrawColor( renderer,100,100,100, 255 );
+    SDL_SetRenderDrawColor(renderer,100,100,100, 255 );
     SDL_RenderFillRect(renderer,&(this->side1));
     SDL_RenderFillRect(renderer,&(this->side2));
     SDL_RenderFillRect(renderer,&(this->side3));
+
     int j=0;
     Node* temp = brickstorender.returnhead();
     while(temp!=NULL){
@@ -87,19 +85,18 @@ void GamePlay::Render( SDL_Renderer* renderer,float delta)
 
 
         SDL_Rect srcrect;
-
         srcrect.x = 9 + (brick.type) * BOARD_BRWIDTH;
         srcrect.y = 61 + ((0) * BOARD_BRHEIGHT);
         srcrect.w = BOARD_BRWIDTH;
         srcrect.h = BOARD_BRHEIGHT;
 
-        //SDL_Rect dstrect;
-        dstrect.x = brickoffsetx + x + i * BOARD_BRWIDTH;
-        dstrect.y = brickoffsety + y + j * BOARD_BRHEIGHT;
+        SDL_Rect dstrect;
+        dstrect.x = x + i * BOARD_BRWIDTH;
+        dstrect.y = y + j * BOARD_BRHEIGHT;
         dstrect.w = BOARD_BRWIDTH;
         dstrect.h = BOARD_BRHEIGHT;
 
-        SDL_RenderCopy(renderer, bricktexture, &srcrect, &dstrect);
+        brickSpriteSheet.Render(dstrect.x,dstrect.y,&srcrect,0.0,NULL,SDL_FLIP_NONE,renderer);
     }
 /*
 
@@ -132,7 +129,6 @@ void GamePlay::CreateLevel() {
 
         for(int i=0; i<content.length(); i++)
         {
-
             if(content[i]=='*')
             {
                 int bricktype = rand()%3;
@@ -149,8 +145,19 @@ void GamePlay::CreateLevel() {
                 j++;
 
             }
-
         }
     }
 }
+void GamePlay::click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer){}
+void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){}
 
+bool GamePlay::loadMedia()
+{
+	//Load sprite sheet texture
+	if( !brickSpriteSheet.LoadFromFile( "Images/finalsprites.png", renderer  ) )
+	{
+		printf( "Failed to load sprite sheet texture!\n" );
+        return false;
+	}
+	return true;
+}

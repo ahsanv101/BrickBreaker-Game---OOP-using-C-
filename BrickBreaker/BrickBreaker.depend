@@ -905,7 +905,7 @@
 	<iostream>
 	"LTexture.h"
 
-1511465021 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.cpp
+1511519832 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.cpp
 	"GamePlay.h"
 	"Bat.h"
 	"NormalBall.h"
@@ -917,13 +917,15 @@
 	<fstream>
 	<time.h>
 
-1511465021 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.h
+1511518790 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
 	"Ball.h"
 	"Board.h"
 	"LTexture.h"
+	"Statics.h"
 	"Queue.h"
 	"Object.h"
+	"ScreenManager.h"
 	<typeinfo>
 
 1511106304 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalball.h
@@ -977,7 +979,7 @@
 	"LTexture.h"
 	"Statics.h"
 
-1511467973 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\main.cpp
+1511516622 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\main.cpp
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -2066,9 +2068,10 @@
 
 1511465021 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\statics.h
 
-1511469257 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\menu.cpp
+1511518582 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\menu.cpp
 	"Menu.h"
 	"Button.h"
+	"GamePlay.h"
 	<iostream>
 
 1511465711 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\menu.h
@@ -2104,7 +2107,7 @@
 	<iostream>
 	"LTexture.h"
 
-1511468817 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\button.cpp
+1511516108 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\button.cpp
 	"Button.h"
 	"Point.h"
 	<SDL.h>

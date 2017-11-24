@@ -34,10 +34,6 @@ void close();
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
-LTexture gSpriteSheetTexture;
-LTexture tSpriteSheetTexture;
-LTexture lSpriteSheetTexture;
-LTexture xSpriteSheetTexture;
 
 //All Screens will implement this protocol to get rendered on through main
 ScreenManager* currentManager = NULL;
@@ -56,13 +52,6 @@ int main( int argc, char* args[] )
 		close();
 		return -1;
 	}
-    //Load media
-    if( !loadMedia() )
-    {
-        printf( "Failed to load media!\n" );
-        close();
-        return -2;
-    }
     bool quit = false;                      //Main loop flag
     SDL_Event e;                            //Event handler
 
@@ -169,37 +158,8 @@ bool init()
 	return true;
 }
 
-
-bool loadMedia()
-{
-	//Load sprite sheet texture
-	if( !gSpriteSheetTexture.LoadFromFile( "Images/finalsprites.png", gRenderer  ) )
-	{
-		printf( "Failed to load sprite sheet texture finalsprites.png!\n" );
-		return false;
-	}
-	if( !tSpriteSheetTexture.LoadFromFile( "Images/final side 1 n 2.png", gRenderer  ) )
-	{
-		printf( "Failed to load sprite sheet texture final side 1 n 2.png!\n" );
-		return false;
-	}
-	if( !lSpriteSheetTexture.LoadFromFile( "Images/side 3 final.png", gRenderer  ) )
-	{
-		printf( "Failed to load sprite sheet texture side 3 final.png!\n" );
-		return false;
-	}
-	if( !xSpriteSheetTexture.LoadFromFile( "Images/bgimage.png", gRenderer  ) )
-	{
-		printf( "Failed to load sprite sheet texture bgimage.png!\n" );
-		return false;
-	}
-	return true;
-}
-
 void close()
 {
-	//Free loaded images
-	gSpriteSheetTexture.Free();
 
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );

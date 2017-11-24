@@ -47,7 +47,7 @@ void Button::shiftOriginToCenter(){
 bool Button::pointLiesInBounds(int x, int y){
     int length = this->word.length;
     int wordWidth_2 = length*20;
-    bool isInXRange = x > center.x-wordWidth_2 && x < center.x+wordWidth_2;
+    bool isInXRange = x > center.x-wordWidth_2-20 && x < center.x+wordWidth_2+20;
     bool isInYRange = y > center.y-30 && y < center.y+30;
     return isInXRange && isInYRange;
 }

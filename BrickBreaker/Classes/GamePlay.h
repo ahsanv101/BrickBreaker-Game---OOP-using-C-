@@ -4,10 +4,10 @@
 #include "Ball.h"
 #include "Board.h"
 #include "LTexture.h"
-
-
-#include"Queue.h"
-#include"Object.h"
+#include "Statics.h"
+#include "Queue.h"
+#include "Object.h"
+#include "ScreenManager.h"
 
 
 // Define the dimensions of the board and bricks
@@ -20,48 +20,32 @@
 
 
 
-class GamePlay
+class GamePlay : public ScreenManager
 {
-        public:
-
-
-        void Update(float delta);
-
-        void CreateLevel();
-
-        float brickoffsetx, brickoffsety;
-
-        // Define the two-dimensional array of bricks
-        //Brick bricks[BOARD_WIDTH][BOARD_HEIGHT];
-        Queue brickstorender;
-
-
-        SDL_Texture* bricktexture;
-        SDL_Texture* sidetexture;
-
-
-
-
-        float x, y , width, height;
-        const int SCREEN_WIDTH = 1000;
-        const int SCREEN_HEIGHT = 650;
-        const int speed = 5;
-        Bat* bat;
-        SDL_Rect dstrect;
-        SDL_Rect srcrect;
-        Ball* ball;
-
+    public:
         GamePlay();
         GamePlay(SDL_Renderer* gRenderer);
-
+        void show();
+        void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer);
+        void keyboardEvent(const Uint8* event, ScreenManager** selfPointer);
         ~GamePlay();
-        void Render(SDL_Renderer* renderer, float delta);
+
+        void CreateLevel();
+        Queue brickstorender;
+
+        LTexture brickSpriteSheet;
+        float x, y, width, height;
+
+        Bat* bat;
+        Ball* ball;
+
         SDL_Rect side1;
         SDL_Rect side2;
         SDL_Rect side3;
 
-
     private:
+        SDL_Renderer* renderer;
+        bool loadMedia();
 };
 
 #endif // GAMEPLAY_H
