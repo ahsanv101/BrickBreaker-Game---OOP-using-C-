@@ -26,11 +26,11 @@
 
 
 
-bool init();
+//bool init();
 
-bool loadMedia();
+//bool loadMedia();
 
-void close();
+//void close();
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
@@ -101,11 +101,17 @@ int main( int argc, char* args[] )
                 }
             }
         }
+        if(!currentManager){
+            break;
+        }
         const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
         currentManager->keyboardEvent(currentKeyStates, &currentManager);
 
         SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0 );
         SDL_RenderClear(gRenderer);
+//        if(!currentManager){
+//            break;
+//        }
         currentManager->show();
         SDL_RenderPresent(gRenderer);
         ++frame;
@@ -130,7 +136,7 @@ bool init()
     }
 
     //Create window
-    gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+    gWindow = SDL_CreateWindow( "Break Out", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
     if( gWindow == NULL )
     {
         printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );

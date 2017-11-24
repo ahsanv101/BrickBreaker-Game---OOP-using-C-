@@ -18,7 +18,7 @@ Menu::Menu(SDL_Renderer* renderer){
 
 }
 void Menu::show(){
-    tSpriteSheetTexture.Render(0,0,0,0.0,NULL,SDL_FLIP_NONE,renderer);
+    backSpriteSheetTexture.Render(0,0,0,0.0,NULL,SDL_FLIP_NONE,renderer);
     newGame.Draw(renderer);
     loadGame.Draw(renderer);
     exitGame.Draw(renderer);
@@ -26,14 +26,19 @@ void Menu::show(){
 void Menu::click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer){
     if(eventType == ClickDown){
         if(newGame.pointLiesInBounds(x,y)){
+            newGame.setIsClicked(true);
             std::cout<<"New Game Button Down"<<std::endl;
         }else if(loadGame.pointLiesInBounds(x,y)){
+            loadGame.setIsClicked(true);
             std::cout<<"Load Game Button Down"<<std::endl;
         }else if(exitGame.pointLiesInBounds(x,y)){
+            exitGame.setIsClicked(true);
             std::cout<<"Exit Game Button Down"<<std::endl;
         }
     }else if(eventType == ClickUp){
-
+        newGame.setIsClicked(false);
+        exitGame.setIsClicked(false);
+        loadGame.setIsClicked(false);
         if(newGame.pointLiesInBounds(x,y)){
             std::cout<<"New Game Button Up"<<std::endl;
             *selfPointer = new GamePlay(this->renderer);
@@ -41,6 +46,7 @@ void Menu::click(int x, int y, MouseEventType eventType, ScreenManager** selfPoi
             std::cout<<"Load Game Button Up"<<std::endl;
         }else if(exitGame.pointLiesInBounds(x,y)){
             std::cout<<"Exit Game Button Up"<<std::endl;
+            *selfPointer = NULL;
         }
     }
 }
@@ -59,10 +65,15 @@ bool Menu::loadMedia()
 		printf( "Failed to load sprite sheet texture!\n" );
         return false;
 	}
-	if( !tSpriteSheetTexture.LoadFromFile( "Images/bgimage.png", renderer  ) )
+	if( !backSpriteSheetTexture.LoadFromFile( "Images/eg3.jpg", renderer  ) )
 	{
 		printf( "Failed to load sprite sheet texture!\n" );
 		return false;
 	}
+	if(!splashSpriteSheetTexture.LoadFromFile("Images/eg3.jpg",renderer))
+    {
+        printf( "Failed to load sprite sheet texture!\n" );
+		return false;
+    }
 	return true;
 }

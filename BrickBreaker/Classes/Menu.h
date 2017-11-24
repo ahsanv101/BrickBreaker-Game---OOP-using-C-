@@ -15,14 +15,14 @@ class Menu : public ScreenManager
         void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer);
         void keyboardEvent(const Uint8* event, ScreenManager** selfPointer);
         ~Menu();
+        LTexture splashSpriteSheetTexture;
 
     private:
         Button newGame;
         Button loadGame;
         Button exitGame;
         LTexture gSpriteSheetTexture;
-        LTexture tSpriteSheetTexture;
+        LTexture backSpriteSheetTexture;
         bool loadMedia();
 };
-
 #endif // MENU_H
