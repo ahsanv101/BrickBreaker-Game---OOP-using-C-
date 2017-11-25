@@ -64,7 +64,7 @@ int main( int argc, char* args[] )
     int random =0;
     currentManager = new Menu(gRenderer);
 
-    bool shoot = false;
+
     while( !quit )                          //While application is running
     {
         while( SDL_PollEvent( &e ) != 0 )   //Handle events on queue

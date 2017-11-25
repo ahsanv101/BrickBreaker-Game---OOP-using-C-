@@ -40,7 +40,7 @@ class Bat : public Object
         bool Collides(Board* other);
         //virtual void Move(int direction, SDL_Rect& side);
         virtual void Move();
-        virtual void Render(long int& frame, SDL_Renderer* gRenderer);
+        virtual void Render(SDL_Renderer* gRenderer);
 };
 
 

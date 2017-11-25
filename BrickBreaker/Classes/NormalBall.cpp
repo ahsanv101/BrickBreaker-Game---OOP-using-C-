@@ -74,7 +74,7 @@ NormalBall::NormalBall(LTexture* image, float x, float y)
     this->height = spriteClips[ 0 ].h;
 
     friction = 0.50f;
-    SetDirection(1,1);
+    SetDirection(-1,-1);
 }
 
 
@@ -111,9 +111,9 @@ void NormalBall::Move(float xx, float yy)
 }
 
 
-void NormalBall::Render(long int& frame, SDL_Renderer* gRenderer)
+void NormalBall::Render(SDL_Renderer* gRenderer)
 {
-    spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips[ frame % FLYING_FRAMES ], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
+    spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips[0], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
 }
 
 

@@ -15,17 +15,6 @@ enum MMOTION {RRIGHT, LLEFT, UUP, DDOWN};
 class NormalBall :public Ball
 {
     public:
-        bool alive;
-        float x;
-        float y;
-        float dirx;
-        float diry;
-        float speedx;
-        float speedy;
-        int width;
-        int height;
-        float friction; //lower speed means more friction
-        int BALL_SPEED = 7;
         enum ANIMATION_FRAMES {FLYING_FRAMES = 1};
         SDL_Rect spriteClips[ FLYING_FRAMES ];
         LTexture* spriteSheetTexture;
@@ -45,7 +34,7 @@ class NormalBall :public Ball
         bool Collides3(Board* other);
         bool Collidesleft(Board* other);
         bool Collidesright(Board* other);
-        virtual void Render(long int& frame, SDL_Renderer* gRenderer);
+        virtual void Render(SDL_Renderer* gRenderer);
 };
 
 

@@ -42,7 +42,8 @@ class GamePlay : public ScreenManager
     private:
         SDL_Renderer* renderer;
         bool loadMedia();
-        LTexture brickSpriteSheet;
+        LTexture backgroundSprite, batBallSpriteSheet;
+        bool shoot;
 };
 
 #endif // GAMEPLAY_H
