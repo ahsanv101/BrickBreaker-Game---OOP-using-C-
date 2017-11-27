@@ -8,6 +8,8 @@
 #include "Board.h"
 #include "Object.h"
 #include "ScreenManager.h"
+#include "Fire.h"
+#include "q.h"
 
 
 // Define the dimensions of the board and bricks
@@ -20,8 +22,9 @@
 class GamePlay : public ScreenManager
 {
     public:
+        long int* frame;
         GamePlay();
-        GamePlay(SDL_Renderer* gRenderer);
+        GamePlay(long int* frame,SDL_Renderer* gRenderer);
         void show();
         void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer);
         void keyboardEvent(const Uint8* event, ScreenManager** selfPointer);
@@ -34,6 +37,10 @@ class GamePlay : public ScreenManager
 
         Bat* bat;
         Ball* ball;
+        Fire* fire;
+        Fire* Missile;
+        Queue q;
+        int count = 0;
 
         SDL_Rect side1;
         SDL_Rect side2;
@@ -44,6 +51,13 @@ class GamePlay : public ScreenManager
         bool loadMedia();
         LTexture backgroundSprite, batBallSpriteSheet;
         bool shoot;
+        bool blast;
+        bool MisActivate;
+        bool FireActivate;
+        bool ThroughActivate;
+        bool NormalActivate;
+        bool IspeedActivate;
+        bool dspeedActivate;
 };
 
 #endif // GAMEPLAY_H

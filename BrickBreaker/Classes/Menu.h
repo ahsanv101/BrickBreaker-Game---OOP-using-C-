@@ -17,6 +17,7 @@ class Menu : public ScreenManager
         ~Menu();
         LTexture splashSpriteSheetTexture;
 
+
     private:
         Button newGame;
         Button loadGame;
@@ -24,5 +25,6 @@ class Menu : public ScreenManager
         LTexture gSpriteSheetTexture;
         LTexture backSpriteSheetTexture;
         bool loadMedia();
+
 };
 #endif // MENU_H

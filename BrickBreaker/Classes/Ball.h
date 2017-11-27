@@ -23,7 +23,7 @@ class Ball : public Object
         int width;
         int height;
         float friction; //lower speed means more friction
-        int BALL_SPEED = 7;
+        int BALL_SPEED = 9;
 //        enum ANIMATION_FRAMES {FLYING_FRAMES = 1};
 //        SDL_Rect spriteClips[ FLYING_FRAMES ];
 //        LTexture* spriteSheetTexture;
@@ -36,6 +36,7 @@ class Ball : public Object
 //        void SetAlive(bool);
 //        bool GetAlive();
 //       // virtual void Move(int direction);
+        void SetDirection(float dirx, float diry);
         virtual void Move(float xx, float yy) = 0;
 //
 //        bool Collides(Board* other);
@@ -43,7 +44,7 @@ class Ball : public Object
 //        bool Collides3(Board* other);
 //        bool Collidesleft(Board* other);
 //        bool Collidesright(Board* other);
-        virtual void Render(SDL_Renderer* gRenderer) = 0;
+        virtual void Render(long int* frame,SDL_Renderer* gRenderer) = 0;
 };
 
 

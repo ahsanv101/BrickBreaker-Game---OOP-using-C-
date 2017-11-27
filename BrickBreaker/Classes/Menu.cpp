@@ -7,6 +7,8 @@ Menu::Menu(){
     renderer = NULL;
 }
 Menu::Menu(SDL_Renderer* renderer){
+
+    //std::cout<<*frame;
     this->renderer = renderer;
     if(loadMedia()){
         newGame = Button("New Game", {(float)SCREEN_WIDTH/2, (float)(SCREEN_HEIGHT/2)}, &gSpriteSheetTexture);
@@ -18,6 +20,7 @@ Menu::Menu(SDL_Renderer* renderer){
 
 }
 void Menu::show(){
+
     backSpriteSheetTexture.Render(0,0,0,0.0,NULL,SDL_FLIP_NONE,renderer);
     newGame.Draw(renderer);
     loadGame.Draw(renderer);
@@ -41,7 +44,7 @@ void Menu::click(int x, int y, MouseEventType eventType, ScreenManager** selfPoi
         loadGame.setIsClicked(false);
         if(newGame.pointLiesInBounds(x,y)){
             std::cout<<"New Game Button Up"<<std::endl;
-            *selfPointer = new GamePlay(this->renderer);
+            *selfPointer = new GamePlay(frame,this->renderer);
         }else if(loadGame.pointLiesInBounds(x,y)){
             std::cout<<"Load Game Button Up"<<std::endl;
         }else if(exitGame.pointLiesInBounds(x,y)){

@@ -93,13 +93,13 @@
 //}
 //
 //
-//void Ball::SetDirection(float dirx, float diry)
-//{
-//    float length = sqrt(dirx * dirx + diry * diry);
-//    this->dirx = BALL_SPEED * (dirx / length);
-//    this->diry = BALL_SPEED * (diry / length);
-//}
-//
+void Ball::SetDirection(float dirx, float diry)
+{
+    float length = sqrt(dirx * dirx + diry * diry);
+    this->dirx = BALL_SPEED * (dirx / length);
+    this->diry = BALL_SPEED * (diry / length);
+}
+
 //
 //void Ball::Move(float xx, float yy)
 //{

@@ -15,9 +15,11 @@ class ScreenManager
         virtual void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer) = 0;
         virtual void keyboardEvent(const Uint8* event, ScreenManager** selfPointer) = 0;
         virtual ~ScreenManager();
+        long int* frame;
 
     protected:
         SDL_Renderer* renderer;
+
 
 };
 

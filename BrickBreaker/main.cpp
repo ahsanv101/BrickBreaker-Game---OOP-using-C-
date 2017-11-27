@@ -62,6 +62,7 @@ int main( int argc, char* args[] )
 
     /* generate secret number between 1 and 10: */
     int random =0;
+
     currentManager = new Menu(gRenderer);
 
 
@@ -69,6 +70,7 @@ int main( int argc, char* args[] )
     {
         while( SDL_PollEvent( &e ) != 0 )   //Handle events on queue
         {
+            currentManager->frame = &frame;
             //User requests quit
             if( e.type == SDL_QUIT )
             {
@@ -149,7 +151,7 @@ bool init()
         printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
         return false;
     }
-    std::cout<<gRenderer;
+
     //Initialize renderer color
     SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
