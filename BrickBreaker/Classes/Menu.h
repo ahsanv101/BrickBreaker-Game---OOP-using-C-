@@ -26,5 +26,6 @@ class Menu : public ScreenManager
         LTexture backSpriteSheetTexture;
         bool loadMedia();
 
+
 };
 #endif // MENU_H

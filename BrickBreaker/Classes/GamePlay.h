@@ -10,6 +10,8 @@
 #include "ScreenManager.h"
 #include "Fire.h"
 #include "q.h"
+#include <SDL_mixer.h>
+
 
 
 // Define the dimensions of the board and bricks
@@ -49,6 +51,8 @@ class GamePlay : public ScreenManager
     private:
         SDL_Renderer* renderer;
         bool loadMedia();
+        Mix_Chunk *gScratch = NULL;
+        Mix_Chunk *medium = NULL;
         LTexture backgroundSprite, batBallSpriteSheet;
         bool shoot;
         bool blast;

@@ -3,6 +3,9 @@
 #include "NormalBall.h"
 #include "Board.h"
 
+#include <SDL_mixer.h>
+
+
 #include<string>
 #include <stdio.h>
 #include <iostream>
@@ -17,6 +20,7 @@
 
 GamePlay::GamePlay(long int* frame,SDL_Renderer* renderer)
 {
+
     this->frame = frame;
     this->renderer = renderer;
     loadMedia();
@@ -85,6 +89,7 @@ GamePlay::~GamePlay(){
 
 void GamePlay::show()
 {
+
 
     backgroundSprite.Render(0,0,0,0.0,NULL, SDL_FLIP_NONE, renderer);
     SDL_SetRenderDrawColor( renderer,100,100,100, 255 );
@@ -155,6 +160,8 @@ void GamePlay::show()
     {
 
         ball->Move(1,-1);
+
+
     }
     if (NormalActivate)
     {
@@ -202,18 +209,22 @@ void GamePlay::show()
 
     //Code for Ball-Side Collision Detection
     if (ball->y-ball->height/2<=this->side2.y+this->side2.h){
+            Mix_PlayChannel( 1, medium, 0 );
         ball->diry *= -1;
     }
     if (ball->x-ball->width/2<=this->side1.x+this->side1.w)
     {
+        Mix_PlayChannel( 1, medium, 0 );
         ball->dirx *= -1;
     }
     if(ball->x+ball->width/2>=this->side3.x+this->side3.w){
+        Mix_PlayChannel( 1, medium, 0 );
         ball->dirx *= -1;
     }
 
     //Code for Ball-Bat Collision Detection
     if (ball->Collide2(bat)){
+            Mix_PlayChannel( 1, medium, 0 );
 //            float ballcenterx = ball->x + ball->width / 2.0f;
 //            int hitx = ballcenterx - bat->x;
 //           // cout<<bat->x<<endl;
@@ -299,6 +310,7 @@ void GamePlay::click(int x, int y, MouseEventType eventType, ScreenManager** sel
 void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
     if(event[ SDL_SCANCODE_SPACE ]){
         shoot = true;
+        Mix_PlayChannel( -1, gScratch, 0 );
     }
     if(event[ SDL_SCANCODE_DOWN ]){
         FireActivate = true;
@@ -325,6 +337,8 @@ void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
 
 
     if(event[ SDL_SCANCODE_RIGHT ]){
+
+
         if(bat->x+bat->width/2>=this->side3.x){}
         else if (ball->x == bat->x && ball->y == bat->y-24){}
         else{
@@ -344,6 +358,7 @@ void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
 }
 
 bool GamePlay::loadMedia(){
+    bool success = true;
     if( !backgroundSprite.LoadFromFile( "Images/bgimages.png", renderer  ) )
 	{
 		printf( "Failed to load sprite sheet texture!\n" );
@@ -353,6 +368,18 @@ bool GamePlay::loadMedia(){
 	{
 		printf( "Failed to load sprite sheet texture!\n" );
         return false;
+	}
+	gScratch = Mix_LoadWAV( "sounds/high.wav" );
+	if( gScratch == NULL )
+	{
+		printf( "Failed to load scratch sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
+	}
+	medium = Mix_LoadWAV( "sounds/medium.wav" );
+	if( medium == NULL )
+	{
+		printf( "Failed to load scratch sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
 	}
 	return true;
 }

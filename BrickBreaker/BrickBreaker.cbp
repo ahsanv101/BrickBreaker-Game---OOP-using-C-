@@ -5,7 +5,6 @@
 		<Option title="BrickBreaker" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Classes\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/BrickBreaker" prefix_auto="1" extension_auto="1" />
@@ -16,7 +15,12 @@
 					<Add option="-g" />
 					<Add directory="Classes" />
 					<Add directory="include" />
+					<Add directory="C:/Users/sn/Desktop/sdl/SDL2_mixer-2.0.1/i686-w64-mingw32/include/SDL2" />
 				</Compiler>
+				<Linker>
+					<Add option="-lSDL2_mixer" />
+					<Add directory="C:/Users/sn/Desktop/sdl/SDL2_image-2.0.1/i686-w64-mingw32/lib" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/BrickBreaker" prefix_auto="1" extension_auto="1" />
@@ -55,6 +59,7 @@
 		<Unit filename="Classes/Button.h" />
 		<Unit filename="Classes/Character.cpp" />
 		<Unit filename="Classes/Character.h" />
+		<Unit filename="Classes/Fire.cpp" />
 		<Unit filename="Classes/Fire.h" />
 		<Unit filename="Classes/FireBall.cpp" />
 		<Unit filename="Classes/FireBall.h" />
@@ -64,6 +69,8 @@
 		<Unit filename="Classes/LTexture.h" />
 		<Unit filename="Classes/Menu.cpp" />
 		<Unit filename="Classes/Menu.h" />
+		<Unit filename="Classes/MissileFire.cpp" />
+		<Unit filename="Classes/MissileFire.h" />
 		<Unit filename="Classes/Node.h" />
 		<Unit filename="Classes/NormalBall.cpp" />
 		<Unit filename="Classes/NormalBall.h" />
@@ -76,17 +83,14 @@
 		<Unit filename="Classes/ScreenManager.cpp" />
 		<Unit filename="Classes/ScreenManager.h" />
 		<Unit filename="Classes/Statics.h" />
+		<Unit filename="Classes/ThroughBall.cpp" />
+		<Unit filename="Classes/ThroughBall.h" />
 		<Unit filename="Classes/Word.cpp" />
 		<Unit filename="Classes/Word.h" />
 		<Unit filename="Classes/node (2).h" />
 		<Unit filename="Classes/q.cpp" />
 		<Unit filename="Classes/q.h" />
-		<Unit filename="include/FireBall.h" />
-		<Unit filename="include/MissileFire.h" />
-		<Unit filename="include/ThroughBall.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/MissileFire.cpp" />
-		<Unit filename="src/ThroughBall.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

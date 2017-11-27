@@ -1420,11 +1420,12 @@
 	<iostream>
 	"LTexture.h"
 
-1511762913 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.cpp
+1511774249 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.cpp
 	"GamePlay.h"
 	"Bat.h"
 	"NormalBall.h"
 	"Board.h"
+	<SDL_mixer.h>
 	<string>
 	<stdio.h>
 	<iostream>
@@ -1437,7 +1438,7 @@
 	"NormalFire.h"
 	"MissileFire.h"
 
-1511762674 c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.h
+1511774062 c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
 	"Ball.h"
 	"Board.h"
@@ -1448,6 +1449,7 @@
 	"ScreenManager.h"
 	"Fire.h"
 	"q.h"
+	<SDL_mixer.h>
 	<typeinfo>
 
 1511692969 c:\users\sn\desktop\mainproject\brickbreaker\classes\normalball.h
@@ -1502,7 +1504,7 @@
 	"LTexture.h"
 	"Statics.h"
 
-1511692728 source:c:\users\sn\desktop\mainproject\brickbreaker\main.cpp
+1511773515 source:c:\users\sn\desktop\mainproject\brickbreaker\main.cpp
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -2191,7 +2193,7 @@
 	"GamePlay.h"
 	<iostream>
 
-1511692289 c:\users\sn\desktop\mainproject\brickbreaker\classes\menu.h
+1511776615 c:\users\sn\desktop\mainproject\brickbreaker\classes\menu.h
 	"ScreenManager.h"
 	"Button.h"
 	"Statics.h"
@@ -2256,4 +2258,50 @@
 1511761431 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\q.cpp
 	"q.h"
 	<iostream>
+
+1451801791 c:\users\sn\desktop\sdl\sdl2_mixer-2.0.1\i686-w64-mingw32\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451801791 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1511742308 c:\users\sn\desktop\mainproject\brickbreaker\classes\throughball.h
+	"Object.h"
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<iostream>
+	"LTexture.h"
+	"Board.h"
+	"Bat.h"
+	"Ball.h"
+
+1511756334 c:\users\sn\desktop\mainproject\brickbreaker\classes\missilefire.h
+	"Fire.h"
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<iostream>
+	"LTexture.h"
+
+1511756843 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\missilefire.cpp
+	"MissileFire.h"
+	"Fire.h"
+
+1511742287 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\throughball.cpp
+	"ThroughBall.h"
+	"Ball.h"
+	<math.h>
 
