@@ -2,43 +2,6 @@
 #include "Ball.h"
 #include<math.h>
 
-bool NormalBall::Collides(Board* other)
-    {
-    if (x + width > other->x  && x < other->x + other->width &&
-        y + height  > other->y +40 && y   < other->y + other->height)
-        {
-          return true;
-        }
-    return false;
-    }
-bool NormalBall::Collide2(Bat* other)
-    {
-    if (x + width > other->x -40 && x +40 < other->x + other->width &&
-        y + height  > other->y && y   < other->y + other->height)
-        {
-
-          return true;
-        }
-    return false;
-    }
-bool NormalBall::Collidesleft(Board* other)
-    {
-    if (this->x <= other->x)
-        {
-
-          return true;
-        }
-    return false;
-    }
-bool NormalBall::Collidesright(Board* other)
-    {
-    if (this->x + this->width >= other->x + other->width)
-        {
-
-          return true;
-        }
-    return false;
-    }
 
 
 NormalBall::NormalBall(LTexture* image, float x, float y)
@@ -47,8 +10,8 @@ NormalBall::NormalBall(LTexture* image, float x, float y)
 
 
     //Frame 0
-    spriteClips[ 0 ].x =   153.5;
-    spriteClips[ 0 ].y =   320;
+    spriteClips[ 0 ].x = 153.5;
+    spriteClips[ 0 ].y = 320;
     spriteClips[ 0 ].w = 24;
     spriteClips[ 0 ].h = 24;
 
@@ -72,6 +35,7 @@ NormalBall::NormalBall(LTexture* image, float x, float y)
 
     this->width = spriteClips[ 0 ].w;
     this->height = spriteClips[ 0 ].h;
+    this->shouldMove = false;
 
     friction = 0.50f;
     SetDirection(-1,-1);
@@ -96,24 +60,19 @@ bool NormalBall::GetAlive()
 
 void NormalBall::SetDirection(float dirx, float diry)
 {
-    float length = sqrt(dirx * dirx + diry * diry);
+    float length = sqrt((dirx*dirx) + (diry*diry));
     this->dirx = BALL_SPEED * (dirx / length);
     this->diry = BALL_SPEED * (diry / length);
 }
-
-
-void NormalBall::Move(float xx, float yy)
+void NormalBall::Move(float x, float y)
 {
-    y +=diry* yy;
-    x +=dirx* xx;
-
-
+    this->y +=diry*y;
+    this->x +=dirx*x;
 }
-
-
 void NormalBall::Render(SDL_Renderer* gRenderer)
 {
     spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips[0], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
+    if(shouldMove){
+        Move(1,1);
+    }
 }
-
-

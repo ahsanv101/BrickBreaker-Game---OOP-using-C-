@@ -2,6 +2,8 @@
 #define STATICS_H_INCLUDED
 
 enum MouseEventType { ClickUp, MouseMotion, ClickDown, RightClickUp, RightClickDown };
+enum CollisionType { Horizontal, Vertical, None};
+enum ANIMATION_FRAMES {FLYING_FRAMES = 1};
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 650;
 const int BOARD_WIDTH = 12;

@@ -491,7 +491,7 @@
 	"Ball.h"
 	<math.h>
 
-1511623002 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\ball.h
+1511708134 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\ball.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -882,7 +882,7 @@
 	"LTexture.h"
 	"Board.h"
 
-1511620698 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\bat.cpp
+1511713513 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\bat.cpp
 	"Bat.h"
 	"Board.h"
 
@@ -905,7 +905,7 @@
 	<iostream>
 	"LTexture.h"
 
-1511622842 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.cpp
+1511714990 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.cpp
 	"GamePlay.h"
 	"Bat.h"
 	"NormalBall.h"
@@ -918,7 +918,7 @@
 	<time.h>
 	"windows.h"
 
-1511620153 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.h
+1511703774 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
 	"Ball.h"
 	"Board.h"
@@ -929,7 +929,7 @@
 	"ScreenManager.h"
 	<typeinfo>
 
-1511621756 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalball.h
+1511640231 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalball.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -939,11 +939,12 @@
 	"Board.h"
 	"Bat.h"
 	"Ball.h"
+	"Statics.h"
 
 1511106294 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\ltexture.cpp
 	"LTexture.h"
 
-1511622305 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalball.cpp
+1511714847 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalball.cpp
 	"NormalBall.h"
 	"Ball.h"
 	<math.h>
@@ -2073,7 +2074,7 @@
 	"Character.h"
 	"Word.h"
 
-1511526204 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\statics.h
+1511640024 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\statics.h
 
 1511526205 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\menu.cpp
 	"Menu.h"

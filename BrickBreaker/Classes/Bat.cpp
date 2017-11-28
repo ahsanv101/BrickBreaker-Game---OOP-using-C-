@@ -156,5 +156,8 @@ void Bat::Move()
 void Bat::Render(SDL_Renderer* gRenderer)
 {
     spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips[0], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
+    SDL_SetRenderDrawColor( gRenderer,255,0,0, 255 );
+//    SDL_Rect rect = {x-width/2,y-height/2,width,height};
+//    SDL_RenderFillRect(gRenderer,&rect);
 }
 

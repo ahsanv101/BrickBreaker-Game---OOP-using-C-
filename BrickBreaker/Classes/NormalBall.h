@@ -9,13 +9,13 @@
 #include "Board.h"
 #include "Bat.h"
 #include "Ball.h"
+#include "Statics.h"
 using namespace std;
 enum MMOTION {RRIGHT, LLEFT, UUP, DDOWN};
 
 class NormalBall :public Ball
 {
     public:
-        enum ANIMATION_FRAMES {FLYING_FRAMES = 1};
         SDL_Rect spriteClips[ FLYING_FRAMES ];
         LTexture* spriteSheetTexture;
         void SetDirection(float dirx, float diry);
@@ -27,13 +27,13 @@ class NormalBall :public Ball
         void SetAlive(bool);
         bool GetAlive();
        // virtual void Move(int direction);
-        virtual void Move(float xx, float yy);
+        virtual void Move(float x, float y);
 
-        bool Collides(Board* other);
+//        bool Collides(Board* other);
         bool Collide2(Bat* other);
-        bool Collides3(Board* other);
-        bool Collidesleft(Board* other);
-        bool Collidesright(Board* other);
+//        bool Collides3(Board* other);
+//        bool Collidesleft(Board* other);
+//        bool Collidesright(Board* other);
         virtual void Render(SDL_Renderer* gRenderer);
 };
 

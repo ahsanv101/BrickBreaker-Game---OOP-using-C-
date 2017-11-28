@@ -9,10 +9,6 @@
 #include "Object.h"
 #include "ScreenManager.h"
 
-
-// Define the dimensions of the board and bricks
-
-
 #include <typeinfo>
 
 
@@ -20,6 +16,8 @@
 class GamePlay : public ScreenManager
 {
     public:
+
+        //ScreenManager Implementation
         GamePlay();
         GamePlay(SDL_Renderer* gRenderer);
         void show();
@@ -28,10 +26,15 @@ class GamePlay : public ScreenManager
         ~GamePlay();
 
         void CreateLevel();
+
+
+    private:
+        SDL_Renderer* renderer;
+        bool loadMedia();
+        LTexture backgroundSprite, batBallSpriteSheet;
+        bool shoot;
+
         Board* board;
-
-        float x, y, width, height;
-
         Bat* bat;
         Ball* ball;
 
@@ -39,11 +42,14 @@ class GamePlay : public ScreenManager
         SDL_Rect side2;
         SDL_Rect side3;
 
-    private:
-        SDL_Renderer* renderer;
-        bool loadMedia();
-        LTexture backgroundSprite, batBallSpriteSheet;
-        bool shoot;
+        float x, y, width, height;
+
+        //collision detection functions
+        bool detectCollisionBetween(Bat*, Ball*);
+        CollisionType detectCollisionBetween(const SDL_Rect& wall, Ball*);
+        CollisionType detectCollisionBetween(Brick*, Ball*);
+        bool isBallAlive(Ball*);
+
 };
 
 #endif // GAMEPLAY_H
