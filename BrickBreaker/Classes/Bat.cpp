@@ -45,10 +45,22 @@ Bat::Bat(LTexture* image, float x, float y)
 
 
     //Frame 0
+    spriteClips3[ 0 ].x =   15;
+    spriteClips3[ 0 ].y =   250;
+    spriteClips3[ 0 ].w = 75;
+    spriteClips3[ 0 ].h = 30;
+
+
+
     spriteClips[ 0 ].x =   0;
     spriteClips[ 0 ].y =   280;
     spriteClips[ 0 ].w = 115;
     spriteClips[ 0 ].h = 30;
+
+    spriteClips2[ 0 ].x =   0;
+    spriteClips2[ 0 ].y =   320;
+    spriteClips2[ 0 ].w = 140;
+    spriteClips2[ 0 ].h = 30;
 
 //    //Frame 1
 //    spriteClips[ 1 ].x = 128;
@@ -159,5 +171,15 @@ void Bat::Render(SDL_Renderer* gRenderer)
     SDL_SetRenderDrawColor( gRenderer,255,0,0, 255 );
 //    SDL_Rect rect = {x-width/2,y-height/2,width,height};
 //    SDL_RenderFillRect(gRenderer,&rect);
+}
+
+void Bat::Render2(SDL_Renderer* gRenderer)
+{
+    spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips2[0], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
+}
+
+void Bat::Render3(SDL_Renderer* gRenderer)
+{
+    spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips3[0], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
 }
 

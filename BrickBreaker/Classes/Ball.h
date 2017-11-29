@@ -35,7 +35,9 @@ class Ball : public Object
 //        virtual ~Ball();
 //       // virtual void Move(int direction);
         virtual void Move(float x, float y) = 0;
-        virtual void Render(SDL_Renderer* gRenderer) = 0;
+        virtual void Render(long int frame, SDL_Renderer* gRenderer) = 0;
+        void SetDirection(float dirx, float diry);
+        virtual void Move();
 };
 
 

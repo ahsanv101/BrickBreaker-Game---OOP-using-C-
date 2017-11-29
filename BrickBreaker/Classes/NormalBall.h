@@ -18,7 +18,7 @@ class NormalBall :public Ball
     public:
         SDL_Rect spriteClips[ FLYING_FRAMES ];
         LTexture* spriteSheetTexture;
-        void SetDirection(float dirx, float diry);
+        //void SetDirection(float dirx, float diry);
 
     public:
         NormalBall(LTexture* image, float x, float y);
@@ -31,10 +31,8 @@ class NormalBall :public Ball
 
 //        bool Collides(Board* other);
         bool Collide2(Bat* other);
-//        bool Collides3(Board* other);
-//        bool Collidesleft(Board* other);
-//        bool Collidesright(Board* other);
-        virtual void Render(SDL_Renderer* gRenderer);
+        virtual void Render(long int frame, SDL_Renderer* gRenderer);
+
 };
 
 

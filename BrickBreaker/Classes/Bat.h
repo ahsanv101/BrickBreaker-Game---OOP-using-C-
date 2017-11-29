@@ -26,10 +26,14 @@ class Bat : public Object
 
         enum ANIMATION_FRAMES {FLYING_FRAMES = 1};
         SDL_Rect spriteClips[ FLYING_FRAMES ];
+        SDL_Rect spriteClips2[ FLYING_FRAMES ];
+        SDL_Rect spriteClips3[ FLYING_FRAMES ];
+        //SDL_Rect spriteClips2[ 0 ];
+
         LTexture* spriteSheetTexture;
 
 
-    public:
+
         Bat(LTexture* image, float x, float y);
         Bat();
         virtual ~Bat();
@@ -41,6 +45,8 @@ class Bat : public Object
         //virtual void Move(int direction, SDL_Rect& side);
         virtual void Move();
         virtual void Render(SDL_Renderer* gRenderer);
+        void Render2(SDL_Renderer* gRenderer);
+        void Render3(SDL_Renderer* gRenderer);
 };
 
 

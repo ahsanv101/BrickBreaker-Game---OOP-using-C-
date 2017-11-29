@@ -20,8 +20,8 @@ public:
     float x, y, width, height;
 
     //virtual void Update(float delta);
-    virtual void Render(float delta);
-
+    virtual void Render(long int frame, SDL_Renderer* renderer);
+    virtual void Move()=0;
     bool Collides(Object* other);
 protected:
     SDL_Renderer* renderer;

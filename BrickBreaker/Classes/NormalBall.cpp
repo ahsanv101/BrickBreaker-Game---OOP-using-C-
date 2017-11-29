@@ -58,21 +58,15 @@ bool NormalBall::GetAlive()
 }
 
 
-void NormalBall::SetDirection(float dirx, float diry)
-{
-    float length = sqrt((dirx*dirx) + (diry*diry));
-    this->dirx = BALL_SPEED * (dirx / length);
-    this->diry = BALL_SPEED * (diry / length);
-}
+
 void NormalBall::Move(float x, float y)
 {
     this->y +=diry*y;
     this->x +=dirx*x;
 }
-void NormalBall::Render(SDL_Renderer* gRenderer)
+
+void NormalBall::Render(long int frame,SDL_Renderer* gRenderer)
 {
     spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips[0], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
-    if(shouldMove){
-        Move(1,1);
-    }
 }
+
