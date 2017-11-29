@@ -20,7 +20,7 @@ class Fire :public Object
         float speedy;
         int width;
         int height;
-        float friction; //lower speed means more friction
+
 //
 //        enum ANIMATION_FRAMES {FLYING_FRAMES = 1};
 //        SDL_Rect spriteClips[ FLYING_FRAMES ];

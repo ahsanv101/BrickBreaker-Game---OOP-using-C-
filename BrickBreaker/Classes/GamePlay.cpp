@@ -32,6 +32,8 @@ GamePlay::GamePlay(long int* frame,SDL_Renderer* renderer)
     NormalActivate = false;
     IspeedActivate = false;
     dspeedActivate = false;
+    BigbActivate = false;
+    SmallbActivate = false;
     this->side1.h=650;
     this->side1.w=5;
     this->side1.x=0;
@@ -96,11 +98,21 @@ void GamePlay::show()
     SDL_RenderFillRect(renderer,&(this->side1));
     SDL_RenderFillRect(renderer,&(this->side2));
     SDL_RenderFillRect(renderer,&(this->side3));
+    if (BigbActivate)
+    {
+        bat->Render2(renderer);
+    }
+    else if (SmallbActivate)
+    {
+        bat->Render3(renderer);
+    }
+    else
     bat->Render(renderer);
+
     ball->Render(this->frame,renderer);
     board->Display(renderer);
 
-    if (*frame%20 ==0 and count<10)
+    if (*frame%20 ==0 and count<30)
     {
 
         fire=new NormalFire(&batBallSpriteSheet, bat->x, bat->y-23);
@@ -109,11 +121,21 @@ void GamePlay::show()
 
 
     }
+//    for (int i;i<=3;i++)
+//    {
+//        ball = new NormalBall(&batBallSpriteSheet, bat->x, bat->y-23);
+//        q.Enqueue(ball);
+//
+//    }
+
+
 
     if(blast )
     {
         q.Render(this->frame,renderer);
         q.Move();
+        q.Clean();
+
 
         //fire = new NormalFire(&batBallSpriteSheet, bat->x, bat->y-23);
         //fire->Render(this->frame,renderer);
@@ -122,6 +144,12 @@ void GamePlay::show()
         //q.Move();
 
     }
+//    if(mball)
+//    {
+//        q.Render(this->frame,renderer);
+//        q.Move();
+//        q.Clean();
+//    }
     if (MisActivate)
     {
         //blast = false;
@@ -310,7 +338,7 @@ void GamePlay::click(int x, int y, MouseEventType eventType, ScreenManager** sel
 void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
     if(event[ SDL_SCANCODE_SPACE ]){
         shoot = true;
-        Mix_PlayChannel( -1, gScratch, 0 );
+
     }
     if(event[ SDL_SCANCODE_DOWN ]){
         FireActivate = true;
@@ -333,6 +361,12 @@ void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
     }
     if(event[ SDL_SCANCODE_V ]){
         MisActivate = true;
+    }
+    if(event[ SDL_SCANCODE_B ]){
+        BigbActivate = true;
+    }
+    if(event[ SDL_SCANCODE_N ]){
+        SmallbActivate = true;
     }
 
 

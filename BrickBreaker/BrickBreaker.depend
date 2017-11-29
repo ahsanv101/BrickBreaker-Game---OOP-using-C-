@@ -1388,7 +1388,7 @@
 
 1511678725 c:\users\sn\desktop\mainproject\brickbreaker\classes\brick.h
 
-1511678725 c:\users\sn\desktop\mainproject\brickbreaker\classes\bat.h
+1511918418 c:\users\sn\desktop\mainproject\brickbreaker\classes\bat.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -1397,7 +1397,7 @@
 	"LTexture.h"
 	"Board.h"
 
-1511678725 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\bat.cpp
+1511916395 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\bat.cpp
 	"Bat.h"
 	"Board.h"
 
@@ -1412,7 +1412,7 @@
 1511753847 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\fire.cpp
 	"Fire.h"
 
-1511754239 c:\users\sn\desktop\mainproject\brickbreaker\classes\fire.h
+1511918418 c:\users\sn\desktop\mainproject\brickbreaker\classes\fire.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -1420,7 +1420,7 @@
 	<iostream>
 	"LTexture.h"
 
-1511774249 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.cpp
+1511919135 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.cpp
 	"GamePlay.h"
 	"Bat.h"
 	"NormalBall.h"
@@ -1438,7 +1438,7 @@
 	"NormalFire.h"
 	"MissileFire.h"
 
-1511774062 c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.h
+1511915967 c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
 	"Ball.h"
 	"Board.h"

@@ -62,6 +62,8 @@ class GamePlay : public ScreenManager
         bool NormalActivate;
         bool IspeedActivate;
         bool dspeedActivate;
+        bool BigbActivate;
+        bool SmallbActivate;
 };
 
 #endif // GAMEPLAY_H
