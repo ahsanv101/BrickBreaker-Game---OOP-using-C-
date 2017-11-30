@@ -20,21 +20,20 @@ class Fire :public Object
         float speedy;
         int width;
         int height;
-        float friction; //lower speed means more friction
 
-        enum ANIMATION_FRAMES {FLYING_FRAMES = 1};
-        SDL_Rect spriteClips[ FLYING_FRAMES ];
-        LTexture* spriteSheetTexture;
+//
+//        enum ANIMATION_FRAMES {FLYING_FRAMES = 1};
+//        SDL_Rect spriteClips[ FLYING_FRAMES ];
+//        LTexture* spriteSheetTexture;
 
     public:
-        Fire(LTexture* image, float x, float y);
-        Fire();
-        virtual ~Fire();
-        void SetAlive(bool);
-        bool GetAlive();
-        virtual void Move(int direction);
-        virtual void Move();
-        virtual void Render(long int& frame, SDL_Renderer* gRenderer);
+
+
+//        void SetAlive(bool);
+//        bool GetAlive();
+       // virtual void Move(int direction) = 0;
+        virtual void Move()=0;
+        virtual void Render(long int frame, SDL_Renderer* gRenderer) = 0;
 };
 
 

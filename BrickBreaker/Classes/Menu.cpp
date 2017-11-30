@@ -7,6 +7,8 @@ Menu::Menu(){
     renderer = NULL;
 }
 Menu::Menu(SDL_Renderer* renderer){
+
+    //std::cout<<*frame;
     this->renderer = renderer;
     if(loadMedia()){
         newGame = Button("New Game", {(float)SCREEN_WIDTH/2, (float)(SCREEN_HEIGHT/2)}, &gSpriteSheetTexture, &buttonSpriteTexture, Brown);
@@ -17,7 +19,7 @@ Menu::Menu(SDL_Renderer* renderer){
     }
 
 }
-void Menu::show(){
+void Menu::show(long int frame){
     backSpriteSheetTexture.Render(0,0,0,0.0,NULL,SDL_FLIP_NONE,renderer);
     newGame.Draw(renderer);
     loadGame.Draw(renderer);

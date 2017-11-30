@@ -19,7 +19,7 @@ void Entity::Update(float delta) {
 }
 */
 
-void Object::Render(float delta) {
+void Object::Render(long int frame, SDL_Renderer* renderer) {
 }
 
 bool Object::Collides(Object* other) {

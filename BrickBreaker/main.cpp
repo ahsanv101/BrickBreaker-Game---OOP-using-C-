@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <SDL_mixer.h>
 #include <SDL_image.h>
 #include <stdio.h>
 #include <iostream>
@@ -10,9 +11,9 @@
 #include "Classes/Board.h"
 #include "Classes/NormalBall.h"
 #include "Classes/GamePlay.h"
-#include "ScreenManager.h"
-#include"Statics.h"
-#include "Menu.h"
+#include "Classes/ScreenManager.h"
+#include "Classes/Statics.h"
+#include "Classes/Menu.h"
 
 
 #include <iomanip>
@@ -63,8 +64,9 @@ int main( int argc, char* args[] )
 
     /* generate secret number between 1 and 10: */
     int random =0;
+
     currentManager = new Menu(gRenderer);
-    bool shoot = false;
+
     splash.Render(132,0,0,0.0,NULL,SDL_FLIP_NONE,gRenderer);
     SDL_RenderPresent(gRenderer);
     Sleep(5000);
@@ -114,10 +116,10 @@ int main( int argc, char* args[] )
 
         SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0 );
         SDL_RenderClear(gRenderer);
-//        if(!currentManager){
-//            break;
-//        }
-        currentManager->show();
+        if(!currentManager){
+            break;
+        }
+        currentManager->show(frame);
         SDL_RenderPresent(gRenderer);
         ++frame;
     }
@@ -164,6 +166,11 @@ bool init()
         printf( "SDL_image could not initialize! SDL_mage Error: %s\n", IMG_GetError() );
         return false;
     }
+//    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+//				{
+//					printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+//					return false;
+//				}
 
 	return loadMedia();
 }

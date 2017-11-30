@@ -1,5 +1,7 @@
 #include"Board.h"
 #include"Statics.h"
+#include"Brick.h"
+#include"Point.h"
 #include<SDL.h>
 #include<iostream>
 
@@ -129,4 +131,13 @@ bool Board::loadMedia()
         return false;
 	}
 	return true;
+}
+CollisionType Board::detectCollisionWithBricks(Point ballPos, BallType ballType){
+
+}
+CollisionType Board::detectCollisionWithBricks(Point FirePos, FireType fireType){
+
+}
+CollisionType detectCollisionWithBrick(Point objectPos, Brick brick){
+
 }

@@ -11,10 +11,11 @@ class Menu : public ScreenManager
     public:
         Menu();
         Menu(SDL_Renderer* renderer);
-        void show();
+        void show(long int frame);
         void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer);
         void keyboardEvent(const Uint8* event, ScreenManager** selfPointer);
         ~Menu();
+
 
     private:
         Button newGame;
@@ -24,5 +25,7 @@ class Menu : public ScreenManager
         LTexture backSpriteSheetTexture;
         LTexture buttonSpriteTexture;
         bool loadMedia();
+
+
 };
 #endif // MENU_H
