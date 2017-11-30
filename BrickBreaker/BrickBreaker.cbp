@@ -11,10 +11,9 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option projectIncludeDirsRelation="0" />
-				<Option projectLibDirsRelation="0" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="Classes" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,10 +21,9 @@
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option projectIncludeDirsRelation="0" />
-				<Option projectLibDirsRelation="0" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="Classes" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -38,7 +36,7 @@
 			<Add directory="MINGW_Lib/include/SDL2" />
 		</Compiler>
 		<Linker>
-			<Add option="-lmingw32 -lSDL2_mixer -lSDL2main -lSDL2 -lSDL2_image" />
+			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image" />
 			<Add directory="MINGW_Lib/lib" />
 		</Linker>
 		<Unit filename="Classes/Ball.cpp" />
@@ -48,22 +46,20 @@
 		<Unit filename="Classes/Board.cpp" />
 		<Unit filename="Classes/Board.h" />
 		<Unit filename="Classes/Brick.h" />
+		<Unit filename="Classes/Bricks.cpp" />
+		<Unit filename="Classes/Bricks.h" />
 		<Unit filename="Classes/Button.cpp" />
 		<Unit filename="Classes/Button.h" />
 		<Unit filename="Classes/Character.cpp" />
 		<Unit filename="Classes/Character.h" />
 		<Unit filename="Classes/Fire.cpp" />
 		<Unit filename="Classes/Fire.h" />
-		<Unit filename="Classes/FireBall.cpp" />
-		<Unit filename="Classes/FireBall.h" />
 		<Unit filename="Classes/GamePlay.cpp" />
 		<Unit filename="Classes/GamePlay.h" />
 		<Unit filename="Classes/LTexture.cpp" />
 		<Unit filename="Classes/LTexture.h" />
 		<Unit filename="Classes/Menu.cpp" />
 		<Unit filename="Classes/Menu.h" />
-		<Unit filename="Classes/MissileFire.cpp" />
-		<Unit filename="Classes/MissileFire.h" />
 		<Unit filename="Classes/Node.h" />
 		<Unit filename="Classes/NormalBall.cpp" />
 		<Unit filename="Classes/NormalBall.h" />
@@ -73,16 +69,13 @@
 		<Unit filename="Classes/Object.h" />
 		<Unit filename="Classes/Point.cpp" />
 		<Unit filename="Classes/Point.h" />
+		<Unit filename="Classes/Pop-Up.cpp" />
+		<Unit filename="Classes/Pop-Up.h" />
 		<Unit filename="Classes/ScreenManager.cpp" />
 		<Unit filename="Classes/ScreenManager.h" />
 		<Unit filename="Classes/Statics.h" />
-		<Unit filename="Classes/ThroughBall.cpp" />
-		<Unit filename="Classes/ThroughBall.h" />
 		<Unit filename="Classes/Word.cpp" />
 		<Unit filename="Classes/Word.h" />
-		<Unit filename="Classes/node (2).h" />
-		<Unit filename="Classes/q.cpp" />
-		<Unit filename="Classes/q.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

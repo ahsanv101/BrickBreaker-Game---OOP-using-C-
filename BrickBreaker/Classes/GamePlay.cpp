@@ -331,12 +331,6 @@ void GamePlay::click(int x, int y, MouseEventType eventType, ScreenManager** sel
             popup = new Pop_Up(this->renderer);
     }
 }
-void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
-    if(popup){
-        popup->keyboardEvent(event,selfPointer, &popup);
-        return;
-    }
-}
 
 void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
     if(event[ SDL_SCANCODE_SPACE ]){
@@ -379,7 +373,10 @@ void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
     if(event[ SDL_SCANCODE_N ]){
         SmallbActivate = true;
     }
-
+    if(popup){
+        popup->keyboardEvent(event,selfPointer, &popup);
+        return;
+    }
 }
 
 bool GamePlay::loadMedia(){
