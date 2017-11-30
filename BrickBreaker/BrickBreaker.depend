@@ -1875,10 +1875,14 @@
 	<stdio.h>
 	<iostream>
 
-1511444715 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\board.h
-	"Queue.h"
-	"Object.h"
-	<typeinfo>
+1511527215 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\board.h
+	"Node.h"
+	"Brick.h"
+	"LTexture.h"
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<iostream>
 
 1511444715 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\queue.h
 	"Node.h"
@@ -1919,11 +1923,12 @@
 	<iostream>
 	"LTexture.h"
 
-1511520049 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.cpp
+1511880717 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.cpp
 	"GamePlay.h"
 	"Bat.h"
 	"NormalBall.h"
 	"Board.h"
+	"Pop-Up.h"
 	<string>
 	<stdio.h>
 	<iostream>
@@ -1931,15 +1936,16 @@
 	<fstream>
 	<time.h>
 
-1511520049 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.h
+1511873918 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
 	"Ball.h"
 	"Board.h"
 	"LTexture.h"
 	"Statics.h"
-	"Queue.h"
+	"Board.h"
 	"Object.h"
 	"ScreenManager.h"
+	"Pop-Up.h"
 	<typeinfo>
 
 1511444715 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\normalball.h
@@ -1993,7 +1999,7 @@
 	"LTexture.h"
 	"Statics.h"
 
-1511525006 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\main.cpp
+1511963247 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\main.cpp
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -2015,13 +2021,13 @@
 	<windows.h>
 	<conio.h>
 
-1511522412 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\button.cpp
+1511892967 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\button.cpp
 	"Button.h"
 	"Point.h"
 	<SDL.h>
 	<iostream>
 
-1511522412 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\button.h
+1511884678 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\button.h
 	<string>
 	"Character.h"
 	<SDL.h>
@@ -2030,6 +2036,7 @@
 	<iostream>
 	"LTexture.h"
 	"Word.h"
+	"Statics.h"
 
 1511518930 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\character.h
 	<SDL.h>
@@ -2053,15 +2060,15 @@
 	"Character.h"
 	<iostream>
 
-1511449203 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\statics.h
+1511881174 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\statics.h
 
-1511524887 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.cpp
+1511896697 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.cpp
 	"Menu.h"
 	"Button.h"
 	"GamePlay.h"
 	<iostream>
 
-1511525006 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.h
+1511893738 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.h
 	"ScreenManager.h"
 	"Button.h"
 	"Statics.h"
@@ -2130,4 +2137,22 @@
 	"LTexture.h"
 	"Character.h"
 	"Word.h"
+
+1511527215 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\board.cpp
+	"Board.h"
+	"Statics.h"
+	<SDL.h>
+	<iostream>
+
+1512042858 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\pop-up.cpp
+	"Pop-Up.h"
+	"Button.h"
+	"GamePlay.h"
+	"Menu.h"
+	<iostream>
+
+1511963388 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\pop-up.h
+	"ScreenManager.h"
+	"Button.h"
+	"Statics.h"
 

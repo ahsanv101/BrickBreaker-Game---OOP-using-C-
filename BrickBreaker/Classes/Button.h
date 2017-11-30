@@ -7,21 +7,24 @@
 #include <iostream>
 #include"LTexture.h"
 #include"Word.h"
+#include"Statics.h"
 
 class Button
 {
     public:
         Button();
         ~Button();
-        Button(std::string, Point, LTexture*);
+        Button(std::string, Point, LTexture*, LTexture*, ButtonColorType);
         void Draw(SDL_Renderer*);
         void shiftOriginToCenter();
         bool pointLiesInBounds(int x, int y);
         void setIsClicked(bool flag);
+        bool getIsClicked();
 
     private:
         Word word;
         Point center;
-        LTexture* spriteSheetTexture;
+        LTexture* buttonTexture;
         bool isClicked;
+        ButtonColorType color;
 };

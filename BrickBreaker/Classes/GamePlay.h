@@ -8,6 +8,7 @@
 #include "Board.h"
 #include "Object.h"
 #include "ScreenManager.h"
+#include "Pop-Up.h"
 
 
 // Define the dimensions of the board and bricks
@@ -38,6 +39,8 @@ class GamePlay : public ScreenManager
         SDL_Rect side1;
         SDL_Rect side2;
         SDL_Rect side3;
+
+        Pop_Up* popup;
 
     private:
         SDL_Renderer* renderer;

@@ -2,6 +2,7 @@
 #include "Bat.h"
 #include "NormalBall.h"
 #include "Board.h"
+#include "Pop-Up.h"
 
 #include<string>
 #include <stdio.h>
@@ -28,6 +29,7 @@ GamePlay::GamePlay(SDL_Renderer* renderer)
     this->side3.y=0;
     bat = new Bat(&brickSpriteSheet, (float)SCREEN_WIDTH/2, 630);
     ball = new NormalBall(&brickSpriteSheet, bat->x, bat->y-23);
+    popup = NULL;
 
 
     /*
@@ -61,6 +63,9 @@ GamePlay::~GamePlay(){
 void GamePlay::show()
 {
     board->Display(renderer);
+    if(popup){
+        popup->show();
+    }
 }
 
 
@@ -90,7 +95,6 @@ void GamePlay::CreateLevel() {
             if(i==content.length()-1 && j<=BOARD_HEIGHT)
             {
                 j++;
-
             }
         }
         if(j > BOARD_HEIGHT){
@@ -98,6 +102,22 @@ void GamePlay::CreateLevel() {
         }
     }
 }
-void GamePlay::click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer){}
-void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){}
+void GamePlay::click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer){
+    if(popup){
+        popup->click(x,y,eventType,selfPointer, &popup);
+        return;
+    }
+    if(eventType == RightClickDown){
+            std::cout<<"Pop-Up Button Down"<<std::endl;
+    }else if(eventType == RightClickUp){
+            std::cout<<"Pop-Up Button Up"<<std::endl;
+            popup = new Pop_Up(this->renderer);
+    }
+}
+void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
+    if(popup){
+        popup->keyboardEvent(event,selfPointer, &popup);
+        return;
+    }
+}
 
