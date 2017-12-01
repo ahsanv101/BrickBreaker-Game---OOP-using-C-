@@ -144,7 +144,7 @@ CollisionInfo Board::detectCollisionWithBricks(Point ballPos, BallType ballType,
     while(temp!=NULL){
         CollisionType type = detectCollisionWithBrick(ballPos, ballSize, temp);
         if(type != None){
-            removebrickat(temp, ballType);
+            c.brick = removeBrickAt(temp, ballType);
             c.directionType = type;
             c.objectType = temp->brick->type == 3 ? CollisionObjectUnbreakableBrickType : CollisionObjectBreakableBrickType;
             return c;
@@ -186,7 +186,7 @@ CollisionType Board::detectCollisionWithBrick(Point objectPos, Point objectSize,
     }
     return None;
 }
-void Board::removebrickat(Node* node, BallType balltype)
+Brick* Board::removeBrickAt(Node* node, BallType balltype)
 {
     if(balltype==NormalBallType)
     {
@@ -207,8 +207,9 @@ void Board::removebrickat(Node* node, BallType balltype)
                 {
                     node->prev->next = node->next;
                 }
-
+                Brick* brick= node->brick;
                 delete node;
+                return brick;
             }
             else if(node->brick->breaktype==1)
             {
@@ -225,7 +226,6 @@ void Board::removebrickat(Node* node, BallType balltype)
         Node* temp = new Node;
         temp = node;
         node->brick->state = false;
-        delete node;
         if(temp->prev!=NULL)
         {
             if(temp->position-temp->prev->position==1)
@@ -265,7 +265,10 @@ void Board::removebrickat(Node* node, BallType balltype)
         {
             lowerbricktype(accessat(node->position+1, (node->y)+1));
         }
+        Brick* brick= node->brick;
+        delete node;
         delete temp;
+        return brick;
 
     }
     else if(balltype==ThroughBallType)
@@ -282,10 +285,12 @@ void Board::removebrickat(Node* node, BallType balltype)
             {
                 node->prev->next = node->next;
             }
+            Brick* brick= node->brick;
             delete node;
-
+            return brick;
         }
     }
+    return NULL;
 }
 Node* Board::accessat(int i, int j)
 {

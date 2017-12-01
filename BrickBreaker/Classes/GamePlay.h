@@ -12,7 +12,7 @@
 #include "q.h"
 #include <SDL_mixer.h>
 #include "Pop-Up.h"
-
+#include "PowerUps.h"
 
 #include <typeinfo>
 
@@ -34,10 +34,11 @@ class GamePlay : public ScreenManager
     private:
         SDL_Renderer* renderer;
         bool loadMedia();
-        LTexture backgroundSprite, batBallSpriteSheet;
+        LTexture backgroundSprite, batBallSpriteSheet, PowerSpriteSheet;
         bool shoot;
 
         Board* board;
+        PowerUps* power;
         Bat* bat;
         Ball* ball;
         Fire* fire;
@@ -56,6 +57,7 @@ class GamePlay : public ScreenManager
 
         //collision detection functions
         bool detectCollisionBetween(Bat*, Ball*);
+        bool detectCollisionBetween(Bat*, PowerUps*);
         CollisionType detectCollisionBetween(const SDL_Rect& wall, Ball*);
         CollisionType detectCollisionBetween(Brick*, Ball*);
         bool isBallAlive(Ball*);

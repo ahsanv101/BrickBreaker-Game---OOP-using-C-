@@ -1,5 +1,6 @@
 #pragma once
 #include"node (2).h"
+#include"Object.h"
 
 class Queue
 {
@@ -9,7 +10,7 @@ private:
 public:
     Queue();
     ~Queue();
-    void Enqueue(Fire*);
+    void Enqueue(Object*);
     void Clean();
     void Render(long int frame, SDL_Renderer* gRenderer);
     void Move();

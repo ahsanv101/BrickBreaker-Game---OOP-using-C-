@@ -20,7 +20,7 @@ Queue::~Queue()
     }
 }
 
-void Queue::Enqueue(Fire* unit)
+void Queue::Enqueue(Object* unit)
 {
 
     if(head == NULL)

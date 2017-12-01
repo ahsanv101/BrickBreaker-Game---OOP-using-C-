@@ -5,6 +5,7 @@
 #include<string>
 #include "Pop-Up.h"
 
+#include"PowerUps.h"
 #include<string>
 #include <stdio.h>
 #include <iostream>
@@ -50,7 +51,6 @@ GamePlay::GamePlay(SDL_Renderer* renderer)
     this->side3.x=1000-5;
     this->side3.y=0;
     popup = NULL;
-
     bat = new Bat(&batBallSpriteSheet, (float)SCREEN_WIDTH/2, 630);
     ball = new NormalBall(&batBallSpriteSheet, bat->x, bat->y-24);
     Missile  = new MissileFire(&batBallSpriteSheet, bat->x, bat->y-24);
@@ -102,13 +102,20 @@ void GamePlay::show(long int frame)
     }
     else
     bat->Render(renderer);
-
+    //power->Render(frame,renderer);
+    //power->Move();
     ball->Render(frame,renderer);
     ball->Move();
     board->Display(renderer);
     if(ball->shouldMove){
         CollisionInfo info = board->detectCollisionWithBricks(Point(ball->x - ball->width/2, ball->y - ball->height/2), ball->type, Point(ball->width, ball->height));
         ball->didCollide(info);
+
+        if(info.directionType != NULL && info.objectType == CollisionObjectBreakableBrickType && info.brick && rand()%100<60){
+                //cout<<"checkingpoweruprenderer"<<endl;
+                power = new PowerUps(&PowerSpriteSheet, ball->x, ball->y);
+                q.Enqueue(power);
+        }
     }
 
 
@@ -130,10 +137,11 @@ void GamePlay::show(long int frame)
 
 
 
+    q.Render(frame,renderer);
+    q.Move();
     if(blast )
     {
-        q.Render(frame,renderer);
-        q.Move();
+
         q.Clean();
 
 
@@ -210,6 +218,7 @@ void GamePlay::show(long int frame)
          ball->dirx = speedx;
          ball->diry = speedy;
          ball->BALL_SPEED = sp;
+         ball->shouldMove=true;
     }
     if (ThroughActivate)
     {
@@ -225,7 +234,7 @@ void GamePlay::show(long int frame)
          ball->dirx = speedx;
          ball->diry = speedy;
          ball->BALL_SPEED = sp;
-         ball->shouldMove = shouldMove;
+         ball->shouldMove = true;
 
     }
 
@@ -239,6 +248,22 @@ void GamePlay::show(long int frame)
     {
 //        Mix_PlayChannel( 1, medium, 0 );
         ball->dirx *= -1;
+    }
+    if(detectCollisionBetween(bat, power)==true)
+    {
+        cout<<"powerupbatcollisionhappening"<<endl;
+        switch(power->random)
+        {
+            case 1: ThroughActivate=true;
+            case 2: FireActivate=true;
+            case 4: IspeedActivate=true;
+            case 5: dspeedActivate=true;
+            case 7: BigbActivate=true;
+            case 8: SmallbActivate=true;
+            case 9: MisActivate=true;
+            case 10: blast=true;
+        }
+
     }
 
     //Code for Ball-Bat Collision Detection
@@ -444,6 +469,11 @@ bool GamePlay::loadMedia(){
 		printf( "Failed to load sprite sheet texture!\n" );
         return false;
 	}
+	if( !PowerSpriteSheet.LoadFromFile( "Images/powerups.png", renderer  ) )
+	{
+		printf( "Failed to load sprite sheet texture!\n" );
+        return false;
+	}
 //	gScratch = Mix_LoadWAV( "sounds/high.wav" );
 //	if( gScratch == NULL )
 //	{
@@ -464,6 +494,14 @@ bool GamePlay::detectCollisionBetween(Bat* bat, Ball* ball){
     float ballMaxY = ball->y + ball->height/2;
     return isInXRange && ballMaxY-batOriginY <= 3 && ballMaxY-batOriginY > -1;
 }
+
+bool GamePlay::detectCollisionBetween(Bat* bat, PowerUps* powerup){
+    bool isInXRange = (powerup->x+(powerup->width) >= bat->x-(bat->width/2)) && (powerup->x-(ball->width/2)) <= (bat->x + (bat->width/2));
+    float batOriginY = bat->y - bat->height/2;
+    float ballMaxY = powerup->y + powerup->height/2;
+    return isInXRange && ballMaxY-batOriginY <= 3 && ballMaxY-batOriginY > -1;
+}
+
 CollisionType GamePlay::detectCollisionBetween(const SDL_Rect& wall, Ball* ball){
     //this means the wall is horizontal
     if(wall.w > wall.h){

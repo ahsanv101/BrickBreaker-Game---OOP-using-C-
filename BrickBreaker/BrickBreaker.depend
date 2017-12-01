@@ -2736,7 +2736,7 @@
 	"LTexture.h"
 	"Board.h"
 
-1512159095 d:\jannat\downloads\mainproject\brickbreaker\classes\board.h
+1512165890 d:\jannat\downloads\mainproject\brickbreaker\classes\board.h
 	"Node.h"
 	"Brick.h"
 	"LTexture.h"
@@ -2753,8 +2753,9 @@
 
 1512051381 d:\jannat\downloads\mainproject\brickbreaker\classes\brick.h
 
-1512142898 d:\jannat\downloads\mainproject\brickbreaker\classes\statics.h
+1512165556 d:\jannat\downloads\mainproject\brickbreaker\classes\statics.h
 	"Point.h"
+	"Brick.h"
 
 1512051381 d:\jannat\downloads\mainproject\brickbreaker\classes\point.h
 
@@ -2762,7 +2763,7 @@
 	"Bat.h"
 	"Board.h"
 
-1512160187 source:d:\jannat\downloads\mainproject\brickbreaker\classes\board.cpp
+1512166561 source:d:\jannat\downloads\mainproject\brickbreaker\classes\board.cpp
 	"Board.h"
 	"Statics.h"
 	"Brick.h"
@@ -2841,13 +2842,14 @@
 
 1512141669 source:d:\jannat\downloads\mainproject\brickbreaker\classes\gameover.cpp
 
-1512149989 source:d:\jannat\downloads\mainproject\brickbreaker\classes\gameplay.cpp
+1512169353 source:d:\jannat\downloads\mainproject\brickbreaker\classes\gameplay.cpp
 	"GamePlay.h"
 	"Bat.h"
 	"NormalBall.h"
 	"Board.h"
 	<string>
 	"Pop-Up.h"
+	"PowerUps.h"
 	<string>
 	<stdio.h>
 	<iostream>
@@ -2863,7 +2865,7 @@
 	<SDL.h>
 	<sstream>
 
-1512142414 d:\jannat\downloads\mainproject\brickbreaker\classes\gameplay.h
+1512168078 d:\jannat\downloads\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
 	"Ball.h"
 	"Board.h"
@@ -2876,6 +2878,7 @@
 	"q.h"
 	<SDL_mixer.h>
 	"Pop-Up.h"
+	"PowerUps.h"
 	<typeinfo>
 
 1512051381 d:\jannat\downloads\mainproject\brickbreaker\classes\screenmanager.h
@@ -2884,8 +2887,9 @@
 	"LTexture.h"
 	"Statics.h"
 
-1512051381 d:\jannat\downloads\mainproject\brickbreaker\classes\q.h
+1512167184 d:\jannat\downloads\mainproject\brickbreaker\classes\q.h
 	"node (2).h"
+	"Object.h"
 
 1512051381 d:\jannat\downloads\mainproject\brickbreaker\classes\node (2).h
 	"Fire.h"
@@ -2984,7 +2988,7 @@
 	"Menu.h"
 	<iostream>
 
-1512051381 source:d:\jannat\downloads\mainproject\brickbreaker\classes\q.cpp
+1512167184 source:d:\jannat\downloads\mainproject\brickbreaker\classes\q.cpp
 	"q.h"
 	<iostream>
 
@@ -3025,4 +3029,12 @@
 	<cstdlib>
 	<windows.h>
 	<conio.h>
+
+1512209440 d:\jannat\downloads\mainproject\brickbreaker\classes\powerups.h
+	"Object.h"
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<iostream>
+	"LTexture.h"
 

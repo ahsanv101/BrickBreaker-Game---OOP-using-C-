@@ -20,7 +20,7 @@ private:
     bool loadMedia();
     LTexture brickSpriteSheet;
     CollisionType detectCollisionWithBrick(Point objectPos, Point objectSize, Node* brickNode);
-    void removebrickat(Node*, BallType);
+    Brick* removeBrickAt(Node*, BallType);
     Node* accessat(int, int);
     void lowerbricktype(Node*);
 
