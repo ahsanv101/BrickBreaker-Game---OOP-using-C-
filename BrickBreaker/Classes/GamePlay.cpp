@@ -101,6 +101,14 @@ void GamePlay::show(long int frame)
     ball->Move();
     board->Display(renderer);
 
+    CollisionType type = ball->shouldMove ? board->detectCollisionWithBricks(Point(ball->x, ball->y), NormalBallType, Point(ball->width, ball->height)) : None;
+    if(type == Horizontal){
+        ball->dirx *= -1;
+    }
+    if(type == Vertical){
+        ball->diry *= -1;
+    }
+
     if (frame%20 ==0 and count<30)
     {
 

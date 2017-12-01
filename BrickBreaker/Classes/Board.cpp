@@ -4,6 +4,7 @@
 #include"Point.h"
 #include<SDL.h>
 #include<iostream>
+#include<ostream>
 
 using namespace std;
 
@@ -83,15 +84,10 @@ Brick* Board::Dequeue()
 }
 */
 
-bool flag = true;
 void Board::Display(SDL_Renderer* gRenderer)
 {
     // Render bricks
     Node* temp = head;
-    if(flag){
-        flag = false;
-        cout<<gRenderer<<endl;
-    }
     while(temp!=NULL){
 
         Brick brick = *temp->brick;
@@ -132,12 +128,52 @@ bool Board::loadMedia()
 	}
 	return true;
 }
-CollisionType Board::detectCollisionWithBricks(Point ballPos, BallType ballType){
-
+CollisionType Board::detectCollisionWithBricks(Point ballPos, BallType ballType, Point ballSize){
+    Node* temp = head;
+    while(temp!=NULL){
+        CollisionType type = detectCollisionWithBrick(ballPos, ballSize, temp);
+        if(type != None){
+            temp->brick->state = false;
+            return type;
+        }
+        temp = temp->next;
+    }
+    return None;
 }
-CollisionType Board::detectCollisionWithBricks(Point FirePos, FireType fireType){
+CollisionType Board::detectCollisionWithBricks(Point firePos, FireType fireType, Point fireSize){
+    Node* temp = head;
+    while(temp!=NULL){
 
+    }
+    return None;
 }
-CollisionType detectCollisionWithBrick(Point objectPos, Brick brick){
-
+CollisionType Board::detectCollisionWithBrick(Point objectPos, Point objectSize, Node* brickNode){
+    int i = brickNode->position;
+    int j = brickNode->y;
+    if(!brickNode->brick->state){
+        return None;
+    }
+    Point brickPos(x + (i * BOARD_BRWIDTH), y + (j * BOARD_BRHEIGHT));
+    Point brickDestPoint(brickPos.x + BOARD_BRWIDTH, brickPos.y + BOARD_BRHEIGHT);
+    Point objectDestPoint(objectPos.x + objectSize.x, objectPos.y + objectSize.y);
+    Point objectCenterPoint((objectPos.x + objectPos.x + objectSize.x)/2, (objectPos.y + objectPos.y + objectSize.y)/2);
+    bool isInXRange = brickPos.x <= objectPos.x && brickDestPoint.x >= objectCenterPoint.x;
+    //Horizontal Collision Detection
+    if(isInXRange){
+        bool didCollide = (brickPos.y > objectPos.y && brickPos.y < objectDestPoint.y) || (brickDestPoint.y > objectPos.y && brickDestPoint.y < objectDestPoint.y);
+        if(didCollide){
+            cout<<endl<<"Hello\n("<<brickPos.x<<","<<brickPos.y<<")"<<endl;
+//            cout<<"("<<objectPos.x<<","<<objectPos.y<<")"<<endl;
+//            cout<<"("<<brickDestPoint.x<<","<<brickDestPoint.y<<")"<<endl;
+//            cout<<"("<<objectDestPoint.x<<","<<objectDestPoint.y<<")"<<endl;
+            cout<<"("<<i<<","<<j<<")"<<endl;
+        }
+        return didCollide ? Horizontal : None;
+    }
+    bool isInYRange = brickPos.y <= objectPos.y && brickDestPoint.y >= objectCenterPoint.y;
+    if(isInYRange){
+        bool didCollide = (brickPos.x > objectPos.x && brickPos.x < objectDestPoint.x) || (brickDestPoint.x > objectPos.x && brickDestPoint.x < objectDestPoint.x);
+        return didCollide ? Vertical : None;
+    }
+    return None;
 }

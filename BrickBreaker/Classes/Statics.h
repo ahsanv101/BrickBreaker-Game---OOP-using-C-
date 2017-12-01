@@ -1,6 +1,6 @@
 #ifndef STATICS_H_INCLUDED
 #define STATICS_H_INCLUDED
-
+#include "Point.h"
 enum MouseEventType { ClickUp, MouseMotion, ClickDown, RightClickUp, RightClickDown };
 enum CollisionType { Horizontal, Vertical, None};
 enum BallType { NormalBallType, ThroughBallType, FireBallType};
@@ -12,6 +12,5 @@ const int BOARD_WIDTH = 12;
 const int BOARD_HEIGHT = 8;
 const int BOARD_BRWIDTH = 63;
 const int BOARD_BRHEIGHT = 31;
-
-
+const Point BallSize = Point();
 #endif // STATICS_H_INCLUDED

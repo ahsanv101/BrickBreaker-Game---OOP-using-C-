@@ -61,8 +61,8 @@ bool NormalBall::GetAlive()
 
 void NormalBall::Move(float x, float y)
 {
-    this->y +=diry*y;
-    this->x +=dirx*x;
+    this->y += diry*y;
+    this->x += dirx*x;
 }
 
 void NormalBall::Render(long int frame,SDL_Renderer* gRenderer)
