@@ -15,7 +15,6 @@ class Menu : public ScreenManager
         void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer);
         void keyboardEvent(const Uint8* event, ScreenManager** selfPointer);
         ~Menu();
-        LTexture splashSpriteSheetTexture;
 
 
     private:
@@ -24,6 +23,7 @@ class Menu : public ScreenManager
         Button exitGame;
         LTexture gSpriteSheetTexture;
         LTexture backSpriteSheetTexture;
+        LTexture buttonSpriteTexture;
         bool loadMedia();
 
 

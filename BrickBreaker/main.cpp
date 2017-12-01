@@ -22,7 +22,6 @@
 #include <windows.h>
 #include <conio.h>
 
-
 //Pre defined screen width and height
 
 
@@ -41,11 +40,13 @@ ScreenManager* currentManager = NULL;
 
 bool init();
 bool loadMedia();
+LTexture splash;
 void close();
 bool checkCollision( SDL_Rect , SDL_Rect  );
 
 int main( int argc, char* args[] )
 {
+    bool splashFlag = false;
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -66,7 +67,9 @@ int main( int argc, char* args[] )
 
     currentManager = new Menu(gRenderer);
 
-
+    splash.Render(132,0,0,0.0,NULL,SDL_FLIP_NONE,gRenderer);
+    SDL_RenderPresent(gRenderer);
+    Sleep(5000);
     while( !quit )                          //While application is running
     {
         while( SDL_PollEvent( &e ) != 0 )   //Handle events on queue
@@ -76,6 +79,8 @@ int main( int argc, char* args[] )
             {
                 quit = true;
             }
+            SDL_bool flag = SDL_bool(true);
+            SDL_SetWindowBordered(gWindow, flag);
             if( e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP )
             {
                 //Get mouse position
@@ -137,8 +142,8 @@ bool init()
         printf( "Warning: Linear texture filtering not enabled!" );
     }
 
-    //Create window
-    gWindow = SDL_CreateWindow( "Break Out", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+    //Create Splash_window
+    gWindow = SDL_CreateWindow( "Break Out", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_BORDERLESS );
     if( gWindow == NULL )
     {
         printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -151,7 +156,6 @@ bool init()
         printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
         return false;
     }
-
     //Initialize renderer color
     SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
@@ -168,6 +172,15 @@ bool init()
 //					return false;
 //				}
 
+	return loadMedia();
+}
+
+bool loadMedia(){
+    if( !splash.LoadFromFile( "Images/2.jpg", gRenderer  ) )
+	{
+		printf( "Failed to load sprite sheet texture!\n" );
+        return false;
+	}
 	return true;
 }
 

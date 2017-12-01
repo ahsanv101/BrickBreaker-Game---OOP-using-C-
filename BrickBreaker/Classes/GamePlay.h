@@ -11,6 +11,7 @@
 #include "Fire.h"
 #include "q.h"
 #include <SDL_mixer.h>
+#include "Pop-Up.h"
 
 
 #include <typeinfo>
@@ -47,6 +48,8 @@ class GamePlay : public ScreenManager
         SDL_Rect side1;
         SDL_Rect side2;
         SDL_Rect side3;
+
+        Pop_Up* popup;
 
     private:
         float x, y, width, height;

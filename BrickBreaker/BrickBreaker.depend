@@ -487,20 +487,21 @@
 
 1511165039 w:\habib university\sophomore\3rd semester\oop cs-224\final project\brickbreaker\classes\brick.h
 
-1511883836 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\ball.cpp
+1511156159 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\ball.cpp
 	"Ball.h"
 	<math.h>
 
-1511992292 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\ball.h
+1511156313 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\ball.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<iostream>
 	"LTexture.h"
+	"Board.h"
 	"Bat.h"
 
-1511992437 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\object.h
+1511163053 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\object.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -851,7 +852,11 @@
 	<stdio.h>
 	<iostream>
 
+<<<<<<< HEAD
 1512052226 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\board.h
+=======
+1511524725 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\board.h
+>>>>>>> origin/master
 	"Node.h"
 	"Brick.h"
 	"LTexture.h"
@@ -859,9 +864,12 @@
 	<SDL_image.h>
 	<stdio.h>
 	<iostream>
+<<<<<<< HEAD
 	"Statics.h"
 	"Point.h"
 	<ostream>
+=======
+>>>>>>> origin/master
 
 1511521208 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\queue.h
 	"Node.h"
@@ -876,7 +884,7 @@
 
 1511165039 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\brick.h
 
-1511873470 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\bat.h
+1511106270 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\bat.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -885,25 +893,27 @@
 	"LTexture.h"
 	"Board.h"
 
-1511873470 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\bat.cpp
+1511412519 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\bat.cpp
 	"Bat.h"
 	"Board.h"
 
+<<<<<<< HEAD
 1512121087 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\board.cpp
+=======
+1511525673 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\board.cpp
+>>>>>>> origin/master
 	"Board.h"
 	"Statics.h"
-	"Brick.h"
-	"Point.h"
 	<SDL.h>
 	<iostream>
 	<ostream>
 
 1511160986 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\bricks.cpp
 
-1511873470 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\fire.cpp
+1511106284 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\fire.cpp
 	"Fire.h"
 
-1511992546 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\fire.h
+1511106288 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\fire.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -911,7 +921,11 @@
 	<iostream>
 	"LTexture.h"
 
+<<<<<<< HEAD
 1512120414 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.cpp
+=======
+1511525954 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.cpp
+>>>>>>> origin/master
 	"GamePlay.h"
 	"Bat.h"
 	"NormalBall.h"
@@ -922,15 +936,8 @@
 	<stdlib.h>
 	<fstream>
 	<time.h>
-	"windows.h"
-	"FireBall.h"
-	"ThroughBall.h"
-	"NormalFire.h"
-	"MissileFire.h"
-	<SDL_mixer.h>
-	<SDL.h>
 
-1511992137 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.h
+1511525919 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
 	"Ball.h"
 	"Board.h"
@@ -939,12 +946,9 @@
 	"Board.h"
 	"Object.h"
 	"ScreenManager.h"
-	"Fire.h"
-	"q.h"
-	<SDL_mixer.h>
 	<typeinfo>
 
-1511992372 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalball.h
+1511106304 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalball.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -954,21 +958,23 @@
 	"Board.h"
 	"Bat.h"
 	"Ball.h"
-	"Statics.h"
 
 1511106294 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\ltexture.cpp
 	"LTexture.h"
 
+<<<<<<< HEAD
 1512044635 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalball.cpp
+=======
+1511106302 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalball.cpp
+>>>>>>> origin/master
 	"NormalBall.h"
 	"Ball.h"
 	<math.h>
 
-1511992577 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalfire.cpp
+1511106306 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalfire.cpp
 	"NormalFire.h"
-	"Fire.h"
 
-1511992564 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalfire.h
+1511106310 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalfire.h
 	"Fire.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -976,7 +982,7 @@
 	<iostream>
 	"LTexture.h"
 
-1511992442 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\object.cpp
+1511163314 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\object.cpp
 	"Object.h"
 
 1511465021 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\point.cpp
@@ -991,15 +997,14 @@
 1511465021 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\screenmanager.cpp
 	"ScreenManager.h"
 
-1511992108 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\screenmanager.h
+1511465752 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\screenmanager.h
 	<SDL.h>
 	<SDL_image.h>
 	"LTexture.h"
 	"Statics.h"
 
-1511992260 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\main.cpp
+1511525758 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\main.cpp
 	<SDL.h>
-	<SDL_mixer.h>
 	<SDL_image.h>
 	<stdio.h>
 	<iostream>
@@ -1011,36 +1016,37 @@
 	"Classes/Board.h"
 	"Classes/NormalBall.h"
 	"Classes/GamePlay.h"
-	"Classes/ScreenManager.h"
-	"Classes/Statics.h"
-	"Classes/Menu.h"
+	"ScreenManager.h"
+	"Statics.h"
+	"Menu.h"
 	<iomanip>
 	<ctype.h>
 	<cstdlib>
 	<windows.h>
 	<conio.h>
 
-1511680593 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\ball.cpp
+1511277225 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\ball.cpp
 	"Ball.h"
 	<math.h>
 
-1511749583 c:\users\sn\desktop\mainproject\brickbreaker\classes\ball.h
+1511277225 c:\users\sn\desktop\mainproject\brickbreaker\classes\ball.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<iostream>
 	"LTexture.h"
+	"Board.h"
 	"Bat.h"
 
-1511678725 c:\users\sn\desktop\mainproject\brickbreaker\classes\object.h
+1511277225 c:\users\sn\desktop\mainproject\brickbreaker\classes\object.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<iostream>
 	"LTexture.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_assert.h"
@@ -1072,12 +1078,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_main.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_stdinc.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -1106,34 +1112,34 @@
 	<stdlib.h>
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_config.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_platform.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\begin_code.h
+1511277227 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\begin_code.h
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\close_code.h
+1511277227 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\close_code.h
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_assert.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_assert.h
 	"SDL_config.h"
 	"begin_code.h"
 	<signal.h>
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_atomic.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_atomic.h
 	"SDL_stdinc.h"
 	"SDL_platform.h"
 	"begin_code.h"
 	<mbarrier.h>
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_audio.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -1143,24 +1149,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_error.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_endian.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_mutex.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_thread.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_atomic.h"
@@ -1170,18 +1176,18 @@
 	<process.h>
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_rwops.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_clipboard.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_clipboard.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_cpuinfo.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<intrin.h>
@@ -1194,7 +1200,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_events.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -1208,7 +1214,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_video.h
+1511277227 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -1216,13 +1222,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_pixels.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_pixels.h
 	"SDL_stdinc.h"
 	"SDL_endian.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_rect.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_rect.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_pixels.h"
@@ -1230,7 +1236,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_surface.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_surface.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -1239,11 +1245,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_blendmode.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_blendmode.h
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_keyboard.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keycode.h"
@@ -1251,27 +1257,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_keycode.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_keycode.h
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_scancode.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_scancode.h
 	"SDL_stdinc.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_mouse.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_joystick.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_gamecontroller.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_gamecontroller.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
@@ -1279,11 +1285,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_quit.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_gesture.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_gesture.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -1291,60 +1297,60 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_touch.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_touch.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_filesystem.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_filesystem.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_haptic.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_haptic.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_joystick.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_hints.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_hints.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_loadso.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_log.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_log.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_messagebox.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_messagebox.h
 	"SDL_stdinc.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_power.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_power.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_render.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_render.h
 	"SDL_stdinc.h"
 	"SDL_rect.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_shape.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_shape.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -1353,7 +1359,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_system.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_system.h
 	"SDL_stdinc.h"
 	"SDL_keyboard.h"
 	"SDL_render.h"
@@ -1361,37 +1367,33 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_timer.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_timer.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_version.h
+1511277227 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678726 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_image.h
+1511277226 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_image.h
 	"SDL.h"
 	"SDL_version.h"
 	"begin_code.h"
 	"close_code.h"
 
-1511678725 c:\users\sn\desktop\mainproject\brickbreaker\classes\ltexture.h
+1511277225 c:\users\sn\desktop\mainproject\brickbreaker\classes\ltexture.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<iostream>
 
-1511678725 c:\users\sn\desktop\mainproject\brickbreaker\classes\board.h
-	"Node.h"
-	"Brick.h"
-	"LTexture.h"
-	<SDL.h>
-	<SDL_image.h>
-	<stdio.h>
-	<iostream>
+1511277225 c:\users\sn\desktop\mainproject\brickbreaker\classes\board.h
+	"Queue.h"
+	"Object.h"
+	<typeinfo>
 
 1511277225 c:\users\sn\desktop\mainproject\brickbreaker\classes\queue.h
 	"Node.h"
@@ -1401,12 +1403,12 @@
 	<stdio.h>
 	<iostream>
 
-1511678725 c:\users\sn\desktop\mainproject\brickbreaker\classes\node.h
+1511277225 c:\users\sn\desktop\mainproject\brickbreaker\classes\node.h
 	"Brick.h"
 
-1511678725 c:\users\sn\desktop\mainproject\brickbreaker\classes\brick.h
+1511277225 c:\users\sn\desktop\mainproject\brickbreaker\classes\brick.h
 
-1511918418 c:\users\sn\desktop\mainproject\brickbreaker\classes\bat.h
+1511277225 c:\users\sn\desktop\mainproject\brickbreaker\classes\bat.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -1415,62 +1417,54 @@
 	"LTexture.h"
 	"Board.h"
 
-1511916395 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\bat.cpp
+1511458539 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\bat.cpp
 	"Bat.h"
 	"Board.h"
 
-1511678725 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\board.cpp
+1511277225 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\board.cpp
 	"Board.h"
-	"Statics.h"
-	<SDL.h>
-	<iostream>
-
-1511678725 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\bricks.cpp
-
-1511753847 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\fire.cpp
-	"Fire.h"
-
-1511918418 c:\users\sn\desktop\mainproject\brickbreaker\classes\fire.h
-	"Object.h"
-	<SDL.h>
-	<SDL_image.h>
-	<stdio.h>
-	<iostream>
-	"LTexture.h"
-
-1511919135 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.cpp
-	"GamePlay.h"
-	"Bat.h"
-	"NormalBall.h"
-	"Board.h"
-	<SDL_mixer.h>
 	<string>
 	<stdio.h>
 	<iostream>
 	<stdlib.h>
 	<fstream>
 	<time.h>
-	"windows.h"
-	"FireBall.h"
-	"ThroughBall.h"
-	"NormalFire.h"
-	"MissileFire.h"
 
-1511915967 c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.h
+1511277225 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\bricks.cpp
+
+1511277225 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\fire.cpp
+	"Fire.h"
+
+1511277225 c:\users\sn\desktop\mainproject\brickbreaker\classes\fire.h
+	"Object.h"
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<iostream>
+	"LTexture.h"
+
+1511504373 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.cpp
+	"GamePlay.h"
+	"Bat.h"
+	"NormalBall.h"
+	"Board.h"
+	<string>
+	<stdio.h>
+	<iostream>
+	<stdlib.h>
+	<fstream>
+	<time.h>
+
+1511505216 c:\users\sn\desktop\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
 	"Ball.h"
 	"Board.h"
 	"LTexture.h"
-	"Statics.h"
-	"Board.h"
+	"Queue.h"
 	"Object.h"
-	"ScreenManager.h"
-	"Fire.h"
-	"q.h"
-	<SDL_mixer.h>
 	<typeinfo>
 
-1511692969 c:\users\sn\desktop\mainproject\brickbreaker\classes\normalball.h
+1511277225 c:\users\sn\desktop\mainproject\brickbreaker\classes\normalball.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -1481,19 +1475,18 @@
 	"Bat.h"
 	"Ball.h"
 
-1511678725 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\ltexture.cpp
+1511277225 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\ltexture.cpp
 	"LTexture.h"
 
-1511692969 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\normalball.cpp
+1511277225 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\normalball.cpp
 	"NormalBall.h"
 	"Ball.h"
 	<math.h>
 
-1511757780 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\normalfire.cpp
+1511277225 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\normalfire.cpp
 	"NormalFire.h"
-	"Fire.h"
 
-1511762032 c:\users\sn\desktop\mainproject\brickbreaker\classes\normalfire.h
+1511277225 c:\users\sn\desktop\mainproject\brickbreaker\classes\normalfire.h
 	"Fire.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -1501,28 +1494,26 @@
 	<iostream>
 	"LTexture.h"
 
-1511678725 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\object.cpp
+1511277225 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\object.cpp
 	"Object.h"
 
-1511678725 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\point.cpp
+1511277225 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\point.cpp
 	"Point.h"
 
-1511678725 c:\users\sn\desktop\mainproject\brickbreaker\classes\point.h
+1511277225 c:\users\sn\desktop\mainproject\brickbreaker\classes\point.h
 
 1511277225 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\queue.cpp
 	"Queue.h"
 	<iostream>
 
-1511678725 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\screenmanager.cpp
+1511277225 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\screenmanager.cpp
 	"ScreenManager.h"
 
-1511692728 c:\users\sn\desktop\mainproject\brickbreaker\classes\screenmanager.h
+1511277225 c:\users\sn\desktop\mainproject\brickbreaker\classes\screenmanager.h
 	<SDL.h>
 	<SDL_image.h>
-	"LTexture.h"
-	"Statics.h"
 
-1511773515 source:c:\users\sn\desktop\mainproject\brickbreaker\main.cpp
+1511506464 source:c:\users\sn\desktop\mainproject\brickbreaker\main.cpp
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -1536,29 +1527,26 @@
 	"Classes/NormalBall.h"
 	"Classes/GamePlay.h"
 	"ScreenManager.h"
-	"Statics.h"
-	"Menu.h"
 	<iomanip>
 	<ctype.h>
 	<cstdlib>
 	<windows.h>
 	<conio.h>
 
-1511444715 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\ball.cpp
+1512055410 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\ball.cpp
 	"Ball.h"
 	<math.h>
 
-1511444715 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\ball.h
+1512055410 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\ball.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<iostream>
 	"LTexture.h"
-	"Board.h"
 	"Bat.h"
 
-1511444715 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\object.h
+1512055410 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\object.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -1909,10 +1897,16 @@
 	<stdio.h>
 	<iostream>
 
-1511444715 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\board.h
-	"Queue.h"
-	"Object.h"
-	<typeinfo>
+1512055410 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\board.h
+	"Node.h"
+	"Brick.h"
+	"LTexture.h"
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<iostream>
+	"Statics.h"
+	"Point.h"
 
 1511444715 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\queue.h
 	"Node.h"
@@ -1927,7 +1921,7 @@
 
 1511444715 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\brick.h
 
-1511444715 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\bat.h
+1512055410 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\bat.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -1936,16 +1930,16 @@
 	"LTexture.h"
 	"Board.h"
 
-1511444715 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\bat.cpp
+1512055410 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\bat.cpp
 	"Bat.h"
 	"Board.h"
 
 1511444715 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\bricks.cpp
 
-1511444715 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\fire.cpp
+1512055410 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\fire.cpp
 	"Fire.h"
 
-1511444715 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\fire.h
+1512055410 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\fire.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -1953,11 +1947,12 @@
 	<iostream>
 	"LTexture.h"
 
-1511520049 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.cpp
+1511880717 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.cpp
 	"GamePlay.h"
 	"Bat.h"
 	"NormalBall.h"
 	"Board.h"
+	"Pop-Up.h"
 	<string>
 	<stdio.h>
 	<iostream>
@@ -1965,18 +1960,22 @@
 	<fstream>
 	<time.h>
 
-1511520049 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.h
+1512056191 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
 	"Ball.h"
 	"Board.h"
 	"LTexture.h"
 	"Statics.h"
-	"Queue.h"
+	"Board.h"
 	"Object.h"
 	"ScreenManager.h"
+	"Fire.h"
+	"q.h"
+	<SDL_mixer.h>
+	"Pop-Up.h"
 	<typeinfo>
 
-1511444715 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\normalball.h
+1512055410 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\normalball.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -1986,19 +1985,21 @@
 	"Board.h"
 	"Bat.h"
 	"Ball.h"
+	"Statics.h"
 
 1511444715 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\ltexture.cpp
 	"LTexture.h"
 
-1511444715 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\normalball.cpp
+1512055410 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\normalball.cpp
 	"NormalBall.h"
 	"Ball.h"
 	<math.h>
 
-1511444715 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\normalfire.cpp
+1512055410 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\normalfire.cpp
 	"NormalFire.h"
+	"Fire.h"
 
-1511444715 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\normalfire.h
+1512055410 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\normalfire.h
 	"Fire.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -2006,7 +2007,7 @@
 	<iostream>
 	"LTexture.h"
 
-1511444715 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\object.cpp
+1512055410 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\object.cpp
 	"Object.h"
 
 1511448936 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\point.cpp
@@ -2021,13 +2022,13 @@
 1511449276 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\screenmanager.cpp
 	"ScreenManager.h"
 
-1511518930 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\screenmanager.h
+1512055410 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\screenmanager.h
 	<SDL.h>
 	<SDL_image.h>
 	"LTexture.h"
 	"Statics.h"
 
-1511525006 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\main.cpp
+1511963247 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\main.cpp
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -2049,13 +2050,13 @@
 	<windows.h>
 	<conio.h>
 
-1511522412 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\button.cpp
+1512055407 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\button.cpp
 	"Button.h"
 	"Point.h"
 	<SDL.h>
 	<iostream>
 
-1511522412 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\button.h
+1512055407 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\button.h
 	<string>
 	"Character.h"
 	<SDL.h>
@@ -2064,6 +2065,7 @@
 	<iostream>
 	"LTexture.h"
 	"Word.h"
+	"Statics.h"
 
 1511518930 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\character.h
 	<SDL.h>
@@ -2087,15 +2089,15 @@
 	"Character.h"
 	<iostream>
 
-1511449203 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\statics.h
+1512055666 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\statics.h
 
-1511524887 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.cpp
+1512055411 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.cpp
 	"Menu.h"
 	"Button.h"
 	"GamePlay.h"
 	<iostream>
 
-1511525006 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.h
+1512055411 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.h
 	"ScreenManager.h"
 	"Button.h"
 	"Statics.h"
@@ -2107,21 +2109,25 @@
 	"Character.h"
 	"Word.h"
 
+<<<<<<< HEAD
 1512049923 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\statics.h
 	"Point.h"
+=======
+1511523117 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\statics.h
+>>>>>>> origin/master
 
-1511992682 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\menu.cpp
+1511518582 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\menu.cpp
 	"Menu.h"
 	"Button.h"
 	"GamePlay.h"
 	<iostream>
 
-1511992128 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\menu.h
+1511465711 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\menu.h
 	"ScreenManager.h"
 	"Button.h"
 	"Statics.h"
 
-1511526205 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\button.h
+1511467581 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\button.h
 	<string>
 	"Character.h"
 	<SDL.h>
@@ -2149,7 +2155,7 @@
 	<iostream>
 	"LTexture.h"
 
-1511526205 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\button.cpp
+1511516108 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\button.cpp
 	"Button.h"
 	"Point.h"
 	<SDL.h>
@@ -2166,70 +2172,32 @@
 	"Character.h"
 	"Word.h"
 
-1511678725 c:\users\sn\desktop\mainproject\brickbreaker\classes\statics.h
-
-1511678725 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\button.cpp
-	"Button.h"
+1512055410 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\board.cpp
+	"Board.h"
+	"Statics.h"
+	"Brick.h"
 	"Point.h"
 	<SDL.h>
 	<iostream>
 
-1511678725 c:\users\sn\desktop\mainproject\brickbreaker\classes\button.h
-	<string>
-	"Character.h"
-	<SDL.h>
-	<SDL_image.h>
-	<stdio.h>
-	<iostream>
-	"LTexture.h"
-	"Word.h"
-
-1511678725 c:\users\sn\desktop\mainproject\brickbreaker\classes\character.h
-	<SDL.h>
-	<SDL_image.h>
-	<stdio.h>
-	<iostream>
-	"LTexture.h"
-	"Point.h"
-	<string>
-
-1511678725 c:\users\sn\desktop\mainproject\brickbreaker\classes\word.h
-	<string>
-	"Character.h"
-	<SDL.h>
-	<SDL_image.h>
-	<stdio.h>
-	<iostream>
-	"LTexture.h"
-
-1511678725 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\character.cpp
-	"Character.h"
-	<iostream>
-
-1511692875 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\menu.cpp
-	"Menu.h"
+1512055407 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\pop-up.cpp
+	"Pop-Up.h"
 	"Button.h"
 	"GamePlay.h"
+	"Menu.h"
 	<iostream>
 
-1511776615 c:\users\sn\desktop\mainproject\brickbreaker\classes\menu.h
+1512055407 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\pop-up.h
 	"ScreenManager.h"
 	"Button.h"
 	"Statics.h"
 
-1511678725 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\word.cpp
-	<string>
-	<iostream>
-	"LTexture.h"
-	"Character.h"
-	"Word.h"
-
-1511742041 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\fireball.cpp
+1512055410 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\fireball.cpp
 	"FireBall.h"
 	"Ball.h"
 	<math.h>
 
-1511692969 c:\users\sn\desktop\mainproject\brickbreaker\classes\fireball.h
+1512055410 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\fireball.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -2240,27 +2208,27 @@
 	"Bat.h"
 	"Ball.h"
 
-1511742287 source:c:\users\sn\desktop\mainproject\brickbreaker\src\throughball.cpp
-	"ThroughBall.h"
-	"Ball.h"
-	<math.h>
+1512055410 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\q.h
+	"node (2).h"
 
-1511742308 c:\users\sn\desktop\mainproject\brickbreaker\include\throughball.h
+1512055410 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\node (2).h
+	"Fire.h"
 	"Object.h"
-	<SDL.h>
-	<SDL_image.h>
-	<stdio.h>
-	<iostream>
-	"LTexture.h"
-	"Board.h"
-	"Bat.h"
-	"Ball.h"
 
-1511756843 source:c:\users\sn\desktop\mainproject\brickbreaker\src\missilefire.cpp
+1512055410 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1512055410 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\missilefire.cpp
 	"MissileFire.h"
 	"Fire.h"
 
-1511756334 c:\users\sn\desktop\mainproject\brickbreaker\include\missilefire.h
+1512055410 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\missilefire.h
 	"Fire.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -2268,68 +2236,16 @@
 	<iostream>
 	"LTexture.h"
 
-1511760182 c:\users\sn\desktop\mainproject\brickbreaker\classes\q.h
-	"node (2).h"
-
-1511760028 c:\users\sn\desktop\mainproject\brickbreaker\classes\node (2).h
-	"Fire.h"
-
-1511761431 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\q.cpp
+1512055410 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\q.cpp
 	"q.h"
 	<iostream>
 
-1451801791 c:\users\sn\desktop\sdl\sdl2_mixer-2.0.1\i686-w64-mingw32\include\sdl2\sdl_mixer.h
-	"SDL_stdinc.h"
-	"SDL_rwops.h"
-	"SDL_audio.h"
-	"SDL_endian.h"
-	"SDL_version.h"
-	"begin_code.h"
-	"close_code.h"
-
-1451801791 c:\users\sn\desktop\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_mixer.h
-	"SDL_stdinc.h"
-	"SDL_rwops.h"
-	"SDL_audio.h"
-	"SDL_endian.h"
-	"SDL_version.h"
-	"begin_code.h"
-	"close_code.h"
-
-1511742308 c:\users\sn\desktop\mainproject\brickbreaker\classes\throughball.h
-	"Object.h"
-	<SDL.h>
-	<SDL_image.h>
-	<stdio.h>
-	<iostream>
-	"LTexture.h"
-	"Board.h"
-	"Bat.h"
-	"Ball.h"
-
-1511756334 c:\users\sn\desktop\mainproject\brickbreaker\classes\missilefire.h
-	"Fire.h"
-	<SDL.h>
-	<SDL_image.h>
-	<stdio.h>
-	<iostream>
-	"LTexture.h"
-
-1511756843 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\missilefire.cpp
-	"MissileFire.h"
-	"Fire.h"
-
-1511742287 source:c:\users\sn\desktop\mainproject\brickbreaker\classes\throughball.cpp
+1512055410 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\throughball.cpp
 	"ThroughBall.h"
 	"Ball.h"
 	<math.h>
 
-1511992613 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\fireball.cpp
-	"FireBall.h"
-	"Ball.h"
-	<math.h>
-
-1511992601 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\fireball.h
+1512055410 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\throughball.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -2339,52 +2255,4 @@
 	"Board.h"
 	"Bat.h"
 	"Ball.h"
-
-1511992408 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\q.h
-	"node (2).h"
-
-1511878219 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\node (2).h
-	"Fire.h"
-	"Object.h"
-
-1508772787 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\mingw_lib\include\sdl2\sdl_mixer.h
-	"SDL_stdinc.h"
-	"SDL_rwops.h"
-	"SDL_audio.h"
-	"SDL_endian.h"
-	"SDL_version.h"
-	"begin_code.h"
-	"close_code.h"
-
-1511992627 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\throughball.h
-	"Object.h"
-	<SDL.h>
-	<SDL_image.h>
-	<stdio.h>
-	<iostream>
-	"LTexture.h"
-	"Board.h"
-	"Bat.h"
-	"Ball.h"
-
-1511992483 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\missilefire.h
-	"Fire.h"
-	<SDL.h>
-	<SDL_image.h>
-	<stdio.h>
-	<iostream>
-	"LTexture.h"
-
-1511992467 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\missilefire.cpp
-	"MissileFire.h"
-	"Fire.h"
-
-1511992416 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\q.cpp
-	"q.h"
-	<iostream>
-
-1511992342 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\throughball.cpp
-	"ThroughBall.h"
-	"Ball.h"
-	<math.h>
 

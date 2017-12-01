@@ -11,9 +11,9 @@ Menu::Menu(SDL_Renderer* renderer){
     //std::cout<<*frame;
     this->renderer = renderer;
     if(loadMedia()){
-        newGame = Button("New Game", {(float)SCREEN_WIDTH/2, (float)(SCREEN_HEIGHT/2)}, &gSpriteSheetTexture);
-        loadGame = Button("Load Game", {(float)SCREEN_WIDTH/2, (float)(SCREEN_HEIGHT/2)+70}, &gSpriteSheetTexture);
-        exitGame = Button("Exit Game", {(float)SCREEN_WIDTH/2, (float)(SCREEN_HEIGHT/2)+140}, &gSpriteSheetTexture);
+        newGame = Button("New Game", {(float)SCREEN_WIDTH/2, (float)(SCREEN_HEIGHT/2)}, &gSpriteSheetTexture, &buttonSpriteTexture, Brown);
+        loadGame = Button("Load Game", {(float)SCREEN_WIDTH/2, (float)(SCREEN_HEIGHT/2)+70}, &gSpriteSheetTexture, &buttonSpriteTexture, Brown);
+        exitGame = Button("Exit Game", {(float)SCREEN_WIDTH/2, (float)(SCREEN_HEIGHT/2)+140}, &gSpriteSheetTexture, &buttonSpriteTexture, Brown);
     }else{
         std::cout<<"Error loading media in Menu class";
     }
@@ -38,18 +38,19 @@ void Menu::click(int x, int y, MouseEventType eventType, ScreenManager** selfPoi
             std::cout<<"Exit Game Button Down"<<std::endl;
         }
     }else if(eventType == ClickUp){
-        newGame.setIsClicked(false);
-        exitGame.setIsClicked(false);
-        loadGame.setIsClicked(false);
-        if(newGame.pointLiesInBounds(x,y)){
+
+        if(newGame.pointLiesInBounds(x,y) && newGame.getIsClicked()){
             std::cout<<"New Game Button Up"<<std::endl;
             *selfPointer = new GamePlay(this->renderer);
-        }else if(loadGame.pointLiesInBounds(x,y)){
+        }else if(loadGame.pointLiesInBounds(x,y) && loadGame.getIsClicked()){
             std::cout<<"Load Game Button Up"<<std::endl;
-        }else if(exitGame.pointLiesInBounds(x,y)){
+        }else if(exitGame.pointLiesInBounds(x,y) && exitGame.getIsClicked()){
             std::cout<<"Exit Game Button Up"<<std::endl;
             *selfPointer = NULL;
         }
+        newGame.setIsClicked(false);
+        exitGame.setIsClicked(false);
+        loadGame.setIsClicked(false);
     }
 }
 void Menu::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
@@ -72,7 +73,7 @@ bool Menu::loadMedia()
 		printf( "Failed to load sprite sheet texture!\n" );
 		return false;
 	}
-	if(!splashSpriteSheetTexture.LoadFromFile("Images/eg3.jpg",renderer))
+	if(!buttonSpriteTexture.LoadFromFile("Images/button.jpg",renderer))
     {
         printf( "Failed to load sprite sheet texture!\n" );
 		return false;
