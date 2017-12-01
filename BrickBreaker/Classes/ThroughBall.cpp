@@ -4,6 +4,7 @@
 
 ThroughBall::ThroughBall(LTexture* image, float x, float y)
 {
+    type = ThroughBallType;
     spriteSheetTexture = image;
 
 

@@ -21,6 +21,7 @@ class Ball : public Object
         float friction; //lower speed means more friction
         bool shouldMove;
         int BALL_SPEED = 7;
+        BallType type;
 //        SDL_Rect spriteClips[ FLYING_FRAMES ];
 //        LTexture* spriteSheetTexture;
 //        void SetDirection(float dirx, float diry);

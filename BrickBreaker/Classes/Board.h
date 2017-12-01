@@ -20,6 +20,7 @@ private:
     bool loadMedia();
     LTexture brickSpriteSheet;
     CollisionType detectCollisionWithBrick(Point objectPos, Point objectSize, Node* brickNode);
+    void removebrickat(Node*, BallType);
 
 public:
     Board();

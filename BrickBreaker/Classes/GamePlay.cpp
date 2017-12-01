@@ -18,6 +18,8 @@
 #include "MissileFire.h"
 #include <SDL_mixer.h>
 #include <SDL.h>
+#include <sstream>
+
 
 GamePlay::GamePlay(SDL_Renderer* renderer)
 {
@@ -67,7 +69,7 @@ GamePlay::GamePlay(SDL_Renderer* renderer)
     width = 768;
     height = 600;
 
-    CreateLevel();
+    CreateLevel(4);
 }
 
 
@@ -105,7 +107,7 @@ void GamePlay::show(long int frame)
     ball->Move();
     board->Display(renderer);
     if(ball->shouldMove){
-        CollisionInfo info = board->detectCollisionWithBricks(Point(ball->x - ball->width/2, ball->y - ball->height/2), NormalBallType, Point(ball->width, ball->height));
+        CollisionInfo info = board->detectCollisionWithBricks(Point(ball->x - ball->width/2, ball->y - ball->height/2), ball->type, Point(ball->width, ball->height));
         ball->didCollide(info);
     }
 
@@ -291,32 +293,78 @@ void GamePlay::show(long int frame)
 }
 
 
-void GamePlay::CreateLevel() {
+void GamePlay::CreateLevel(int LevelNumber) {
     board = new Board(x, y, width, height, renderer);
 
     std::string content;
+    std::stringstream ss;
+    ss << LevelNumber;
+    std::string str = ss.str();
+
+    std::string filename = "levels/" + str + ".txt";
+
 	//opening file
     std::ifstream readfile;
-    readfile.open("bricks.txt");
+    readfile.open(filename.c_str());
     int j = 0;
     while (getline(readfile, content))
     {
         for(int i=0; i<content.length(); i++)
         {
-            if(content[i]=='*')
+            if(i==BOARD_WIDTH)
             {
-                int bricktype = rand()%3;
+                break;
+            }
+            if(content[i]=='0')
+            {
+                int bricktype = 0;
                 //cout<<bricktype<<endl;
                 Brick* brick = new Brick;
-                brick->type=rand()%4;
+                brick->type=rand()%3;
                 brick->breaktype=bricktype;
                 brick->state = true;
                 //cout<<brick->breaktype<<endl;
                 board->Enqueue(brick, i, j);
             }
+            if(content[i]=='1')
+            {
+                int bricktype = 1;
+                //cout<<bricktype<<endl;
+                Brick* brick = new Brick;
+                brick->type=rand()%3;
+                brick->breaktype=bricktype;
+                brick->state = true;
+                //cout<<brick->breaktype<<endl;
+                board->Enqueue(brick, i, j);
+            }
+            if(content[i]=='2')
+            {
+                int bricktype = 2;
+                //cout<<bricktype<<endl;
+                Brick* brick = new Brick;
+                brick->type=rand()%3;
+                brick->breaktype=bricktype;
+                brick->state = true;
+                //cout<<brick->breaktype<<endl;
+                board->Enqueue(brick, i, j);
+            }
+
+            if(content[i]=='3')
+            {
+                int bricktype = 3;
+                //cout<<bricktype<<endl;
+                Brick* brick = new Brick;
+                brick->type=3;
+                brick->breaktype=bricktype;
+                brick->state = true;
+                //cout<<brick->breaktype<<endl;
+                board->Enqueue(brick, i, j);
+            }
+
             if(i==content.length()-1 && j<=BOARD_HEIGHT)
             {
                 j++;
+
             }
         }
         if(j > BOARD_HEIGHT){

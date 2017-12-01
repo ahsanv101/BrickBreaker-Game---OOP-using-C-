@@ -28,7 +28,7 @@ class GamePlay : public ScreenManager
         void keyboardEvent(const Uint8* event, ScreenManager** selfPointer);
         ~GamePlay();
 
-        void CreateLevel();
+        void CreateLevel(int);
 
 
     private:
