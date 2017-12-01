@@ -21,6 +21,8 @@ private:
     LTexture brickSpriteSheet;
     CollisionType detectCollisionWithBrick(Point objectPos, Point objectSize, Node* brickNode);
     void removebrickat(Node*, BallType);
+    Node* accessat(int, int);
+    void lowerbricktype(Node*);
 
 public:
     Board();

@@ -222,8 +222,50 @@ void Board::removebrickat(Node* node, BallType balltype)
     }
     else if(balltype==FireBallType)
     {
+        Node* temp = new Node;
+        temp = node;
         node->brick->state = false;
+        delete node;
+        if(temp->prev!=NULL)
+        {
+            if(temp->position-temp->prev->position==1)
+            {
+                lowerbricktype(node->prev);
+            }
+        }
+        if(temp->next != NULL)
+        {
 
+            if(temp->position-temp->next->position==-1)
+            {
+                lowerbricktype(node->next);
+            }
+        }
+        if(accessat(temp->position, (temp->y)-1)!=NULL)
+        {
+            lowerbricktype(accessat(node->position, (node->y)-1));
+        }
+        if(accessat(temp->position-1, (temp->y)-1)!=NULL)
+        {
+            lowerbricktype(accessat(node->position-1, (node->y)-1));
+        }
+        if(accessat(temp->position+1, (temp->y)-1)!=NULL)
+        {
+            lowerbricktype(accessat(node->position+1, (node->y)-1));
+        }
+        if(accessat(temp->position, (temp->y)+1)!=NULL)
+        {
+            lowerbricktype(accessat(node->position, (node->y)+1));
+        }
+        if(accessat(temp->position-1, (temp->y)+1)!=NULL)
+        {
+            lowerbricktype(accessat(node->position-1, (node->y)+1));
+        }
+        if(accessat(temp->position+1, (temp->y)+1)!=NULL)
+        {
+            lowerbricktype(accessat(node->position+1, (node->y)+1));
+        }
+        delete temp;
 
     }
     else if(balltype==ThroughBallType)
@@ -243,5 +285,31 @@ void Board::removebrickat(Node* node, BallType balltype)
             delete node;
 
         }
+    }
+}
+Node* Board::accessat(int i, int j)
+{
+    Node* temp=head;
+    while(temp!=NULL)
+    {
+        if(temp->position==i && temp->y==j)
+        {
+            return temp;
+        }
+        temp=temp->next;
+    }
+    return NULL;
+}
+
+void Board::lowerbricktype(Node* node)
+{
+    if(node->brick->breaktype != 3 && node->brick->breaktype!=0)
+    {
+        node->brick->breaktype=node->brick->breaktype-1;
+    }
+    else if(node->brick->breaktype==0)
+    {
+        node->brick->state=false;
+        delete node;
     }
 }
