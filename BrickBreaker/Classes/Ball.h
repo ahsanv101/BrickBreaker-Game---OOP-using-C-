@@ -14,14 +14,10 @@ class Ball : public Object
 {
     public:
         bool alive;
-        float x;
-        float y;
         float dirx;
         float diry;
         float speedx;
         float speedy;
-        int width;
-        int height;
         float friction; //lower speed means more friction
         bool shouldMove;
         int BALL_SPEED = 7;
@@ -38,6 +34,7 @@ class Ball : public Object
         virtual void Render(long int frame, SDL_Renderer* gRenderer) = 0;
         void SetDirection(float dirx, float diry);
         virtual void Move();
+        virtual void didCollide(CollisionInfo info) = 0;
 };
 
 

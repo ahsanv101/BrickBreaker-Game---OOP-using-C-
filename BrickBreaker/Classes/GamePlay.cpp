@@ -104,14 +104,11 @@ void GamePlay::show(long int frame)
     ball->Render(frame,renderer);
     ball->Move();
     board->Display(renderer);
+    if(ball->shouldMove){
+        CollisionInfo info = board->detectCollisionWithBricks(Point(ball->x - ball->width/2, ball->y - ball->height/2), NormalBallType, Point(ball->width, ball->height));
+        ball->didCollide(info);
+    }
 
-    CollisionType type = ball->shouldMove ? board->detectCollisionWithBricks(Point(ball->x, ball->y), NormalBallType, Point(ball->width, ball->height)) : None;
-    if(type == Horizontal){
-        ball->dirx *= -1;
-    }
-    if(type == Vertical){
-        ball->diry *= -1;
-    }
 
     if (frame%20 ==0 and count<30)
     {
@@ -414,7 +411,7 @@ bool GamePlay::loadMedia(){
 	return true;
 }
 bool GamePlay::detectCollisionBetween(Bat* bat, Ball* ball){
-    bool isInXRange = (ball->x+(ball->width/2) >= bat->x-(bat->width/2)) && (ball->x-(ball->width/2)) <= (bat->x + (bat->width/2));
+    bool isInXRange = (ball->x+(ball->width) >= bat->x-(bat->width/2)) && (ball->x-(ball->width/2)) <= (bat->x + (bat->width/2));
     float batOriginY = bat->y - bat->height/2;
     float ballMaxY = ball->y + ball->height/2;
     return isInXRange && ballMaxY-batOriginY <= 3 && ballMaxY-batOriginY > -1;

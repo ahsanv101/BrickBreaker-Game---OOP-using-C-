@@ -27,7 +27,7 @@ public:
     Board(float x, float y, float width, float height, SDL_Renderer* renderer);
     void Enqueue(Brick* brick, int column, int row);
     void Display(SDL_Renderer* gRenderer);
-    CollisionType detectCollisionWithBricks(Point ballPos, BallType ballType, Point ballSize);
-    CollisionType detectCollisionWithBricks(Point firePos, FireType fireType, Point fireSize);
+    CollisionInfo detectCollisionWithBricks(Point ballPos, BallType ballType, Point ballSize);
+    bool detectCollisionWithBricks(Point firePos, FireType fireType, Point fireSize);
     float x,y,width,height;
 };
