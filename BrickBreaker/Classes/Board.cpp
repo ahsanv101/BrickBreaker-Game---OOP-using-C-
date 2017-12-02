@@ -36,6 +36,7 @@ Board::~Board()
         //cout<<"Deallocating value: "<<temp->data<<endl;
         delete temp;
     }
+    this->brickSpriteSheet.Free();
 }
 
 void Board::Enqueue(Brick* brick, int column, int row)
@@ -175,4 +176,7 @@ CollisionType Board::detectCollisionWithBrick(Point objectPos, Point objectSize,
         return didCollide ? Horizontal : None;
     }
     return None;
+}
+Node* Board::getHead(){
+    return head;
 }

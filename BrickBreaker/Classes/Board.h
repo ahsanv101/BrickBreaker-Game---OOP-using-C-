@@ -30,4 +30,5 @@ public:
     CollisionInfo detectCollisionWithBricks(Point ballPos, BallType ballType, Point ballSize);
     bool detectCollisionWithBricks(Point firePos, FireType fireType, Point fireSize);
     float x,y,width,height;
+    Node* getHead();
 };

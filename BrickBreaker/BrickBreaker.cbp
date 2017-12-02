@@ -52,6 +52,8 @@
 		<Unit filename="Classes/Button.h" />
 		<Unit filename="Classes/Character.cpp" />
 		<Unit filename="Classes/Character.h" />
+		<Unit filename="Classes/DiskManager.cpp" />
+		<Unit filename="Classes/DiskManager.h" />
 		<Unit filename="Classes/Fire.cpp" />
 		<Unit filename="Classes/Fire.h" />
 		<Unit filename="Classes/FireBall.cpp" />

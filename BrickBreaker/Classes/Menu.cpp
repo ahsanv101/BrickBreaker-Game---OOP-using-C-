@@ -1,6 +1,7 @@
 #include "Menu.h"
 #include "Button.h"
 #include "GamePlay.h"
+#include "DiskManager.h"
 #include <iostream>
 
 Menu::Menu(){
@@ -44,6 +45,7 @@ void Menu::click(int x, int y, MouseEventType eventType, ScreenManager** selfPoi
             *selfPointer = new GamePlay(this->renderer);
         }else if(loadGame.pointLiesInBounds(x,y) && loadGame.getIsClicked()){
             std::cout<<"Load Game Button Up"<<std::endl;
+            *selfPointer = DiskManager::LoadGame(this->renderer);
         }else if(exitGame.pointLiesInBounds(x,y) && exitGame.getIsClicked()){
             std::cout<<"Exit Game Button Up"<<std::endl;
             *selfPointer = NULL;

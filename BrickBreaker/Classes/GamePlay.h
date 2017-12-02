@@ -23,18 +23,25 @@ class GamePlay : public ScreenManager
     public:
         GamePlay();
         GamePlay(SDL_Renderer* gRenderer);
+        GamePlay(SDL_Renderer* gRenderer, Bat* bat, Ball* ball, Board* board, LTexture* backTexture, LTexture* batBallTexture);
         void show(long int frame);
         void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer);
         void keyboardEvent(const Uint8* event, ScreenManager** selfPointer);
         ~GamePlay();
 
         void CreateLevel();
-
+        Board* getBoard() const;
+        Ball* getBall() const;
+        Bat* getBat() const;
+        SDL_Rect getBoardBounds();
+        void setBoard(Board* board);
 
     private:
         SDL_Renderer* renderer;
         bool loadMedia();
-        LTexture backgroundSprite, batBallSpriteSheet;
+
+        LTexture* backgroundSprite;
+        LTexture* batBallSpriteSheet;
         bool shoot;
 
         Board* board;
@@ -51,13 +58,12 @@ class GamePlay : public ScreenManager
 
         Pop_Up* popup;
 
-    private:
         float x, y, width, height;
 
         //collision detection functions
         bool detectCollisionBetween(Bat*, Ball*);
         CollisionType detectCollisionBetween(const SDL_Rect& wall, Ball*);
-        CollisionType detectCollisionBetween(Brick*, Ball*);
+        CollisionType detectCollisionWithSides(Ball*);
         bool isBallAlive(Ball*);
 
         Mix_Chunk *gScratch = NULL;

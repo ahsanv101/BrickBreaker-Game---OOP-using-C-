@@ -2,6 +2,7 @@
 #include "Button.h"
 #include "GamePlay.h"
 #include "Menu.h"
+#include "DiskManager.h"
 #include <iostream>
 
 Pop_Up::Pop_Up(){
@@ -50,6 +51,7 @@ void Pop_Up::click(int x, int y, MouseEventType eventType, ScreenManager** paren
             *selfPointer = NULL;
         }else if(save.pointLiesInBounds(x,y) && save.getIsClicked()){
             std::cout<<"Save Button Up"<<std::endl;
+            DiskManager::SaveGame(*(dynamic_cast<GamePlay*>(*parentPointer)));
         }else if(restart.pointLiesInBounds(x,y) && restart.getIsClicked()){
             std::cout<<"Restart Button Up"<<std::endl;
             *parentPointer = new GamePlay(this->renderer);

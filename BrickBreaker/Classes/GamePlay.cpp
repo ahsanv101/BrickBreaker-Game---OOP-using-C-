@@ -47,11 +47,12 @@ GamePlay::GamePlay(SDL_Renderer* renderer)
     this->side3.w=5;
     this->side3.x=1000-5;
     this->side3.y=0;
+
     popup = NULL;
 
-    bat = new Bat(&batBallSpriteSheet, (float)SCREEN_WIDTH/2, 630);
-    ball = new NormalBall(&batBallSpriteSheet, bat->x, bat->y-24);
-    Missile  = new MissileFire(&batBallSpriteSheet, bat->x, bat->y-24);
+    bat = new Bat(batBallSpriteSheet, (float)SCREEN_WIDTH/2, 630);
+    ball = new NormalBall(batBallSpriteSheet, bat->x, bat->y-24);
+    Missile  = new MissileFire(batBallSpriteSheet, bat->x, bat->y-24);
 
 
     /*
@@ -69,6 +70,49 @@ GamePlay::GamePlay(SDL_Renderer* renderer)
 
     CreateLevel();
 }
+GamePlay::GamePlay(SDL_Renderer* gRenderer, Bat* bat, Ball* ball, Board* board, LTexture* backTexture, LTexture* batBallTexture){
+    this->renderer = gRenderer;
+    this->backgroundSprite = backTexture;
+    this->batBallSpriteSheet = batBallTexture;
+    this->bat = bat;
+    this->ball = ball;
+    this->board = board;
+
+    blast = false;
+    shoot = false;
+    MisActivate = false;
+    FireActivate = false;
+    ThroughActivate = false;
+    NormalActivate = false;
+    IspeedActivate = false;
+    dspeedActivate = false;
+    BigbActivate = false;
+    SmallbActivate = false;
+
+    this->side1.h=650;
+    this->side1.w=5;
+    this->side1.x=0;
+    this->side1.y=0;
+
+    this->side2.h=5;
+    this->side2.w=1000;
+    this->side2.x=0;
+    this->side2.y=0;
+
+    this->side3.h=650;
+    this->side3.w=5;
+    this->side3.x=1000-5;
+    this->side3.y=0;
+
+    popup = NULL;
+
+    srand(time(0));
+
+    x = board->x;
+    y = board->y;
+    width = board->width;
+    height = board->height;
+}
 
 
 
@@ -84,8 +128,7 @@ GamePlay::~GamePlay(){
 void GamePlay::show(long int frame)
 {
 
-
-    backgroundSprite.Render(0,0,0,0.0,NULL, SDL_FLIP_NONE, renderer);
+    backgroundSprite->Render(0,0,0,0.0,NULL, SDL_FLIP_NONE, renderer);
     SDL_SetRenderDrawColor( renderer,100,100,100,255);
     SDL_RenderFillRect(renderer,&(this->side1));
     SDL_RenderFillRect(renderer,&(this->side2));
@@ -113,7 +156,7 @@ void GamePlay::show(long int frame)
     if (frame%20 ==0 and count<30)
     {
 
-        fire=new NormalFire(&batBallSpriteSheet, bat->x, bat->y-23);
+        fire=new NormalFire(batBallSpriteSheet, bat->x, bat->y-23);
         q.Enqueue(fire);
         count++;
 
@@ -179,7 +222,7 @@ void GamePlay::show(long int frame)
         NormalActivate = false;
         IspeedActivate = false;
         dspeedActivate = false;
-        ball = new NormalBall(&batBallSpriteSheet, bat->x,bat->y-24);
+        ball = new NormalBall(batBallSpriteSheet, bat->x,bat->y-24);
     }
     if (NormalActivate)
     {
@@ -189,7 +232,7 @@ void GamePlay::show(long int frame)
          int y = ball->y;
          int sp = ball->BALL_SPEED;
          delete ball;
-         ball = new NormalBall(&batBallSpriteSheet, x,y);
+         ball = new NormalBall(batBallSpriteSheet, x,y);
          ball->dirx = speedx;
          ball->diry = speedy;
          ball->BALL_SPEED = sp;
@@ -204,7 +247,7 @@ void GamePlay::show(long int frame)
          int x = ball->x;
          int y = ball->y;
          delete ball;
-         ball = new FireBall(&batBallSpriteSheet, x,y);
+         ball = new FireBall(batBallSpriteSheet, x,y);
          ball->dirx = speedx;
          ball->diry = speedy;
          ball->BALL_SPEED = sp;
@@ -219,7 +262,7 @@ void GamePlay::show(long int frame)
          int y = ball->y;
          bool shouldMove = ball->shouldMove;
          delete ball;
-         ball = new ThroughBall(&batBallSpriteSheet, x,y);
+         ball = new ThroughBall(batBallSpriteSheet, x,y);
          ball->dirx = speedx;
          ball->diry = speedy;
          ball->BALL_SPEED = sp;
@@ -229,15 +272,10 @@ void GamePlay::show(long int frame)
 
 
     //Code for Ball-Side Collision Detection
-    if (detectCollisionBetween(side2, ball) == Vertical){
-//        Mix_PlayChannel(1, medium, 0);
-        ball->diry *= -1;
-    }
-    if (detectCollisionBetween(side1, ball) == Horizontal || detectCollisionBetween(side3, ball) == Horizontal)
-    {
-//        Mix_PlayChannel( 1, medium, 0 );
-        ball->dirx *= -1;
-    }
+    CollisionInfo wallCollision;
+    wallCollision.objectType = CollisionObjectWallType;
+    wallCollision.directionType = detectCollisionWithSides(ball);
+    ball->didCollide(wallCollision);
 
     //Code for Ball-Bat Collision Detection
     if (detectCollisionBetween(bat, ball) && ball->shouldMove){
@@ -386,12 +424,14 @@ void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
 
 bool GamePlay::loadMedia(){
     bool success = true;
-    if( !backgroundSprite.LoadFromFile( "Images/bgimage.png", renderer  ) )
+    backgroundSprite = new LTexture();
+    batBallSpriteSheet = new LTexture();
+    if( !backgroundSprite->LoadFromFile( "Images/bgimage.png", renderer  ) )
 	{
 		printf( "Failed to load sprite sheet texture!\n" );
         return false;
 	}
-	if( !batBallSpriteSheet.LoadFromFile( "Images/finalsprites.png", renderer  ) )
+	if( !batBallSpriteSheet->LoadFromFile( "Images/finalsprites.png", renderer  ) )
 	{
 		printf( "Failed to load sprite sheet texture!\n" );
         return false;
@@ -416,6 +456,14 @@ bool GamePlay::detectCollisionBetween(Bat* bat, Ball* ball){
     float ballMaxY = ball->y + ball->height/2;
     return isInXRange && ballMaxY-batOriginY <= 3 && ballMaxY-batOriginY > -1;
 }
+CollisionType GamePlay::detectCollisionWithSides(Ball* ball){
+    CollisionType type = detectCollisionBetween(side2, ball);
+    if(type!=None){
+        return type;
+    }
+    type = detectCollisionBetween(side3, ball);
+    return type != None ? type : detectCollisionBetween(side1, ball);
+}
 CollisionType GamePlay::detectCollisionBetween(const SDL_Rect& wall, Ball* ball){
     //this means the wall is horizontal
     if(wall.w > wall.h){
@@ -437,10 +485,21 @@ CollisionType GamePlay::detectCollisionBetween(const SDL_Rect& wall, Ball* ball)
     }
     return None;
 }
-
-CollisionType GamePlay::detectCollisionBetween(Brick* brick, Ball* ball){
-    return None;
-}
 bool GamePlay::isBallAlive(Ball* ball){
     return ball->y-ball->height<=SCREEN_HEIGHT;
+}
+Board* GamePlay::getBoard() const {
+    return board;
+}
+Ball* GamePlay::getBall() const {
+    return ball;
+}
+Bat* GamePlay::getBat() const {
+    return bat;
+}
+SDL_Rect GamePlay::getBoardBounds(){
+    return {x,y,width,height};
+}
+void GamePlay::setBoard(Board* board){
+    this->board = board;
 }
