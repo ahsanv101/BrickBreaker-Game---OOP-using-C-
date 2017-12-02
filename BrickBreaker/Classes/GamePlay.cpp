@@ -51,6 +51,7 @@ GamePlay::GamePlay(SDL_Renderer* renderer)
     this->side3.x=1000-5;
     this->side3.y=0;
     popup = NULL;
+    power = new PowerUps(&PowerSpriteSheet, SCREEN_WIDTH/2, 300);
     bat = new Bat(&batBallSpriteSheet, (float)SCREEN_WIDTH/2, 630);
     ball = new NormalBall(&batBallSpriteSheet, bat->x, bat->y-24);
     Missile  = new MissileFire(&batBallSpriteSheet, bat->x, bat->y-24);
@@ -102,8 +103,8 @@ void GamePlay::show(long int frame)
     }
     else
     bat->Render(renderer);
-    //power->Render(frame,renderer);
-    //power->Move();
+    power->Render(frame,renderer);
+    power->Move();
     ball->Render(frame,renderer);
     ball->Move();
     board->Display(renderer);
