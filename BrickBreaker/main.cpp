@@ -69,7 +69,7 @@ int main( int argc, char* args[] )
 
     splash.Render(132,0,0,0.0,NULL,SDL_FLIP_NONE,gRenderer);
     SDL_RenderPresent(gRenderer);
-    Sleep(5000);
+    Sleep(50);
     while( !quit )                          //While application is running
     {
         while( SDL_PollEvent( &e ) != 0 )   //Handle events on queue

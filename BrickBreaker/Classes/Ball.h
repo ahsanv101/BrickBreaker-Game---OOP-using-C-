@@ -20,7 +20,7 @@ class Ball : public Object
         float speedy;
         float friction; //lower speed means more friction
         bool shouldMove;
-        int BALL_SPEED = 7;
+        int BALL_SPEED = 9;
         BallType type;
 //        SDL_Rect spriteClips[ FLYING_FRAMES ];
 //        LTexture* spriteSheetTexture;

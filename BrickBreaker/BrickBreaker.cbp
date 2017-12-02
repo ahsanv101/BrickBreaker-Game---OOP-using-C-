@@ -92,9 +92,7 @@
 		<Unit filename="Classes/node (2).h" />
 		<Unit filename="Classes/q.cpp" />
 		<Unit filename="Classes/q.h" />
-		<Unit filename="include/PowerUps.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/PowerUps.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

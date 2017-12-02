@@ -44,7 +44,12 @@ void Queue::Enqueue(Object* unit)
 
 void Queue::Clean()
 {
-
+    while(head != NULL)
+    {
+        node* temp = head;
+        head = head->next;
+        delete temp;
+    }
 }
 
 void Queue::Render(long int frame, SDL_Renderer* gRenderer)

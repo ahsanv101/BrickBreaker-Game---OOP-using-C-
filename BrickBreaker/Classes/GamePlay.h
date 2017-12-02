@@ -39,11 +39,11 @@ class GamePlay : public ScreenManager
 
         Board* board;
         PowerUps* power;
-        Bat* bat;
+       // Bat* bat;
         Ball* ball;
         Fire* fire;
         Fire* Missile;
-        PowerUps* power;
+
         Queue q;
         int count = 0;
 
@@ -65,6 +65,7 @@ class GamePlay : public ScreenManager
 
         Mix_Chunk *gScratch = NULL;
         Mix_Chunk *medium = NULL;
+        bool holdball;
         bool blast;
         bool mball;
         bool mismake;

@@ -63,13 +63,13 @@ PowerUps::PowerUps(LTexture* image, int x, int y)
 
     spriteClips11[ 0 ].x =   42;
     spriteClips11[ 0 ].y =   82;
-    spriteClips11[ 0 ].w = 24;
-    spriteClips11[ 0 ].h = 24;
+    spriteClips11[ 0 ].w = 36;
+    spriteClips11[ 0 ].h = 36;
 
     spriteClips12[ 0 ].x =   82;
     spriteClips12[ 0 ].y =   82;
-    spriteClips12[ 0 ].w = 24;
-    spriteClips12[ 0 ].h = 24;
+    spriteClips12[ 0 ].w = 36;
+    spriteClips12[ 0 ].h = 36;
 
 
 

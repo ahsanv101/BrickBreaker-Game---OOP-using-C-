@@ -23,6 +23,7 @@ class Bat : public Object
         int width;
         int bigwidth;
         int smallwidth;
+        int normalwidth;
         int height;
         float friction; //lower speed means more friction
 
@@ -36,8 +37,7 @@ class Bat : public Object
 
 
 
-        Bat(LTexture* image, float x, float y);
-        Bat();
+
         virtual ~Bat();
         void SetAlive(bool);
         bool GetAlive();
@@ -49,6 +49,18 @@ class Bat : public Object
         virtual void Render(SDL_Renderer* gRenderer);
         void Render2(SDL_Renderer* gRenderer);
         void Render3(SDL_Renderer* gRenderer);
+        static Bat* GetInstance();
+        void SetValue(LTexture* image, float x, float y);
+    private:
+        static Bat* instance;
+        Bat(){}
+
+
+
+
+
+
+
 };
 
 
