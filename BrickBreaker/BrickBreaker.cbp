@@ -54,12 +54,19 @@
 		<Unit filename="Classes/Character.h" />
 		<Unit filename="Classes/Fire.cpp" />
 		<Unit filename="Classes/Fire.h" />
+		<Unit filename="Classes/FireBall.cpp" />
+		<Unit filename="Classes/FireBall.h" />
+		<Unit filename="Classes/GameOver.cpp" />
+		<Unit filename="Classes/GameOver.h" />
 		<Unit filename="Classes/GamePlay.cpp" />
 		<Unit filename="Classes/GamePlay.h" />
 		<Unit filename="Classes/LTexture.cpp" />
 		<Unit filename="Classes/LTexture.h" />
+		<Unit filename="Classes/LevelComplete.h" />
 		<Unit filename="Classes/Menu.cpp" />
 		<Unit filename="Classes/Menu.h" />
+		<Unit filename="Classes/MissileFire.cpp" />
+		<Unit filename="Classes/MissileFire.h" />
 		<Unit filename="Classes/Node.h" />
 		<Unit filename="Classes/NormalBall.cpp" />
 		<Unit filename="Classes/NormalBall.h" />
@@ -74,8 +81,14 @@
 		<Unit filename="Classes/ScreenManager.cpp" />
 		<Unit filename="Classes/ScreenManager.h" />
 		<Unit filename="Classes/Statics.h" />
+		<Unit filename="Classes/ThroughBall.cpp" />
+		<Unit filename="Classes/ThroughBall.h" />
 		<Unit filename="Classes/Word.cpp" />
 		<Unit filename="Classes/Word.h" />
+		<Unit filename="Classes/bricks.txt" />
+		<Unit filename="Classes/node (2).h" />
+		<Unit filename="Classes/q.cpp" />
+		<Unit filename="Classes/q.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

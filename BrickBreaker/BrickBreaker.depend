@@ -1924,18 +1924,29 @@
 	<iostream>
 	"LTexture.h"
 
-1511880717 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.cpp
+1512156945 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.cpp
 	"GamePlay.h"
 	"Bat.h"
 	"NormalBall.h"
 	"Board.h"
+	<string>
 	"Pop-Up.h"
+	"Options.h"
+	"GameOver.h"
+	"LevelComplete.h"
 	<string>
 	<stdio.h>
 	<iostream>
 	<stdlib.h>
 	<fstream>
 	<time.h>
+	"windows.h"
+	"FireBall.h"
+	"ThroughBall.h"
+	"NormalFire.h"
+	"MissileFire.h"
+	<SDL_mixer.h>
+	<SDL.h>
 
 1512056191 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
@@ -2005,8 +2016,9 @@
 	"LTexture.h"
 	"Statics.h"
 
-1511963247 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\main.cpp
+1512181573 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\main.cpp
 	<SDL.h>
+	<SDL_mixer.h>
 	<SDL_image.h>
 	<stdio.h>
 	<iostream>
@@ -2018,9 +2030,9 @@
 	"Classes/Board.h"
 	"Classes/NormalBall.h"
 	"Classes/GamePlay.h"
-	"ScreenManager.h"
-	"Statics.h"
-	"Menu.h"
+	"Classes/ScreenManager.h"
+	"Classes/Statics.h"
+	"Classes/Menu.h"
 	<iomanip>
 	<ctype.h>
 	<cstdlib>
@@ -2062,22 +2074,24 @@
 	<iostream>
 	"LTexture.h"
 
-1511518930 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\character.cpp
+1512159029 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\character.cpp
 	"Character.h"
 	<iostream>
 
-1512055666 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\statics.h
+1512158006 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\statics.h
 
-1512055411 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.cpp
+1512182423 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.cpp
 	"Menu.h"
 	"Button.h"
 	"GamePlay.h"
+	"LevelSelection.h"
 	<iostream>
 
-1512055411 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.h
+1512163651 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\menu.h
 	"ScreenManager.h"
 	"Button.h"
 	"Statics.h"
+	"Pop-Up.h"
 
 1511518930 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\word.cpp
 	<string>
@@ -2152,14 +2166,10 @@
 	<SDL.h>
 	<iostream>
 
-1512055407 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\pop-up.cpp
+1512150451 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\pop-up.cpp
 	"Pop-Up.h"
-	"Button.h"
-	"GamePlay.h"
-	"Menu.h"
-	<iostream>
 
-1512055407 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\pop-up.h
+1512155945 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\pop-up.h
 	"ScreenManager.h"
 	"Button.h"
 	"Statics.h"
@@ -2227,4 +2237,56 @@
 	"Board.h"
 	"Bat.h"
 	"Ball.h"
+
+1512177176 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameover.cpp
+	"Pop-Up.h"
+	"Button.h"
+	"GamePlay.h"
+	"Menu.h"
+	"GameOver.h"
+	<iostream>
+
+1512155936 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\options.h
+	"ScreenManager.h"
+	"Button.h"
+	"Statics.h"
+
+1512155635 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\gameover.h
+	"ScreenManager.h"
+	"Button.h"
+	"Statics.h"
+
+1512157286 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\options.cpp
+	"Pop-Up.h"
+	"Button.h"
+	"GamePlay.h"
+	"Menu.h"
+	"Options.h"
+	<iostream>
+
+1512156693 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\levelcomplete.h
+	"ScreenManager.h"
+	"Button.h"
+	"Statics.h"
+
+1512180834 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\levelcomplete.cpp
+	"Pop-Up.h"
+	"Button.h"
+	"GamePlay.h"
+	"Menu.h"
+	"LevelComplete.h"
+	<iostream>
+
+1512175785 source:c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\levelselection.cpp
+	"Pop-Up.h"
+	"Button.h"
+	"GamePlay.h"
+	"Menu.h"
+	"LevelSelection.h"
+	<iostream>
+
+1512173592 c:\users\hp\downloads\fall 2017\oop\project\mainproject\brickbreaker\classes\levelselection.h
+	"ScreenManager.h"
+	"Button.h"
+	"Statics.h"
 

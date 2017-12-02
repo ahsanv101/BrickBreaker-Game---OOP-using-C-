@@ -4,6 +4,9 @@
 #include "Board.h"
 #include<string>
 #include "Pop-Up.h"
+#include "Options.h"
+#include "GameOver.h"
+#include "LevelComplete.h"
 
 #include<string>
 #include <stdio.h>
@@ -328,7 +331,7 @@ void GamePlay::click(int x, int y, MouseEventType eventType, ScreenManager** sel
             std::cout<<"Pop-Up Button Down"<<std::endl;
     }else if(eventType == RightClickUp){
             std::cout<<"Pop-Up Button Up"<<std::endl;
-            popup = new Pop_Up(this->renderer);
+            popup = new Options(this->renderer);
     }
 }
 
@@ -373,6 +376,12 @@ void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
     if(event[ SDL_SCANCODE_N ]){
         SmallbActivate = true;
     }
+    if(event[ SDL_SCANCODE_G]){
+        popup= new GameOver(this->renderer);
+    }
+    if(event[ SDL_SCANCODE_L]){
+        popup= new LevelComplete(this->renderer);
+    }
     if(popup){
         popup->keyboardEvent(event,selfPointer, &popup);
         return;
@@ -381,7 +390,7 @@ void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
 
 bool GamePlay::loadMedia(){
     bool success = true;
-    if( !backgroundSprite.LoadFromFile( "Images/bgimage.png", renderer  ) )
+    if( !backgroundSprite.LoadFromFile( "Images/bggame.jpg", renderer  ) )
 	{
 		printf( "Failed to load sprite sheet texture!\n" );
         return false;
