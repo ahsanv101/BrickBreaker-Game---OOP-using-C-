@@ -65,6 +65,9 @@ class GamePlay : public ScreenManager
         Mix_Chunk *gScratch = NULL;
         Mix_Chunk *medium = NULL;
         bool blast;
+        bool mball;
+        bool mismake;
+        bool firemake;
         bool MisActivate;
         bool FireActivate;
         bool ThroughActivate;

@@ -2727,7 +2727,7 @@
 	<stdio.h>
 	<iostream>
 
-1512051381 d:\jannat\downloads\mainproject\brickbreaker\classes\bat.h
+1512172319 d:\jannat\downloads\mainproject\brickbreaker\classes\bat.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -2736,7 +2736,7 @@
 	"LTexture.h"
 	"Board.h"
 
-1512165890 d:\jannat\downloads\mainproject\brickbreaker\classes\board.h
+1512171478 d:\jannat\downloads\mainproject\brickbreaker\classes\board.h
 	"Node.h"
 	"Brick.h"
 	"LTexture.h"
@@ -2759,11 +2759,11 @@
 
 1512051381 d:\jannat\downloads\mainproject\brickbreaker\classes\point.h
 
-1512051381 source:d:\jannat\downloads\mainproject\brickbreaker\classes\bat.cpp
+1512172319 source:d:\jannat\downloads\mainproject\brickbreaker\classes\bat.cpp
 	"Bat.h"
 	"Board.h"
 
-1512166561 source:d:\jannat\downloads\mainproject\brickbreaker\classes\board.cpp
+1512171922 source:d:\jannat\downloads\mainproject\brickbreaker\classes\board.cpp
 	"Board.h"
 	"Statics.h"
 	"Brick.h"
@@ -2842,7 +2842,7 @@
 
 1512141669 source:d:\jannat\downloads\mainproject\brickbreaker\classes\gameover.cpp
 
-1512169353 source:d:\jannat\downloads\mainproject\brickbreaker\classes\gameplay.cpp
+1512170562 source:d:\jannat\downloads\mainproject\brickbreaker\classes\gameplay.cpp
 	"GamePlay.h"
 	"Bat.h"
 	"NormalBall.h"
@@ -2865,7 +2865,7 @@
 	<SDL.h>
 	<sstream>
 
-1512168078 d:\jannat\downloads\mainproject\brickbreaker\classes\gameplay.h
+1512173036 d:\jannat\downloads\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
 	"Ball.h"
 	"Board.h"
@@ -3037,4 +3037,12 @@
 	<stdio.h>
 	<iostream>
 	"LTexture.h"
+
+1512172319 source:d:\jannat\downloads\mainproject\brickbreaker\classes\powerups.cpp
+	"PowerUps.h"
+	"string"
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<sstream>
 

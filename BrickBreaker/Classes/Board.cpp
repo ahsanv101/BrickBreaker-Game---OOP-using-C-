@@ -318,3 +318,15 @@ void Board::lowerbricktype(Node* node)
         delete node;
     }
 }
+Brick* Board::removeBrickAt(Node* node, FireType firetype)
+{
+    if(firetype==NormalFireType)
+    {
+        lowerbricktype(node);
+        return node->brick;
+    }
+    if(firetype==MissileFireType)
+    {
+        return removeBrickAt(node, FireBallType);
+    }
+}

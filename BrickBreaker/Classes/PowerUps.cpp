@@ -105,8 +105,7 @@ void PowerUps::Render(long int frame, SDL_Renderer* gRenderer)
     switch(random)
     {
         case 1 : spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips1[ frame % FLYING_FRAMES ], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
-
-                 break;       // and exits the switch
+                 break;
         case 2 : spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips2[ frame % FLYING_FRAMES ], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
                  break;
         case 3 : spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips3[ frame % FLYING_FRAMES ], 0.0, NULL, SDL_FLIP_NONE, gRenderer );

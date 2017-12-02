@@ -77,6 +77,8 @@
 		<Unit filename="Classes/Point.h" />
 		<Unit filename="Classes/Pop-Up.cpp" />
 		<Unit filename="Classes/Pop-Up.h" />
+		<Unit filename="Classes/PowerUps.cpp" />
+		<Unit filename="Classes/PowerUps.h" />
 		<Unit filename="Classes/ScreenManager.cpp" />
 		<Unit filename="Classes/ScreenManager.h" />
 		<Unit filename="Classes/Statics.h" />

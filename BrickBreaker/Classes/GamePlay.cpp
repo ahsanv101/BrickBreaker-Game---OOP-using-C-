@@ -119,15 +119,7 @@ void GamePlay::show(long int frame)
     }
 
 
-    if (frame%20 ==0 and count<30)
-    {
 
-        fire=new NormalFire(&batBallSpriteSheet, bat->x, bat->y-23);
-        q.Enqueue(fire);
-        count++;
-
-
-    }
 //    for (int i;i<=3;i++)
 //    {
 //        ball = new NormalBall(&batBallSpriteSheet, bat->x, bat->y-23);
@@ -139,10 +131,68 @@ void GamePlay::show(long int frame)
 
     q.Render(frame,renderer);
     q.Move();
+    if (mismake)
+    {
+        fire =  new MissileFire(&batBallSpriteSheet, bat->x, bat->y-23);
+        MisActivate = true;
+
+
+
+    }
+
+
+            //fire->Move();
+
+
+   // fire->Move();
+
+
+
+
+
+    if (frame%10 ==0 && count<10 && firemake )
+    {
+        fire=new NormalFire(&batBallSpriteSheet, bat->x, bat->y-23);
+        q.Enqueue(fire);
+        count++;
+        blast = true;
+    }
+    if (frame%60 ==0 && count<3 && mball)
+    {
+        delete ball;
+        FireActivate = false;
+        ThroughActivate = false;
+        NormalActivate = false;
+        IspeedActivate = false;
+        dspeedActivate = false;
+        Ball* balls=new NormalBall(&batBallSpriteSheet, ball->x, ball->y);
+        //ball->shouldMove = true;
+        //ball->SetDirection(0,-1);
+       // ball->BALL_SPEED=1;
+        q.Enqueue(balls);
+        count++;
+    }
+//    if (mismake)
+//    {
+//        fire = new MissileFire(&batBallSpriteSheet, bat->x, bat->y-23);
+//
+//    }
+//    if (MisActivate)
+//    {
+//
+//        fire->Render(frame,renderer);
+//        fire->Move();
+//
+//    }
+
+
     if(blast )
     {
+        //firemake = false;
+        q.Render(frame,renderer);
+        q.Move();
 
-        q.Clean();
+
 
 
         //fire = new NormalFire(&batBallSpriteSheet, bat->x, bat->y-23);
@@ -152,27 +202,45 @@ void GamePlay::show(long int frame)
         //q.Move();
 
     }
-//    if(mball)
-//    {
-//        q.Render(this->frame,renderer);
-//        q.Move();
-//        q.Clean();
-//    }
+    if (blast == false)
+    {
+       q.Clean();
+    }
+
+
+
     if (MisActivate)
     {
-        //blast = false;
-        //delete fire;
-        Missile->Render(frame,renderer);
-        Missile->Move();
+        mismake = false;
+        fire->Render(frame,renderer);
+        fire->Move();
+    }
+    if(mball)
+    {
 
-        //blast = true;
-        //fire->Move();
+        q.Render(frame,renderer);
+        //q.Move();
 
     }
+//    if (MisActivate)
+//    {
+//        //blast = false;
+//        //delete fire;
+//
+//        Missile->Render(frame,renderer);
+//        Missile->Move();
+//
+//        //blast = true;
+//        //fire->Move();
+//
+//    }
     if(IspeedActivate)
     {
         //dspeedActivate = false;
         ball->BALL_SPEED = 15;
+
+
+
 
     }
     if (dspeedActivate)
@@ -182,13 +250,25 @@ void GamePlay::show(long int frame)
     }
 
     if(!isBallAlive(ball)){
+        q.Clean();
         delete ball;
-        Sleep(1000);
+
+        //Sleep(1000);
+        loadMedia();
+        blast = true;
+        shoot = false;
+        mball = false;
+        MisActivate =false;
         FireActivate = false;
         ThroughActivate = false;
         NormalActivate = false;
         IspeedActivate = false;
         dspeedActivate = false;
+        BigbActivate = false;
+        SmallbActivate = false;
+        mismake = false;
+        firemake = false;
+
         ball = new NormalBall(&batBallSpriteSheet, bat->x,bat->y-24);
     }
     if (NormalActivate)
@@ -218,7 +298,7 @@ void GamePlay::show(long int frame)
          ball->dirx = speedx;
          ball->diry = speedy;
          ball->BALL_SPEED = sp;
-         ball->shouldMove=true;
+         ball->shouldMove = true;
     }
     if (ThroughActivate)
     {
@@ -237,6 +317,7 @@ void GamePlay::show(long int frame)
          ball->shouldMove = true;
 
     }
+
 
 
     //Code for Ball-Side Collision Detection
@@ -260,8 +341,8 @@ void GamePlay::show(long int frame)
             case 5: dspeedActivate=true;
             case 7: BigbActivate=true;
             case 8: SmallbActivate=true;
-            case 9: MisActivate=true;
-            case 10: blast=true;
+            case 9: mismake=true;
+            case 10: firemake=true;
         }
 
     }
@@ -277,29 +358,46 @@ void GamePlay::show(long int frame)
 //                ///ball->SetDirection(1,1);
 
                         float ballcenterx = ball->x + ball->width / 2.0f;
-                        int hitx = ballcenterx - bat->x;
+                        int hitx = ballcenterx - bat->x-12;
+
                         //cout<<hitx<<endl;
                         //ball->SetDirection(-1,1);
-                        if (hitx>12)
+
+                        if (hitx>0 && hitx<15)
+                            {
+                                ball->SetDirection(0.5,-1);
+                            }
+                        else if (hitx>15 && hitx<30)
                             {
                                 ball->SetDirection(1,-1);
-                                //ball->diry *= -1;
-                                //ball->dirx *=1;
-                                //ball->SetDirection(-1,1);
-
                             }
-                        else if (hitx<12)
+                        else if (hitx>30 && hitx<45)
+                            {
+                                ball->SetDirection(1.5,-1);
+                            }
+                        else if (hitx>45)
+                            {
+                                ball->SetDirection(2,-1);
+                            }
+                        else if (hitx<0 && hitx>-15)
+                            {
+                                ball->SetDirection(-0.5,-1);
+                            }
+                        else if (hitx<-15 && hitx>-30)
                             {
                                 ball->SetDirection(-1,-1);
-                                //ball->diry *= -1;
-                                //ball->dirx*=1;
-                                //ball->SetDirection(1,1);
                             }
-                        else if (hitx==12)
+                        else if (hitx<-30 && hitx>-45)
                             {
-                                ball->SetDirection(0,-1);
-                                //ball->dirx *= 0.1;
-                                //ball->SetDirection(0,1);
+                                ball->SetDirection(-1.5,-1);
+                            }
+                        else if (hitx<-45)
+                            {
+                                ball->SetDirection(-2,-1);
+                            }
+                        else
+                            {
+                                ball->diry*=-1;
                             }
 //            }
 //            else if (hitx<0){
