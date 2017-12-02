@@ -12,7 +12,7 @@
 #include "q.h"
 #include <SDL_mixer.h>
 #include "Pop-Up.h"
-
+#include "PowerUps.h"
 
 #include <typeinfo>
 
@@ -34,7 +34,7 @@ class GamePlay : public ScreenManager
     private:
         SDL_Renderer* renderer;
         bool loadMedia();
-        LTexture backgroundSprite, batBallSpriteSheet;
+        LTexture backgroundSprite, batBallSpriteSheet, PowerSpriteSheet;
         bool shoot;
 
         Board* board;
@@ -42,6 +42,7 @@ class GamePlay : public ScreenManager
         Ball* ball;
         Fire* fire;
         Fire* Missile;
+        PowerUps* power;
         Queue q;
         int count = 0;
 
