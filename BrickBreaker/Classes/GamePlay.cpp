@@ -4,6 +4,9 @@
 #include "Board.h"
 #include<string>
 #include "Pop-Up.h"
+#include "Options.h"
+#include "GameOver.h"
+#include "LevelComplete.h"
 
 #include"PowerUps.h"
 #include<string>
@@ -21,14 +24,12 @@
 #include <SDL.h>
 #include <sstream>
 
-Bat* Bat::instance = NULL;
+
 GamePlay::GamePlay(SDL_Renderer* renderer)
 {
     this->renderer = renderer;
     loadMedia();
-    holdball = false;
     blast = false;
-    firemake = false;
     shoot = false;
     MisActivate = false;
     FireActivate = false;
@@ -38,7 +39,6 @@ GamePlay::GamePlay(SDL_Renderer* renderer)
     dspeedActivate = false;
     BigbActivate = false;
     SmallbActivate = false;
-    mismake = false;
     this->side1.h=650;
     this->side1.w=5;
     this->side1.x=0;
@@ -54,11 +54,10 @@ GamePlay::GamePlay(SDL_Renderer* renderer)
     this->side3.x=1000-5;
     this->side3.y=0;
     popup = NULL;
-    Bat::GetInstance();
-    Bat::GetInstance()->SetValue(&batBallSpriteSheet, (float)SCREEN_WIDTH/2, 630);
-    //bat = new Bat(&batBallSpriteSheet, (float)SCREEN_WIDTH/2, 630);
-    ball = new NormalBall(&batBallSpriteSheet, Bat::GetInstance()->x, Bat::GetInstance()->y-24);
-    Missile  = new MissileFire(&batBallSpriteSheet, Bat::GetInstance()->x,Bat::GetInstance()->y-24);
+    power = new PowerUps(&PowerSpriteSheet, SCREEN_WIDTH/2, 300);
+    bat = new Bat(&batBallSpriteSheet, (float)SCREEN_WIDTH/2, 630);
+    ball = new NormalBall(&batBallSpriteSheet, bat->x, bat->y-24);
+    Missile  = new MissileFire(&batBallSpriteSheet, bat->x, bat->y-24);
 
 
     /*
@@ -99,40 +98,57 @@ void GamePlay::show(long int frame)
     SDL_RenderFillRect(renderer,&(this->side3));
     if (BigbActivate)
     {
-        Bat::GetInstance()->Render2(renderer);
-        Bat::GetInstance()->width = Bat::GetInstance()->bigwidth;
+        bat->Render2(renderer);
     }
     else if (SmallbActivate)
     {
-       Bat::GetInstance()->Render3(renderer);
-       Bat::GetInstance()->width = Bat::GetInstance()->smallwidth;
+        bat->Render3(renderer);
     }
     else
-    Bat::GetInstance()->Render(renderer);
-
+    bat->Render(renderer);
+    power->Render(frame,renderer);
+    power->Move();
     ball->Render(frame,renderer);
     ball->Move();
     board->Display(renderer);
     if(ball->shouldMove){
         CollisionInfo info = board->detectCollisionWithBricks(Point(ball->x - ball->width/2, ball->y - ball->height/2), ball->type, Point(ball->width, ball->height));
         ball->didCollide(info);
+
         if(info.directionType != NULL && info.objectType == CollisionObjectBreakableBrickType && info.brick && rand()%100<60){
                 //cout<<"checkingpoweruprenderer"<<endl;
                 power = new PowerUps(&PowerSpriteSheet, ball->x, ball->y);
                 q.Enqueue(power);
         }
     }
-q.Render(frame,renderer);
-q.Move();
 
 
+
+//    for (int i;i<=3;i++)
+//    {
+//        ball = new NormalBall(&batBallSpriteSheet, bat->x, bat->y-23);
+//        q.Enqueue(ball);
+//
+//    }
+
+
+
+    q.Render(frame,renderer);
+    q.Move();
     if (mismake)
     {
-        fire =  new MissileFire(&batBallSpriteSheet, Bat::GetInstance()->x, Bat::GetInstance()->y-23);
+        fire =  new MissileFire(&batBallSpriteSheet, bat->x, bat->y-23);
         MisActivate = true;
+
+
 
     }
 
+
+            //fire->Move();
+
+
+   // fire->Move();
 
 
 
@@ -140,32 +156,62 @@ q.Move();
 
     if (frame%10 ==0 && count<10 && firemake )
     {
-        fire=new NormalFire(&batBallSpriteSheet, Bat::GetInstance()->x, Bat::GetInstance()->y-23);
+        fire=new NormalFire(&batBallSpriteSheet, bat->x, bat->y-23);
         q.Enqueue(fire);
         count++;
         blast = true;
     }
-
-    if (mismake)
+    if (frame%60 ==0 && count<3 && mball)
     {
-        fire = new MissileFire(&batBallSpriteSheet,Bat::GetInstance()->x, Bat::GetInstance()->y-23);
-        MisActivate = true;
-
+        delete ball;
+        FireActivate = false;
+        ThroughActivate = false;
+        NormalActivate = false;
+        IspeedActivate = false;
+        dspeedActivate = false;
+        Ball* balls=new NormalBall(&batBallSpriteSheet, ball->x, ball->y);
+        //ball->shouldMove = true;
+        //ball->SetDirection(0,-1);
+       // ball->BALL_SPEED=1;
+        q.Enqueue(balls);
+        count++;
     }
-    if (MisActivate)
-    {
-
-        fire->Render(frame,renderer);
-        fire->Move();
-
-    }
+//    if (mismake)
+//    {
+//        fire = new MissileFire(&batBallSpriteSheet, bat->x, bat->y-23);
+//
+//    }
+//    if (MisActivate)
+//    {
+//
+//        fire->Render(frame,renderer);
+//        fire->Move();
+//
+//    }
 
 
     if(blast )
     {
+        //firemake = false;
         q.Render(frame,renderer);
         q.Move();
+
+
+
+
+        //fire = new NormalFire(&batBallSpriteSheet, bat->x, bat->y-23);
+        //fire->Render(this->frame,renderer);
+        //fire->Move();
+        //q.Render(this->frame,renderer);
+        //q.Move();
+
     }
+    if (blast == false)
+    {
+       q.Clean();
+    }
+
+
 
     if (MisActivate)
     {
@@ -173,22 +219,47 @@ q.Move();
         fire->Render(frame,renderer);
         fire->Move();
     }
+    if(mball)
+    {
 
+        q.Render(frame,renderer);
+        //q.Move();
+
+    }
+//    if (MisActivate)
+//    {
+//        //blast = false;
+//        //delete fire;
+//
+//        Missile->Render(frame,renderer);
+//        Missile->Move();
+//
+//        //blast = true;
+//        //fire->Move();
+//
+//    }
     if(IspeedActivate)
     {
+        //dspeedActivate = false;
         ball->BALL_SPEED = 15;
+
+
+
+
     }
     if (dspeedActivate)
     {
+        //IspeedActivate = false;
         ball->BALL_SPEED = 5;
-
     }
 
     if(!isBallAlive(ball)){
         q.Clean();
         delete ball;
+
+        //Sleep(1000);
         loadMedia();
-        blast = false;
+        blast = true;
         shoot = false;
         mball = false;
         MisActivate =false;
@@ -201,8 +272,8 @@ q.Move();
         SmallbActivate = false;
         mismake = false;
         firemake = false;
-        ball = new NormalBall(&batBallSpriteSheet, Bat::GetInstance()->x,Bat::GetInstance()->y-24);
-        Bat::GetInstance()->width = Bat::GetInstance()->normalwidth;
+
+        ball = new NormalBall(&batBallSpriteSheet, bat->x,bat->y-24);
     }
     if (NormalActivate)
     {
@@ -213,33 +284,29 @@ q.Move();
          int sp = ball->BALL_SPEED;
          delete ball;
          ball = new NormalBall(&batBallSpriteSheet, x,y);
-         NormalActivate = false;
          ball->dirx = speedx;
          ball->diry = speedy;
          ball->BALL_SPEED = sp;
     }
     if (FireActivate)
     {
-
+         //ThroughActivate = false;
          int speedx = ball->dirx;
          int sp = ball->BALL_SPEED;
          int speedy = ball->diry;
+
          int x = ball->x;
          int y = ball->y;
          delete ball;
          ball = new FireBall(&batBallSpriteSheet, x,y);
-         FireActivate = false;
          ball->dirx = speedx;
          ball->diry = speedy;
          ball->BALL_SPEED = sp;
          ball->shouldMove = true;
-
-
-
     }
     if (ThroughActivate)
     {
-
+         //FireActivate  = false;
          int speedx = ball->dirx;
          int speedy = ball->diry;
          int sp = ball->BALL_SPEED;
@@ -248,14 +315,10 @@ q.Move();
          bool shouldMove = ball->shouldMove;
          delete ball;
          ball = new ThroughBall(&batBallSpriteSheet, x,y);
-         ThroughActivate = false;
          ball->dirx = speedx;
          ball->diry = speedy;
          ball->BALL_SPEED = sp;
          ball->shouldMove = true;
-
-
-
 
     }
 
@@ -271,9 +334,9 @@ q.Move();
 //        Mix_PlayChannel( 1, medium, 0 );
         ball->dirx *= -1;
     }
-    if(detectCollisionBetween(Bat::GetInstance(), power)==true)
+    if(detectCollisionBetween(bat, power)==true)
     {
-
+        cout<<"powerupbatcollisionhappening"<<endl;
         switch(power->random)
         {
             case 1: ThroughActivate=true;
@@ -289,7 +352,7 @@ q.Move();
     }
 
     //Code for Ball-Bat Collision Detection
-    if (detectCollisionBetween(Bat::GetInstance(), ball) && ball->shouldMove){
+    if (detectCollisionBetween(bat, ball) && ball->shouldMove){
 //        Mix_PlayChannel( 1, medium, 0 );
 //            float ballcenterx = ball->x + ball->width / 2.0f;
 //            int hitx = ballcenterx - bat->x;
@@ -299,74 +362,45 @@ q.Move();
 //                ///ball->SetDirection(1,1);
 
                         float ballcenterx = ball->x + ball->width / 2.0f;
-                        int hitx = ballcenterx - Bat::GetInstance()->x-12;
+                        int hitx = ballcenterx - bat->x-12;
 
                         //cout<<hitx<<endl;
                         //ball->SetDirection(-1,1);
 
                         if (hitx>0 && hitx<15)
                             {
-                                if (holdball)
-                                {
-                                    ball->shouldMove = false;
-                                }
-
                                 ball->SetDirection(0.5,-1);
                             }
                         else if (hitx>15 && hitx<30)
                             {
-                                if (holdball)
-                                {
-                                    ball->shouldMove = false;
-                                }
                                 ball->SetDirection(1,-1);
                             }
                         else if (hitx>30 && hitx<45)
                             {
-                                if (holdball)
-                                {
-                                    ball->shouldMove = false;
-                                }
                                 ball->SetDirection(1.5,-1);
                             }
                         else if (hitx>45)
                             {
-
-
                                 ball->SetDirection(2,-1);
                             }
                         else if (hitx<0 && hitx>-15)
-                                {
-                                    ball->SetDirection(-0.5,-1);
-                                }
+                            {
+                                ball->SetDirection(-0.5,-1);
+                            }
                         else if (hitx<-15 && hitx>-30)
                             {
-                                if (holdball)
-                                {
-                                    ball->shouldMove = false;
-                                }
                                 ball->SetDirection(-1,-1);
                             }
                         else if (hitx<-30 && hitx>-45)
                             {
-                                if (holdball)
-                                {
-                                    ball->shouldMove = false;
-                                }
                                 ball->SetDirection(-1.5,-1);
                             }
                         else if (hitx<-45)
                             {
-
-
                                 ball->SetDirection(-2,-1);
                             }
                         else
                             {
-                                if (holdball)
-                                {
-                                    ball->shouldMove = false;
-                                }
                                 ball->diry*=-1;
                             }
 //            }
@@ -474,7 +508,7 @@ void GamePlay::click(int x, int y, MouseEventType eventType, ScreenManager** sel
             std::cout<<"Pop-Up Button Down"<<std::endl;
     }else if(eventType == RightClickUp){
             std::cout<<"Pop-Up Button Up"<<std::endl;
-            popup = new Pop_Up(this->renderer);
+            popup = new Options(this->renderer);
     }
 }
 
@@ -483,16 +517,17 @@ void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
         ball->shouldMove = true;
     }
     if(event[ SDL_SCANCODE_RIGHT ]){
-        if(Bat::GetInstance()->x+Bat::GetInstance()->width/2>=this->side3.x || !ball->shouldMove){return;}
-        Bat::GetInstance()->Move(RIGHT);
+        if(bat->x+bat->width/2>=this->side3.x || !ball->shouldMove){return;}
+        bat->Move(RIGHT);
     }
     if(event[ SDL_SCANCODE_LEFT ]){
 
-        if (Bat::GetInstance()->x-Bat::GetInstance()->width/2<=this->side1.x+this->side1.w || !ball->shouldMove){return;}
-        Bat::GetInstance()->Move(LEFT);
+        if (bat->x-bat->width/2<=this->side1.x+this->side1.w || !ball->shouldMove){return;}
+        bat->Move(LEFT);
     }
     if(event[ SDL_SCANCODE_DOWN ]){
         FireActivate = true;
+
     }
     if(event[ SDL_SCANCODE_UP ]){
         ThroughActivate = true;
@@ -507,10 +542,10 @@ void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
         dspeedActivate = true;
     }
     if(event[ SDL_SCANCODE_C ]){
-        firemake= true;
+        blast= true;
     }
     if(event[ SDL_SCANCODE_V ]){
-        mismake= true;
+        MisActivate = true;
     }
     if(event[ SDL_SCANCODE_B ]){
         BigbActivate = true;
@@ -518,8 +553,11 @@ void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
     if(event[ SDL_SCANCODE_N ]){
         SmallbActivate = true;
     }
-    if(event[ SDL_SCANCODE_S ]){
-        holdball = true;
+    if(event[ SDL_SCANCODE_G]){
+        popup= new GameOver(this->renderer);
+    }
+    if(event[ SDL_SCANCODE_L]){
+        popup= new LevelComplete(this->renderer);
     }
     if(popup){
         popup->keyboardEvent(event,selfPointer, &popup);
@@ -529,7 +567,7 @@ void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
 
 bool GamePlay::loadMedia(){
     bool success = true;
-    if( !backgroundSprite.LoadFromFile( "Images/bgimage.png", renderer  ) )
+    if( !backgroundSprite.LoadFromFile( "Images/bggame.jpg", renderer  ) )
 	{
 		printf( "Failed to load sprite sheet texture!\n" );
         return false;

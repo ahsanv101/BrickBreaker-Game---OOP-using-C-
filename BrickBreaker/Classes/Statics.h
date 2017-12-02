@@ -7,7 +7,7 @@ enum CollisionType { Horizontal, Vertical, None};
 enum BallType { NormalBallType, ThroughBallType, FireBallType};
 enum FireType { NormalFireType, MissileFireType};
 enum ANIMATION_FRAMES {FLYING_FRAMES = 1};
-enum ButtonColorType {Brown, Green, Red};
+enum ButtonColorType {Brown, Green, Red, Life};
 enum CollisionObjectType {CollisionObjectBallType, CollisionObjectBreakableBrickType, CollisionObjectUnbreakableBrickType, CollisionObjectWallType, CollisionObjectBatType};
 struct CollisionInfo { CollisionObjectType objectType; CollisionType directionType; Brick* brick = NULL;};
 const int SCREEN_WIDTH = 1000;

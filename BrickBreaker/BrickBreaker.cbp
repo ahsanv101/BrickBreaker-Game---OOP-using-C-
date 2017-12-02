@@ -14,7 +14,6 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="Classes" />
-					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -25,7 +24,6 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="Classes" />
-					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -64,6 +62,7 @@
 		<Unit filename="Classes/GamePlay.h" />
 		<Unit filename="Classes/LTexture.cpp" />
 		<Unit filename="Classes/LTexture.h" />
+		<Unit filename="Classes/LevelComplete.h" />
 		<Unit filename="Classes/Menu.cpp" />
 		<Unit filename="Classes/Menu.h" />
 		<Unit filename="Classes/MissileFire.cpp" />
@@ -79,8 +78,6 @@
 		<Unit filename="Classes/Point.h" />
 		<Unit filename="Classes/Pop-Up.cpp" />
 		<Unit filename="Classes/Pop-Up.h" />
-		<Unit filename="Classes/PowerUps.cpp" />
-		<Unit filename="Classes/PowerUps.h" />
 		<Unit filename="Classes/ScreenManager.cpp" />
 		<Unit filename="Classes/ScreenManager.h" />
 		<Unit filename="Classes/Statics.h" />
