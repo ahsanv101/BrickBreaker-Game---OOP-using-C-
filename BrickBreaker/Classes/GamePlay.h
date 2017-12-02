@@ -43,6 +43,7 @@ class GamePlay : public ScreenManager
         Ball* ball;
         Fire* fire;
         Fire* Missile;
+        PowerUps* power;
         Queue q;
         int count = 0;
 
