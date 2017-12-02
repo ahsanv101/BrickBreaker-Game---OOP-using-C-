@@ -4,6 +4,7 @@
 #include"Point.h"
 #include<SDL.h>
 #include<iostream>
+#include<ostream>
 
 using namespace std;
 
@@ -82,7 +83,6 @@ Brick* Board::Dequeue()
     }
 }
 */
-
 bool flag = true;
 void Board::Display(SDL_Renderer* gRenderer)
 {
@@ -95,7 +95,7 @@ void Board::Display(SDL_Renderer* gRenderer)
     while(temp!=NULL){
 
         Brick brick = *temp->brick;
-        int i= temp->position%12;
+        int i= temp->position;
         int j = temp->y;
 
         temp = temp->next;
@@ -109,7 +109,13 @@ void Board::Display(SDL_Renderer* gRenderer)
 
         SDL_Rect srcrect;
         srcrect.x = 9 + (brick.type * BOARD_BRWIDTH);
-        srcrect.y = 61 + ((brick.breaktype) * BOARD_BRHEIGHT);
+        if(brick.breaktype==3)
+        {
+            srcrect.y = 61 + ((0) * BOARD_BRHEIGHT);
+        }
+        else{
+            srcrect.y = 61 + ((brick.breaktype) * BOARD_BRHEIGHT);
+        }
         srcrect.w = BOARD_BRWIDTH;
         srcrect.h = BOARD_BRHEIGHT;
 
@@ -132,12 +138,195 @@ bool Board::loadMedia()
 	}
 	return true;
 }
-CollisionType Board::detectCollisionWithBricks(Point ballPos, BallType ballType){
-
+CollisionInfo Board::detectCollisionWithBricks(Point ballPos, BallType ballType, Point ballSize){
+    Node* temp = head;
+    CollisionInfo c;
+    while(temp!=NULL){
+        CollisionType type = detectCollisionWithBrick(ballPos, ballSize, temp);
+        if(type != None){
+            c.brick = removeBrickAt(temp, ballType);
+            c.directionType = type;
+            c.objectType = temp->brick->type == 3 ? CollisionObjectUnbreakableBrickType : CollisionObjectBreakableBrickType;
+            return c;
+        }
+        temp = temp->next;
+    }
+    c.directionType = None;
+    c.objectType = CollisionObjectBreakableBrickType;
+    return c;
 }
-CollisionType Board::detectCollisionWithBricks(Point FirePos, FireType fireType){
+bool Board::detectCollisionWithBricks(Point firePos, FireType fireType, Point fireSize){
+    Node* temp = head;
+    while(temp!=NULL){
 
+    }
+    return false;
 }
-CollisionType detectCollisionWithBrick(Point objectPos, Brick brick){
+CollisionType Board::detectCollisionWithBrick(Point objectPos, Point objectSize, Node* brickNode){
+    int i = brickNode->position;
+    int j = brickNode->y;
+    if(!brickNode->brick->state){
+        return None;
+    }
+    Point brickPos(x + (i * BOARD_BRWIDTH), y + (j * BOARD_BRHEIGHT));
+    Point brickDestPoint(brickPos.x + BOARD_BRWIDTH, brickPos.y + BOARD_BRHEIGHT);
+    Point objectDestPoint(objectPos.x + objectSize.x, objectPos.y + objectSize.y);
+    Point objectCenterPoint((objectPos.x + objectPos.x + objectSize.x)/2, (objectPos.y + objectPos.y + objectSize.y)/2);
+    bool isInXRange = (brickPos.x <= objectPos.x && brickDestPoint.x >= objectCenterPoint.x) || (brickPos.x <= objectCenterPoint.x && brickDestPoint.x >= objectDestPoint.x);
+    //Vertical Collision Detection
+    if(isInXRange){
+        bool didCollide = (brickPos.y > objectPos.y && brickPos.y < objectDestPoint.y) || (brickDestPoint.y > objectPos.y && brickDestPoint.y < objectDestPoint.y);
+        return didCollide ? Vertical : None;
+    }
+    //Horizontal Collision Detection
+    bool isInYRange = (brickPos.y <= objectPos.y && brickDestPoint.y >= objectCenterPoint.y) || (brickPos.y <= objectCenterPoint.y && brickDestPoint.y >= objectDestPoint.y);
+    if(isInYRange){
+        bool didCollide = (brickPos.x > objectPos.x && brickPos.x < objectDestPoint.x) || (brickDestPoint.x > objectPos.x && brickDestPoint.x < objectDestPoint.x);
+        return didCollide ? Horizontal : None;
+    }
+    return None;
+}
+Brick* Board::removeBrickAt(Node* node, BallType balltype)
+{
+    if(balltype==NormalBallType)
+    {
 
+        if(node->brick->breaktype!=3)
+        {
+
+            if(node->brick->breaktype==0)
+            {
+
+
+                node->brick->state = false;
+                if(node->next)
+                {
+                    node->next->prev =  node->prev;
+                }
+                if(node->prev)
+                {
+                    node->prev->next = node->next;
+                }
+                Brick* brick= node->brick;
+                delete node;
+                return brick;
+            }
+            else if(node->brick->breaktype==1)
+            {
+                node->brick->breaktype=0;
+            }
+            else if(node->brick->breaktype==2)
+            {
+                node->brick->breaktype=1;
+            }
+        }
+    }
+    else if(balltype==FireBallType)
+    {
+        Node* temp = new Node;
+        temp = node;
+        node->brick->state = false;
+        if(temp->prev!=NULL)
+        {
+            if(temp->position-temp->prev->position==1)
+            {
+                lowerbricktype(node->prev);
+            }
+        }
+        if(temp->next != NULL)
+        {
+
+            if(temp->position-temp->next->position==-1)
+            {
+                lowerbricktype(node->next);
+            }
+        }
+        if(accessat(temp->position, (temp->y)-1)!=NULL)
+        {
+            lowerbricktype(accessat(node->position, (node->y)-1));
+        }
+        if(accessat(temp->position-1, (temp->y)-1)!=NULL)
+        {
+            lowerbricktype(accessat(node->position-1, (node->y)-1));
+        }
+        if(accessat(temp->position+1, (temp->y)-1)!=NULL)
+        {
+            lowerbricktype(accessat(node->position+1, (node->y)-1));
+        }
+        if(accessat(temp->position, (temp->y)+1)!=NULL)
+        {
+            lowerbricktype(accessat(node->position, (node->y)+1));
+        }
+        if(accessat(temp->position-1, (temp->y)+1)!=NULL)
+        {
+            lowerbricktype(accessat(node->position-1, (node->y)+1));
+        }
+        if(accessat(temp->position+1, (temp->y)+1)!=NULL)
+        {
+            lowerbricktype(accessat(node->position+1, (node->y)+1));
+        }
+        Brick* brick= node->brick;
+        delete node;
+        delete temp;
+        return brick;
+
+    }
+    else if(balltype==ThroughBallType)
+    {
+        if(node->brick->breaktype!=3)
+        {
+
+
+            node->brick->state = false;
+            if(node->next){
+                node->next->prev =  node->prev;
+            }
+            if(node->prev)
+            {
+                node->prev->next = node->next;
+            }
+            Brick* brick= node->brick;
+            delete node;
+            return brick;
+        }
+    }
+    return NULL;
+}
+Node* Board::accessat(int i, int j)
+{
+    Node* temp=head;
+    while(temp!=NULL)
+    {
+        if(temp->position==i && temp->y==j)
+        {
+            return temp;
+        }
+        temp=temp->next;
+    }
+    return NULL;
+}
+
+void Board::lowerbricktype(Node* node)
+{
+    if(node->brick->breaktype != 3 && node->brick->breaktype!=0)
+    {
+        node->brick->breaktype=node->brick->breaktype-1;
+    }
+    else if(node->brick->breaktype==0)
+    {
+        node->brick->state=false;
+        delete node;
+    }
+}
+Brick* Board::removeBrickAt(Node* node, FireType firetype)
+{
+    if(firetype==NormalFireType)
+    {
+        lowerbricktype(node);
+        return node->brick;
+    }
+    if(firetype==MissileFireType)
+    {
+        return removeBrickAt(node, FireBallType);
+    }
 }

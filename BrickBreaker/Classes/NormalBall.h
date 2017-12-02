@@ -32,7 +32,7 @@ class NormalBall :public Ball
 //        bool Collides(Board* other);
         bool Collide2(Bat* other);
         virtual void Render(long int frame, SDL_Renderer* gRenderer);
-
+        void didCollide(CollisionInfo info);
 };
 
 

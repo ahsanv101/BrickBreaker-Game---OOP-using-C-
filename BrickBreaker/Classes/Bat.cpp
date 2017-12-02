@@ -76,7 +76,8 @@ Bat::Bat(LTexture* image, float x, float y)
 
     this->x = x;
     this->y = y;
-
+    this->smallwidth= spriteClips3[0].w;
+    this->smallwidth= spriteClips2[0].w;
     this->width = spriteClips[ 0 ].w;
     this->height = spriteClips[ 0 ].h;
 

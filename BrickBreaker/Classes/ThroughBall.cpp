@@ -2,47 +2,9 @@
 #include "Ball.h"
 #include<math.h>
 
-bool ThroughBall::Collides(Board* other)
-    {
-    if (x + width > other->x  && x < other->x + other->width &&
-        y + height  > other->y +40 && y   < other->y + other->height)
-        {
-          return true;
-        }
-    return false;
-    }
-bool ThroughBall::Collide2(Bat* other)
-    {
-    if (x + width > other->x -40 && x +40 < other->x + other->width &&
-        y + height  > other->y && y   < other->y + other->height)
-        {
-
-          return true;
-        }
-    return false;
-    }
-bool ThroughBall::Collidesleft(Board* other)
-    {
-    if (this->x <= other->x)
-        {
-
-          return true;
-        }
-    return false;
-    }
-bool ThroughBall::Collidesright(Board* other)
-    {
-    if (this->x + this->width >= other->x + other->width)
-        {
-
-          return true;
-        }
-    return false;
-    }
-
-
 ThroughBall::ThroughBall(LTexture* image, float x, float y)
 {
+    type = ThroughBallType;
     spriteSheetTexture = image;
 
 
@@ -105,5 +67,11 @@ void ThroughBall::Render(long int frame,SDL_Renderer* gRenderer)
 {
     spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips[ frame % FLYING_FRAMES ], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
 }
-
-
+void ThroughBall::didCollide(CollisionInfo info){
+    if(info.directionType == None){
+        return;
+    }
+    if(info.objectType == CollisionObjectUnbreakableBrickType || info.objectType == CollisionObjectWallType){
+        info.directionType == Vertical ? diry *= -1 : dirx *= -1;
+    }
+}

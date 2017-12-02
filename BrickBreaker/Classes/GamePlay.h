@@ -12,7 +12,7 @@
 #include "q.h"
 #include <SDL_mixer.h>
 #include "Pop-Up.h"
-
+#include "PowerUps.h"
 
 #include <typeinfo>
 
@@ -28,20 +28,22 @@ class GamePlay : public ScreenManager
         void keyboardEvent(const Uint8* event, ScreenManager** selfPointer);
         ~GamePlay();
 
-        void CreateLevel();
+        void CreateLevel(int);
 
 
     private:
         SDL_Renderer* renderer;
         bool loadMedia();
-        LTexture backgroundSprite, batBallSpriteSheet;
+        LTexture backgroundSprite, batBallSpriteSheet, PowerSpriteSheet;
         bool shoot;
 
         Board* board;
+        PowerUps* power;
         Bat* bat;
         Ball* ball;
         Fire* fire;
         Fire* Missile;
+        PowerUps* power;
         Queue q;
         int count = 0;
 
@@ -56,6 +58,7 @@ class GamePlay : public ScreenManager
 
         //collision detection functions
         bool detectCollisionBetween(Bat*, Ball*);
+        bool detectCollisionBetween(Bat*, PowerUps*);
         CollisionType detectCollisionBetween(const SDL_Rect& wall, Ball*);
         CollisionType detectCollisionBetween(Brick*, Ball*);
         bool isBallAlive(Ball*);
@@ -63,6 +66,9 @@ class GamePlay : public ScreenManager
         Mix_Chunk *gScratch = NULL;
         Mix_Chunk *medium = NULL;
         bool blast;
+        bool mball;
+        bool mismake;
+        bool firemake;
         bool MisActivate;
         bool FireActivate;
         bool ThroughActivate;

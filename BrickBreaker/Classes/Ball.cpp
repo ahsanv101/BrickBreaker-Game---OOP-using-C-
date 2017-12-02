@@ -118,5 +118,12 @@ void Ball::Move(){
 //{
 //    spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips[ frame % FLYING_FRAMES ], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
 //}
-
+void Ball::didCollide(CollisionInfo info){
+    if(info.directionType == None){
+        return;
+    }
+    if(info.objectType == CollisionObjectBreakableBrickType || info.objectType == CollisionObjectUnbreakableBrickType || info.objectType == CollisionObjectWallType){
+        info.directionType == Vertical ? diry *= -1 : dirx *= -1;
+    }
+}
 

@@ -8,6 +8,7 @@
 #include "GameOver.h"
 #include "LevelComplete.h"
 
+#include"PowerUps.h"
 #include<string>
 #include <stdio.h>
 #include <iostream>
@@ -21,6 +22,8 @@
 #include "MissileFire.h"
 #include <SDL_mixer.h>
 #include <SDL.h>
+#include <sstream>
+
 
 GamePlay::GamePlay(SDL_Renderer* renderer)
 {
@@ -51,7 +54,7 @@ GamePlay::GamePlay(SDL_Renderer* renderer)
     this->side3.x=1000-5;
     this->side3.y=0;
     popup = NULL;
-
+    power = new PowerUps(&PowerSpriteSheet, SCREEN_WIDTH/2, 300);
     bat = new Bat(&batBallSpriteSheet, (float)SCREEN_WIDTH/2, 630);
     ball = new NormalBall(&batBallSpriteSheet, bat->x, bat->y-24);
     Missile  = new MissileFire(&batBallSpriteSheet, bat->x, bat->y-24);
@@ -70,7 +73,7 @@ GamePlay::GamePlay(SDL_Renderer* renderer)
     width = 768;
     height = 600;
 
-    CreateLevel();
+    CreateLevel(4);
 }
 
 
@@ -103,20 +106,24 @@ void GamePlay::show(long int frame)
     }
     else
     bat->Render(renderer);
-
+    power->Render(frame,renderer);
+    power->Move();
     ball->Render(frame,renderer);
     ball->Move();
     board->Display(renderer);
+    if(ball->shouldMove){
+        CollisionInfo info = board->detectCollisionWithBricks(Point(ball->x - ball->width/2, ball->y - ball->height/2), ball->type, Point(ball->width, ball->height));
+        ball->didCollide(info);
 
-    if (frame%20 ==0 and count<30)
-    {
-
-        fire=new NormalFire(&batBallSpriteSheet, bat->x, bat->y-23);
-        q.Enqueue(fire);
-        count++;
-
-
+        if(info.directionType != NULL && info.objectType == CollisionObjectBreakableBrickType && info.brick && rand()%100<60){
+                //cout<<"checkingpoweruprenderer"<<endl;
+                power = new PowerUps(&PowerSpriteSheet, ball->x, ball->y);
+                q.Enqueue(power);
+        }
     }
+
+
+
 //    for (int i;i<=3;i++)
 //    {
 //        ball = new NormalBall(&batBallSpriteSheet, bat->x, bat->y-23);
@@ -126,11 +133,70 @@ void GamePlay::show(long int frame)
 
 
 
+    q.Render(frame,renderer);
+    q.Move();
+    if (mismake)
+    {
+        fire =  new MissileFire(&batBallSpriteSheet, bat->x, bat->y-23);
+        MisActivate = true;
+
+
+
+    }
+
+
+            //fire->Move();
+
+
+   // fire->Move();
+
+
+
+
+
+    if (frame%10 ==0 && count<10 && firemake )
+    {
+        fire=new NormalFire(&batBallSpriteSheet, bat->x, bat->y-23);
+        q.Enqueue(fire);
+        count++;
+        blast = true;
+    }
+    if (frame%60 ==0 && count<3 && mball)
+    {
+        delete ball;
+        FireActivate = false;
+        ThroughActivate = false;
+        NormalActivate = false;
+        IspeedActivate = false;
+        dspeedActivate = false;
+        Ball* balls=new NormalBall(&batBallSpriteSheet, ball->x, ball->y);
+        //ball->shouldMove = true;
+        //ball->SetDirection(0,-1);
+       // ball->BALL_SPEED=1;
+        q.Enqueue(balls);
+        count++;
+    }
+//    if (mismake)
+//    {
+//        fire = new MissileFire(&batBallSpriteSheet, bat->x, bat->y-23);
+//
+//    }
+//    if (MisActivate)
+//    {
+//
+//        fire->Render(frame,renderer);
+//        fire->Move();
+//
+//    }
+
+
     if(blast )
     {
+        //firemake = false;
         q.Render(frame,renderer);
         q.Move();
-        q.Clean();
+
+
 
 
         //fire = new NormalFire(&batBallSpriteSheet, bat->x, bat->y-23);
@@ -140,27 +206,45 @@ void GamePlay::show(long int frame)
         //q.Move();
 
     }
-//    if(mball)
-//    {
-//        q.Render(this->frame,renderer);
-//        q.Move();
-//        q.Clean();
-//    }
+    if (blast == false)
+    {
+       q.Clean();
+    }
+
+
+
     if (MisActivate)
     {
-        //blast = false;
-        //delete fire;
-        Missile->Render(frame,renderer);
-        Missile->Move();
+        mismake = false;
+        fire->Render(frame,renderer);
+        fire->Move();
+    }
+    if(mball)
+    {
 
-        //blast = true;
-        //fire->Move();
+        q.Render(frame,renderer);
+        //q.Move();
 
     }
+//    if (MisActivate)
+//    {
+//        //blast = false;
+//        //delete fire;
+//
+//        Missile->Render(frame,renderer);
+//        Missile->Move();
+//
+//        //blast = true;
+//        //fire->Move();
+//
+//    }
     if(IspeedActivate)
     {
         //dspeedActivate = false;
         ball->BALL_SPEED = 15;
+
+
+
 
     }
     if (dspeedActivate)
@@ -170,13 +254,25 @@ void GamePlay::show(long int frame)
     }
 
     if(!isBallAlive(ball)){
+        q.Clean();
         delete ball;
-        Sleep(1000);
+
+        //Sleep(1000);
+        loadMedia();
+        blast = true;
+        shoot = false;
+        mball = false;
+        MisActivate =false;
         FireActivate = false;
         ThroughActivate = false;
         NormalActivate = false;
         IspeedActivate = false;
         dspeedActivate = false;
+        BigbActivate = false;
+        SmallbActivate = false;
+        mismake = false;
+        firemake = false;
+
         ball = new NormalBall(&batBallSpriteSheet, bat->x,bat->y-24);
     }
     if (NormalActivate)
@@ -206,6 +302,7 @@ void GamePlay::show(long int frame)
          ball->dirx = speedx;
          ball->diry = speedy;
          ball->BALL_SPEED = sp;
+         ball->shouldMove = true;
     }
     if (ThroughActivate)
     {
@@ -221,9 +318,10 @@ void GamePlay::show(long int frame)
          ball->dirx = speedx;
          ball->diry = speedy;
          ball->BALL_SPEED = sp;
-         ball->shouldMove = shouldMove;
+         ball->shouldMove = true;
 
     }
+
 
 
     //Code for Ball-Side Collision Detection
@@ -235,6 +333,22 @@ void GamePlay::show(long int frame)
     {
 //        Mix_PlayChannel( 1, medium, 0 );
         ball->dirx *= -1;
+    }
+    if(detectCollisionBetween(bat, power)==true)
+    {
+        cout<<"powerupbatcollisionhappening"<<endl;
+        switch(power->random)
+        {
+            case 1: ThroughActivate=true;
+            case 2: FireActivate=true;
+            case 4: IspeedActivate=true;
+            case 5: dspeedActivate=true;
+            case 7: BigbActivate=true;
+            case 8: SmallbActivate=true;
+            case 9: mismake=true;
+            case 10: firemake=true;
+        }
+
     }
 
     //Code for Ball-Bat Collision Detection
@@ -248,29 +362,46 @@ void GamePlay::show(long int frame)
 //                ///ball->SetDirection(1,1);
 
                         float ballcenterx = ball->x + ball->width / 2.0f;
-                        int hitx = ballcenterx - bat->x;
+                        int hitx = ballcenterx - bat->x-12;
+
                         //cout<<hitx<<endl;
                         //ball->SetDirection(-1,1);
-                        if (hitx>12)
+
+                        if (hitx>0 && hitx<15)
+                            {
+                                ball->SetDirection(0.5,-1);
+                            }
+                        else if (hitx>15 && hitx<30)
                             {
                                 ball->SetDirection(1,-1);
-                                //ball->diry *= -1;
-                                //ball->dirx *=1;
-                                //ball->SetDirection(-1,1);
-
                             }
-                        else if (hitx<12)
+                        else if (hitx>30 && hitx<45)
+                            {
+                                ball->SetDirection(1.5,-1);
+                            }
+                        else if (hitx>45)
+                            {
+                                ball->SetDirection(2,-1);
+                            }
+                        else if (hitx<0 && hitx>-15)
+                            {
+                                ball->SetDirection(-0.5,-1);
+                            }
+                        else if (hitx<-15 && hitx>-30)
                             {
                                 ball->SetDirection(-1,-1);
-                                //ball->diry *= -1;
-                                //ball->dirx*=1;
-                                //ball->SetDirection(1,1);
                             }
-                        else if (hitx==12)
+                        else if (hitx<-30 && hitx>-45)
                             {
-                                ball->SetDirection(0,-1);
-                                //ball->dirx *= 0.1;
-                                //ball->SetDirection(0,1);
+                                ball->SetDirection(-1.5,-1);
+                            }
+                        else if (hitx<-45)
+                            {
+                                ball->SetDirection(-2,-1);
+                            }
+                        else
+                            {
+                                ball->diry*=-1;
                             }
 //            }
 //            else if (hitx<0){
@@ -289,32 +420,78 @@ void GamePlay::show(long int frame)
 }
 
 
-void GamePlay::CreateLevel() {
+void GamePlay::CreateLevel(int LevelNumber) {
     board = new Board(x, y, width, height, renderer);
 
     std::string content;
+    std::stringstream ss;
+    ss << LevelNumber;
+    std::string str = ss.str();
+
+    std::string filename = "levels/" + str + ".txt";
+
 	//opening file
     std::ifstream readfile;
-    readfile.open("bricks.txt");
+    readfile.open(filename.c_str());
     int j = 0;
     while (getline(readfile, content))
     {
         for(int i=0; i<content.length(); i++)
         {
-            if(content[i]=='*')
+            if(i==BOARD_WIDTH)
             {
-                int bricktype = rand()%3;
+                break;
+            }
+            if(content[i]=='0')
+            {
+                int bricktype = 0;
                 //cout<<bricktype<<endl;
                 Brick* brick = new Brick;
-                brick->type=rand()%4;
+                brick->type=rand()%3;
                 brick->breaktype=bricktype;
                 brick->state = true;
                 //cout<<brick->breaktype<<endl;
                 board->Enqueue(brick, i, j);
             }
+            if(content[i]=='1')
+            {
+                int bricktype = 1;
+                //cout<<bricktype<<endl;
+                Brick* brick = new Brick;
+                brick->type=rand()%3;
+                brick->breaktype=bricktype;
+                brick->state = true;
+                //cout<<brick->breaktype<<endl;
+                board->Enqueue(brick, i, j);
+            }
+            if(content[i]=='2')
+            {
+                int bricktype = 2;
+                //cout<<bricktype<<endl;
+                Brick* brick = new Brick;
+                brick->type=rand()%3;
+                brick->breaktype=bricktype;
+                brick->state = true;
+                //cout<<brick->breaktype<<endl;
+                board->Enqueue(brick, i, j);
+            }
+
+            if(content[i]=='3')
+            {
+                int bricktype = 3;
+                //cout<<bricktype<<endl;
+                Brick* brick = new Brick;
+                brick->type=3;
+                brick->breaktype=bricktype;
+                brick->state = true;
+                //cout<<brick->breaktype<<endl;
+                board->Enqueue(brick, i, j);
+            }
+
             if(i==content.length()-1 && j<=BOARD_HEIGHT)
             {
                 j++;
+
             }
         }
         if(j > BOARD_HEIGHT){
@@ -400,6 +577,11 @@ bool GamePlay::loadMedia(){
 		printf( "Failed to load sprite sheet texture!\n" );
         return false;
 	}
+	if( !PowerSpriteSheet.LoadFromFile( "Images/powerups.png", renderer  ) )
+	{
+		printf( "Failed to load sprite sheet texture!\n" );
+        return false;
+	}
 //	gScratch = Mix_LoadWAV( "sounds/high.wav" );
 //	if( gScratch == NULL )
 //	{
@@ -415,11 +597,19 @@ bool GamePlay::loadMedia(){
 	return true;
 }
 bool GamePlay::detectCollisionBetween(Bat* bat, Ball* ball){
-    bool isInXRange = (ball->x+(ball->width/2) >= bat->x-(bat->width/2)) && (ball->x-(ball->width/2)) <= (bat->x + (bat->width/2));
+    bool isInXRange = (ball->x+(ball->width) >= bat->x-(bat->width/2)) && (ball->x-(ball->width/2)) <= (bat->x + (bat->width/2));
     float batOriginY = bat->y - bat->height/2;
     float ballMaxY = ball->y + ball->height/2;
     return isInXRange && ballMaxY-batOriginY <= 3 && ballMaxY-batOriginY > -1;
 }
+
+bool GamePlay::detectCollisionBetween(Bat* bat, PowerUps* powerup){
+    bool isInXRange = (powerup->x+(powerup->width) >= bat->x-(bat->width/2)) && (powerup->x-(ball->width/2)) <= (bat->x + (bat->width/2));
+    float batOriginY = bat->y - bat->height/2;
+    float ballMaxY = powerup->y + powerup->height/2;
+    return isInXRange && ballMaxY-batOriginY <= 3 && ballMaxY-batOriginY > -1;
+}
+
 CollisionType GamePlay::detectCollisionBetween(const SDL_Rect& wall, Ball* ball){
     //this means the wall is horizontal
     if(wall.w > wall.h){

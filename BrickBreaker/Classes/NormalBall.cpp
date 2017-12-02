@@ -6,6 +6,7 @@
 
 NormalBall::NormalBall(LTexture* image, float x, float y)
 {
+    type = NormalBallType;
     spriteSheetTexture = image;
 
 
@@ -61,12 +62,14 @@ bool NormalBall::GetAlive()
 
 void NormalBall::Move(float x, float y)
 {
-    this->y +=diry*y;
-    this->x +=dirx*x;
+    this->y += diry*y;
+    this->x += dirx*x;
 }
 
 void NormalBall::Render(long int frame,SDL_Renderer* gRenderer)
 {
     spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips[0], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
 }
-
+void NormalBall::didCollide(CollisionInfo info){
+    Ball::didCollide(info);
+}

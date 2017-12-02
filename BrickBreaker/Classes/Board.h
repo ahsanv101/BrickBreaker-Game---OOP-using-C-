@@ -8,6 +8,7 @@
 #include <iostream>
 #include "Statics.h"
 #include "Point.h"
+#include <ostream>
 
 
 class Board
@@ -18,7 +19,11 @@ private:
     SDL_Renderer* renderer;
     bool loadMedia();
     LTexture brickSpriteSheet;
-    CollisionType detectCollisionWithBrick(Point objectPos, Brick brick);
+    CollisionType detectCollisionWithBrick(Point objectPos, Point objectSize, Node* brickNode);
+    Brick* removeBrickAt(Node*, BallType);
+    Brick* removeBrickAt(Node*, FireType);
+    Node* accessat(int, int);
+    void lowerbricktype(Node*);
 
 public:
     Board();
@@ -26,7 +31,7 @@ public:
     Board(float x, float y, float width, float height, SDL_Renderer* renderer);
     void Enqueue(Brick* brick, int column, int row);
     void Display(SDL_Renderer* gRenderer);
-    CollisionType detectCollisionWithBricks(Point ballPos, BallType ballType);
-    CollisionType detectCollisionWithBricks(Point FirePos, FireType fireType);
+    CollisionInfo detectCollisionWithBricks(Point ballPos, BallType ballType, Point ballSize);
+    bool detectCollisionWithBricks(Point firePos, FireType fireType, Point fireSize);
     float x,y,width,height;
 };

@@ -21,6 +21,8 @@ class Bat : public Object
         float speedx;
         float speedy;
         int width;
+        int bigwidth;
+        int smallwidth;
         int height;
         float friction; //lower speed means more friction
 

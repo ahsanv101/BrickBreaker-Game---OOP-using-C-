@@ -2,47 +2,9 @@
 #include "Ball.h"
 #include<math.h>
 
-bool FireBall::Collides(Board* other)
-    {
-    if (x + width > other->x  && x < other->x + other->width &&
-        y + height  > other->y +40 && y   < other->y + other->height)
-        {
-          return true;
-        }
-    return false;
-    }
-bool FireBall::Collide2(Bat* other)
-    {
-    if (x + width > other->x -40 && x +40 < other->x + other->width &&
-        y + height  > other->y && y   < other->y + other->height)
-        {
-
-          return true;
-        }
-    return false;
-    }
-bool FireBall::Collidesleft(Board* other)
-    {
-    if (this->x <= other->x)
-        {
-
-          return true;
-        }
-    return false;
-    }
-bool FireBall::Collidesright(Board* other)
-    {
-    if (this->x + this->width >= other->x + other->width)
-        {
-
-          return true;
-        }
-    return false;
-    }
-
-
 FireBall::FireBall(LTexture* image, float x, float y)
 {
+    type = FireBallType;
     spriteSheetTexture = image;
 
 
@@ -106,5 +68,7 @@ void FireBall::Render(long int frame,SDL_Renderer* gRenderer)
 {
     spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips[ frame % FLYING_FRAMES ], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
 }
-
+void FireBall::didCollide(CollisionInfo info){
+    Ball::didCollide(info);
+}
 
