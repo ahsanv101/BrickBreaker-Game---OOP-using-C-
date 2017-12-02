@@ -8,23 +8,16 @@
 class Pop_Up
 {
     public:
-        Pop_Up();
-        Pop_Up(SDL_Renderer* renderer);
-        void show();
-        void click(int x, int y, MouseEventType eventType, ScreenManager** parentPointer, Pop_Up** selfPointer);
-        void keyboardEvent(const Uint8* event, ScreenManager** parentPointer, Pop_Up** selfPointer);
-        ~Pop_Up();
+        Pop_Up(){renderer = NULL;}
+        Pop_Up(SDL_Renderer* renderer){this->renderer = renderer;}
+        virtual void show()=0;
+        virtual void click(int x, int y, MouseEventType eventType, ScreenManager** parentPointer, Pop_Up** selfPointer) = 0;
+        virtual void keyboardEvent(const Uint8* event, ScreenManager** parentPointer, Pop_Up** selfPointer) = 0;
+        ~Pop_Up(){}
 
-    private:
-        Button resume;
-        Button save;
-        Button restart;
-        Button quit;
-        LTexture gSpriteSheetTexture;
-        LTexture backSpriteSheetTexture;
-        LTexture buttonSpriteTexture;
+    protected:
         SDL_Renderer* renderer;
-        bool loadMedia();
+        virtual bool loadMedia()=0;
 };
 
 #endif // POP-UP_H_INCLUDED

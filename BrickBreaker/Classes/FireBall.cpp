@@ -4,6 +4,7 @@
 
 FireBall::FireBall(LTexture* image, float x, float y)
 {
+    type = FireBallType;
     spriteSheetTexture = image;
 
 

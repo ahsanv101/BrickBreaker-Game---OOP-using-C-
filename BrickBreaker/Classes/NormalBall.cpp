@@ -6,6 +6,7 @@
 
 NormalBall::NormalBall(LTexture* image, float x, float y)
 {
+    type = NormalBallType;
     spriteSheetTexture = image;
 
 

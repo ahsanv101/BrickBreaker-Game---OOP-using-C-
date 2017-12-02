@@ -1,10 +1,13 @@
 #include "Bat.h"
 #include "Board.h"
-Bat::Bat()
-{
-    //ctor
-}
 
+Bat* Bat::instance = NULL;
+Bat* Bat::GetInstance()
+{
+    if (!(instance))
+        instance = new Bat();
+    return instance;
+}
 Bat::~Bat()
 {
     spriteSheetTexture = NULL;
@@ -38,8 +41,7 @@ float Bat::GetReflection(float hitx) {
 }
 
 
-
-Bat::Bat(LTexture* image, float x, float y)
+void Bat::SetValue(LTexture* image, float x, float y)
 {
     spriteSheetTexture = image;
 
@@ -76,6 +78,9 @@ Bat::Bat(LTexture* image, float x, float y)
 
     this->x = x;
     this->y = y;
+    this->smallwidth= spriteClips3[0].w;
+    this->bigwidth= spriteClips2[0].w;
+    this->normalwidth= spriteClips[0].w;
 
     this->width = spriteClips[ 0 ].w;
     this->height = spriteClips[ 0 ].h;
@@ -127,13 +132,13 @@ void Bat::Move(int direction)
 
     if(direction==LEFT )
     {
-        speedx = -8;
+        speedx = -10;
         x=x+speedx;
     }
 
     if(direction==RIGHT)
     {
-        speedx = 8;
+        speedx = 10;
         x=x+speedx;
     }
 

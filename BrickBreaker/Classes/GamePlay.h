@@ -12,7 +12,7 @@
 #include "q.h"
 #include <SDL_mixer.h>
 #include "Pop-Up.h"
-
+#include "PowerUps.h"
 
 #include <typeinfo>
 
@@ -22,33 +22,36 @@ class GamePlay : public ScreenManager
 {
     public:
         GamePlay();
-        GamePlay(SDL_Renderer* gRenderer);
-        GamePlay(SDL_Renderer* gRenderer, Bat* bat, Ball* ball, Board* board, LTexture* backTexture, LTexture* batBallTexture);
+        GamePlay(SDL_Renderer* gRenderer, int levelNumber);
+        GamePlay(SDL_Renderer* gRenderer, Ball* ball, Board* board, LTexture* backTexture, LTexture* batBallTexture);
         void show(long int frame);
         void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer);
         void keyboardEvent(const Uint8* event, ScreenManager** selfPointer);
         ~GamePlay();
 
-        void CreateLevel();
         Board* getBoard() const;
         Ball* getBall() const;
-        Bat* getBat() const;
         SDL_Rect getBoardBounds();
-        void setBoard(Board* board);
+        void CreateLevel(int);
+        int getCurrentLevel();
 
     private:
+        int levelNumber;
         SDL_Renderer* renderer;
         bool loadMedia();
 
         LTexture* backgroundSprite;
         LTexture* batBallSpriteSheet;
+        LTexture* PowerSpriteSheet;
         bool shoot;
 
         Board* board;
-        Bat* bat;
+        PowerUps* power;
+       // Bat* bat;
         Ball* ball;
         Fire* fire;
         Fire* Missile;
+
         Queue q;
         int count = 0;
 
@@ -62,13 +65,18 @@ class GamePlay : public ScreenManager
 
         //collision detection functions
         bool detectCollisionBetween(Bat*, Ball*);
+        bool detectCollisionBetween(Bat*, PowerUps*);
         CollisionType detectCollisionBetween(const SDL_Rect& wall, Ball*);
         CollisionType detectCollisionWithSides(Ball*);
         bool isBallAlive(Ball*);
 
         Mix_Chunk *gScratch = NULL;
         Mix_Chunk *medium = NULL;
+        bool holdball;
         bool blast;
+        bool mball;
+        bool mismake;
+        bool firemake;
         bool MisActivate;
         bool FireActivate;
         bool ThroughActivate;

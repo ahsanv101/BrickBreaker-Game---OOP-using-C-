@@ -1,28 +1,31 @@
-#ifndef GAMEOVER_H_INCLUDED
-#define GAMEOVER_H_INCLUDED
+#ifndef Options_H_INCLUDED
+#define Options_H_INCLUDED
 
 #include "ScreenManager.h"
 #include "Button.h"
 #include "Statics.h"
 
-class GameOver: public Pop_Up
+class Options: public Pop_Up
 {
     public:
-        GameOver();
-        GameOver(SDL_Renderer* renderer);
+        Options();
+        Options(SDL_Renderer* renderer);
         void show();
         void click(int x, int y, MouseEventType eventType, ScreenManager** parentPointer, Pop_Up** selfPointer);
         void keyboardEvent(const Uint8* event, ScreenManager** parentPointer, Pop_Up** selfPointer);
-        ~GameOver();
+        ~Options();
 
     private:
+        Button resume;
+        Button save;
         Button restart;
         Button quit;
         LTexture gSpriteSheetTexture;
         LTexture backSpriteSheetTexture;
         LTexture buttonSpriteTexture;
+
     protected:
         bool loadMedia();
 };
 
-#endif // GAMEOVER_H_INCLUDED
+#endif

@@ -53,7 +53,7 @@ Character::Character(LTexture* image, float x, float y, char i)
         spriteClips.w = 40;
         spriteClips.h = 60;
     }
-    if (a==33)
+    if (a==58)
     {
         spriteClips.x = 640;
         spriteClips.y = 65;

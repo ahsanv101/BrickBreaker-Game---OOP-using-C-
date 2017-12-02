@@ -20,6 +20,11 @@ private:
     bool loadMedia();
     LTexture brickSpriteSheet;
     CollisionType detectCollisionWithBrick(Point objectPos, Point objectSize, Node* brickNode);
+    bool detectCollisionWithBrick(Point firePos, Node* brickNode);
+    Brick* removeBrickAt(Node*, BallType);
+    Brick* removeBrickAt(Node*, FireType);
+    Node* accessat(int, int);
+    void lowerbricktype(Node*);
 
 public:
     Board();
@@ -28,7 +33,7 @@ public:
     void Enqueue(Brick* brick, int column, int row);
     void Display(SDL_Renderer* gRenderer);
     CollisionInfo detectCollisionWithBricks(Point ballPos, BallType ballType, Point ballSize);
-    bool detectCollisionWithBricks(Point firePos, FireType fireType, Point fireSize);
+    bool detectCollisionWithBricks(Point firePos, FireType fireType);
     float x,y,width,height;
     Node* getHead();
 };

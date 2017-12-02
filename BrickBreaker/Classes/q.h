@@ -1,6 +1,6 @@
 #pragma once
-#include "node (2).h"
-#include "Object.h"
+#include"node (2).h"
+#include"Object.h"
 
 class Queue
 {

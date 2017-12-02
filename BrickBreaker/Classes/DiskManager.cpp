@@ -23,8 +23,7 @@ void DiskManager::SaveGame(const GamePlay& gameplay){
 
     //Saving Bat
     *editFile<<endl<<"Bat:";
-    Bat* bat = gameplay.getBat();
-    *editFile<<endl<<">"<<bat->width;
+    *editFile<<endl<<">"<<Bat::GetInstance()->width;
 
     *editFile<<endl<<"Game:";
     //Should save score, lives, levelCount and more...
@@ -56,7 +55,8 @@ GamePlay* DiskManager::LoadGame(SDL_Renderer* renderer){
 	}
 
     //Defining Objects of GamePlay
-    Bat* bat = new Bat(batBallTexture, (float)SCREEN_WIDTH/2, 630);
+    Bat* bat = Bat::GetInstance();
+    bat->SetValue(batBallTexture, (float)SCREEN_WIDTH/2, 630);
     Board* board = new Board(16, 5, 768, 600, renderer);
     float ballx, bally, ballDirX, ballDirY;
     int ballSpeed;
@@ -135,7 +135,7 @@ GamePlay* DiskManager::LoadGame(SDL_Renderer* renderer){
     }
 
     readfile.close();
-    GamePlay* gamePlay = new GamePlay(renderer, bat, ball, board, backgroundTexture, batBallTexture);
+    GamePlay* gamePlay = new GamePlay(renderer, ball, board, backgroundTexture, batBallTexture);
 
     return gamePlay;
 }

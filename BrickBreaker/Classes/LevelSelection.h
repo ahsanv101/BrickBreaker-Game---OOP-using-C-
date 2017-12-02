@@ -1,23 +1,23 @@
-#ifndef GAMEOVER_H_INCLUDED
-#define GAMEOVER_H_INCLUDED
+#ifndef LEVELSELECTION_H_INCLUDED
+#define LEVELSELECTION_H_INCLUDED
 
 #include "ScreenManager.h"
 #include "Button.h"
 #include "Statics.h"
 
-class GameOver: public Pop_Up
+class LevelSelection: public Pop_Up
 {
     public:
-        GameOver();
-        GameOver(SDL_Renderer* renderer);
+        LevelSelection();
+        LevelSelection(SDL_Renderer* renderer);
         void show();
         void click(int x, int y, MouseEventType eventType, ScreenManager** parentPointer, Pop_Up** selfPointer);
         void keyboardEvent(const Uint8* event, ScreenManager** parentPointer, Pop_Up** selfPointer);
-        ~GameOver();
+        ~LevelSelection();
 
     private:
-        Button restart;
-        Button quit;
+        Button l1,l2,l3,l4,l5,l6,l7,l8,l9,l10;
+        Button circle,diamond,wave,backButton;
         LTexture gSpriteSheetTexture;
         LTexture backSpriteSheetTexture;
         LTexture buttonSpriteTexture;
@@ -25,4 +25,4 @@ class GameOver: public Pop_Up
         bool loadMedia();
 };
 
-#endif // GAMEOVER_H_INCLUDED
+#endif // LEVELSELECTION_H_INCLUDED
