@@ -6,6 +6,7 @@ enum MouseEventType { ClickUp, MouseMotion, ClickDown, RightClickUp, RightClickD
 enum CollisionType { Horizontal, Vertical, None};
 enum BallType { NormalBallType, ThroughBallType, FireBallType};
 enum FireType { NormalFireType, MissileFireType};
+enum ShapeLevel {circle, diamond, wave};
 enum ANIMATION_FRAMES {FLYING_FRAMES = 1};
 enum ButtonColorType {Brown, Green, Red, Life};
 enum CollisionObjectType {CollisionObjectBallType, CollisionObjectBreakableBrickType, CollisionObjectUnbreakableBrickType, CollisionObjectWallType, CollisionObjectBatType};
