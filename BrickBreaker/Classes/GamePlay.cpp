@@ -161,16 +161,17 @@ void GamePlay::show(long int frame)
     if(ball->shouldMove){
         CollisionInfo info = board->detectCollisionWithBricks(Point(ball->x - ball->width/2, ball->y - ball->height/2), ball->type, Point(ball->width, ball->height));
         ball->didCollide(info);
-
-        if(info.directionType != NULL && info.objectType == CollisionObjectBreakableBrickType && info.brick && rand()%100<60){
+        if(info.directionType != None && info.objectType == CollisionObjectBreakableBrickType && info.brick){
                 //cout<<"checkingpoweruprenderer"<<endl;
+            if(board->isLevelComplete()){
+                popup= new LevelComplete(this->renderer);
+            }
+            if(rand()%100<60){
                 power = new PowerUps(PowerSpriteSheet, ball->x, ball->y);
                 q.Enqueue(power);
+            }
         }
     }
-
-
-
 //    for (int i;i<=3;i++)
 //    {
 //        ball = new NormalBall(&batBallSpriteSheet, bat->x, bat->y-23);
@@ -287,10 +288,6 @@ void GamePlay::show(long int frame)
     {
         //dspeedActivate = false;
         ball->BALL_SPEED = 15;
-
-
-
-
     }
     if (dspeedActivate)
     {
@@ -394,64 +391,48 @@ void GamePlay::show(long int frame)
     //Code for Ball-Bat Collision Detection
     if (detectCollisionBetween(Bat::GetInstance(), ball) && ball->shouldMove){
 //        Mix_PlayChannel( 1, medium, 0 );
-//            float ballcenterx = ball->x + ball->width / 2.0f;
-//            int hitx = ballcenterx - bat->x;
-//           // cout<<bat->x<<endl;
-//            cout<<hitx<<endl;
-//            if (hitx>0){
-//                ///ball->SetDirection(1,1);
+        float ballcenterx = ball->x + ball->width / 2.0f;
+        int hitx = ballcenterx - Bat::GetInstance()->x-12;
 
-                        float ballcenterx = ball->x + ball->width / 2.0f;
-                        int hitx = ballcenterx - Bat::GetInstance()->x-12;
+        //cout<<hitx<<endl;
+        //ball->SetDirection(-1,1);
 
-                        //cout<<hitx<<endl;
-                        //ball->SetDirection(-1,1);
-
-                        if (hitx>0 && hitx<15)
-                            {
-                                ball->SetDirection(0.5,-1);
-                            }
-                        else if (hitx>15 && hitx<30)
-                            {
-                                ball->SetDirection(1,-1);
-                            }
-                        else if (hitx>30 && hitx<45)
-                            {
-                                ball->SetDirection(1.5,-1);
-                            }
-                        else if (hitx>45)
-                            {
-                                ball->SetDirection(2,-1);
-                            }
-                        else if (hitx<0 && hitx>-15)
-                            {
-                                ball->SetDirection(-0.5,-1);
-                            }
-                        else if (hitx<-15 && hitx>-30)
-                            {
-                                ball->SetDirection(-1,-1);
-                            }
-                        else if (hitx<-30 && hitx>-45)
-                            {
-                                ball->SetDirection(-1.5,-1);
-                            }
-                        else if (hitx<-45)
-                            {
-                                ball->SetDirection(-2,-1);
-                            }
-                        else
-                            {
-                                ball->diry*=-1;
-                            }
-//            }
-//            else if (hitx<0){
-//                //ball->SetDirection(-1,1);
-//                ball->diry *= -1;
-//            }
-//            else if (hitx==0){
-//                //ball->SetDirection(0,1);
-//                ball->diry *= -1;
-//            }
+        if (hitx>0 && hitx<15)
+        {
+            ball->SetDirection(0.5,-1);
+        }
+        else if (hitx>15 && hitx<30)
+        {
+            ball->SetDirection(1,-1);
+        }
+        else if (hitx>30 && hitx<45)
+        {
+            ball->SetDirection(1.5,-1);
+        }
+        else if (hitx>45)
+        {
+            ball->SetDirection(2,-1);
+        }
+        else if (hitx<0 && hitx>-15)
+        {
+            ball->SetDirection(-0.5,-1);
+        }
+        else if (hitx<-15 && hitx>-30)
+        {
+            ball->SetDirection(-1,-1);
+        }
+        else if (hitx<-30 && hitx>-45)
+        {
+            ball->SetDirection(-1.5,-1);
+        }
+        else if (hitx<-45)
+        {
+            ball->SetDirection(-2,-1);
+        }
+        else
+        {
+            ball->diry*=-1;
+        }
 
     }
     if(popup){
@@ -595,9 +576,6 @@ void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
     }
     if(event[ SDL_SCANCODE_G]){
         popup= new GameOver(this->renderer);
-    }
-    if(event[ SDL_SCANCODE_L]){
-        popup= new LevelComplete(this->renderer);
     }
     if(popup){
         popup->keyboardEvent(event,selfPointer, &popup);

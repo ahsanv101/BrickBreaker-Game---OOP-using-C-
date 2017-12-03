@@ -10,6 +10,7 @@ enum ANIMATION_FRAMES {FLYING_FRAMES = 1};
 enum ButtonColorType {Brown, Green, Red, Life};
 enum CollisionObjectType {CollisionObjectBallType, CollisionObjectBreakableBrickType, CollisionObjectUnbreakableBrickType, CollisionObjectWallType, CollisionObjectBatType};
 enum MOTION {RIGHT, LEFT, UP, DOWN};
+enum MovingObjectType {ObjectFireType, ObjectMissileType, ObjectBallType, ObjectPowerType};
 struct CollisionInfo { CollisionObjectType objectType; CollisionType directionType; Brick* brick = NULL;};
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 650;

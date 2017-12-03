@@ -36,4 +36,5 @@ public:
     bool detectCollisionWithBricks(Point firePos, FireType fireType);
     float x,y,width,height;
     Node* getHead();
+    bool isLevelComplete();
 };
