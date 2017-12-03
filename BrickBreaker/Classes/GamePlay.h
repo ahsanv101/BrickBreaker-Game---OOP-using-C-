@@ -34,6 +34,7 @@ class GamePlay : public ScreenManager
         SDL_Rect getBoardBounds();
         void CreateLevel(int);
         int getCurrentLevel();
+        void CreateLevel(ShapeLevel);
 
     private:
         int levelNumber;

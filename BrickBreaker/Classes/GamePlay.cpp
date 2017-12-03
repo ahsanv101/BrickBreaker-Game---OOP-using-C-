@@ -15,6 +15,8 @@
 #include <stdlib.h>
 #include <fstream>
 #include <time.h>
+#include <cmath>
+
 #include "windows.h"
 #include "FireBall.h"
 #include "ThroughBall.h"
@@ -23,7 +25,7 @@
 #include <SDL_mixer.h>
 #include <SDL.h>
 #include <sstream>
-
+#include <conio.h>
 
 GamePlay::GamePlay(SDL_Renderer* renderer, int levelNumber)
 {
@@ -77,6 +79,7 @@ GamePlay::GamePlay(SDL_Renderer* renderer, int levelNumber)
     height = 600;
     this->levelNumber = levelNumber;
     CreateLevel(levelNumber);
+    //CreateLevel(circle);
 }
 GamePlay::GamePlay(SDL_Renderer* gRenderer, Ball* ball, Board* board, LTexture* backTexture, LTexture* batBallTexture){
     this->renderer = gRenderer;
@@ -665,3 +668,139 @@ SDL_Rect GamePlay::getBoardBounds(){
 int GamePlay::getCurrentLevel(){
     return levelNumber;
 }
+void GamePlay::CreateLevel(ShapeLevel shapelevel)
+{
+    board = new Board(x, y, width, height, renderer);
+    if(shapelevel==circle)
+    {
+        int circle_radius = 5; // or whatever you want
+
+for (int i = 0; i <= 2*circle_radius; i++)
+{
+    for (int j = 0; j <= 2*circle_radius; j++)
+    {
+        float distance_to_centre = sqrt((i - circle_radius)*(i - circle_radius) + (j - circle_radius)*(j - circle_radius));
+        if (distance_to_centre > circle_radius-0.5 && distance_to_centre < circle_radius+0.5)
+        {
+             int bricktype = rand()%2;
+            Brick* brick = new Brick;
+            brick->type=rand()%3;
+            brick->breaktype=bricktype;
+            brick->state = true;
+            board->Enqueue(brick, i, j);
+
+            Brick* adjbrick = new Brick;
+            adjbrick->type=rand()%3;
+            adjbrick->breaktype=rand()%2;
+            adjbrick->state=true;
+            board->Enqueue(adjbrick, j, i+1);
+        }
+        else
+        {
+             continue;
+        }
+    }
+    continue;
+}}
+    else if(shapelevel==diamond)
+    {int n, c, k, space = 1;
+    n=5;
+    space = n - 1;
+
+  for (k = 1; k<=n; k++)
+  {
+    space--;
+
+    for (c = 1; c<= 2*k-1; c++)
+      cout<<"";
+      for(int i=1; i<c; i++)
+      {
+           int bricktype = rand()%2;
+            Brick* brick = new Brick;
+            brick->type=rand()%3;
+            brick->breaktype=bricktype;
+            brick->state = true;
+            board->Enqueue(brick, space+i, k-1);
+      }
+  }
+
+  space = 1;
+
+  for (k = 1; k<= n - 1; k++)
+  {
+    space++;
+
+    for (c = 1 ; c<= 2*(n-k)-1; c++)
+        cout<<"";
+        for(int i=1; i<c; i++)
+      {
+           int bricktype = rand()%2;
+            Brick* brick = new Brick;
+            brick->type=rand()%3;
+            brick->breaktype=bricktype;
+            brick->state = true;
+            board->Enqueue(brick, space+i-2, k+n-1);
+      }
+
+  }
+}
+    else if(shapelevel==wave)
+    {
+    string s;
+    int n = 5;
+    int len = 15;
+
+    //Generate String
+    for (int i=0; i<len; i++)
+    {
+        s[i]='*';
+    }
+    // Create a 2d character array
+    char a[len][len] = { };
+
+    // for counting the rows of the ZigZag
+    int row = 0;
+    bool down;
+
+    for (int i=0; i<len; i++)
+    {
+        // put characters in the matrix
+        a[row][i] = s[i];
+
+        // You have reached the bottom
+        if (row==n-1)
+            down = false;
+        else if (row==0)
+            down = true;
+
+        (down)?(row++):(row--);
+    }
+
+    // Print the Zig-Zag String
+    for (int i=0; i<n; i++)
+    {
+        for (int j=0; j<len; j++)
+        {
+            if(a[i][j]=='*')
+            {
+                    Brick* brick = new Brick;
+                    brick->type=rand()%3;
+                    brick->breaktype=rand()%2;
+                    brick->state = true;
+                    board->Enqueue(brick, j, i);
+
+                    Brick* adjbrick = new Brick;
+                    adjbrick->type=rand()%3;
+                    adjbrick->breaktype=rand()%2;
+                    adjbrick->state=true;
+                    board->Enqueue(adjbrick, j, i+1);
+            }
+
+
+        }
+        //cout<<endl;
+    }
+    }
+}
+
+
