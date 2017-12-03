@@ -15,7 +15,6 @@ Queue::~Queue()
     {
         node* temp = head;
         head = head->next;
-        //cout<<"Deallocating value: "<<temp->data<<endl;
         delete temp;
     }
 }
@@ -33,7 +32,6 @@ void Queue::Enqueue(Object* unit)
     }
     else
     {
-
         tail->next = new node;
         tail->next->unit = unit;
         tail->next->next = NULL;
@@ -57,7 +55,9 @@ void Queue::Render(long int frame, SDL_Renderer* gRenderer)
     node* temp = head;
     while(temp!=NULL)
     {
-        temp->unit->Render(frame, gRenderer);
+        if(temp->unit){
+            temp->unit->Render(frame, gRenderer);
+        }
         temp=temp->next;
     }
 }
@@ -67,7 +67,23 @@ void Queue::Move()
     node* temp = head;
     while(temp!=NULL)
     {
-        temp->unit->Move();
+        if(temp->unit){
+            temp->unit->Move();
+        }
         temp=temp->next;
     }
+}
+node* Queue::getHead(){
+    return head;
+}
+node* Queue::getTail(){
+    return tail;
+}
+void Queue::moveHeadAhead(){
+    if(!head) return;
+    head = head->next;
+}
+void Queue::bringTailBack(){
+    if(!tail) return;
+    tail = tail->prev;
 }

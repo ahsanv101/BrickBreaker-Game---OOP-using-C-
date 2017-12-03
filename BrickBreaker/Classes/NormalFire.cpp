@@ -3,6 +3,7 @@
 
 NormalFire::NormalFire(LTexture* image, float x, float y)
 {
+    this->objectType = ObjectFireType;
     spriteSheetTexture = image;
 
 

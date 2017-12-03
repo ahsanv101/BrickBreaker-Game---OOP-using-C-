@@ -7,6 +7,7 @@
 #include <sstream>
 PowerUps::PowerUps(LTexture* image, int x, int y)
 {
+    this->objectType = ObjectPowerType;
     random  = rand() % 12 + 1;
     spriteSheetTexture = image;
 

@@ -26,6 +26,7 @@ void DiskManager::SaveGame(const GamePlay& gameplay){
     *editFile<<endl<<">"<<Bat::GetInstance()->width;
 
     *editFile<<endl<<"Game:";
+    *editFile<<endl<<">"<<gameplay.getLives();
     //Should save score, lives, levelCount and more...
     editFile->close();
 }
@@ -45,6 +46,8 @@ GamePlay* DiskManager::LoadGame(SDL_Renderer* renderer){
     //Loading textures for Bat & Ball
     LTexture* backgroundTexture = new LTexture;
     LTexture* batBallTexture = new LTexture;
+    LTexture* buttonSprite = new LTexture();
+    LTexture* fontSprite = new LTexture();
     if( !backgroundTexture->LoadFromFile( "Images/bgimage.png", renderer  ) )
 	{
 		printf( "Failed to load sprite sheet texture!\n" );
@@ -53,11 +56,19 @@ GamePlay* DiskManager::LoadGame(SDL_Renderer* renderer){
 	{
 		printf( "Failed to load sprite sheet texture!\n" );
 	}
+    if( !fontSprite->LoadFromFile( "Images/final2.png", renderer  ) )
+	{
+		printf( "Failed to load sprite sheet texture!\n" );
+	}
+	if(!buttonSprite->LoadFromFile("Images/button.jpg",renderer))
+    {
+        printf( "Failed to load sprite sheet texture!\n" );
+    }
 
     //Defining Objects of GamePlay
     Bat* bat = Bat::GetInstance();
     bat->SetValue(batBallTexture, (float)SCREEN_WIDTH/2, 630);
-    Board* board = new Board(16, 5, 768, 600, renderer);
+    Board* board = new Board(16, 65, 768, 600, renderer);
     float ballx, bally, ballDirX, ballDirY;
     int ballSpeed;
 
@@ -133,10 +144,15 @@ GamePlay* DiskManager::LoadGame(SDL_Renderer* renderer){
             k++;
         }
     }
+    if(name2.find("Bat") != string::npos){
+        if(readfile >> name2){
+            if(name2.find(">") == string::npos){
 
+            }
+        }
+    }
     readfile.close();
-    GamePlay* gamePlay = new GamePlay(renderer, ball, board, backgroundTexture, batBallTexture);
-
+    GamePlay* gamePlay = new GamePlay(renderer, ball, board, backgroundTexture, batBallTexture, buttonSprite, fontSprite);
     return gamePlay;
 }
 void DiskManager::saveBricks(const GamePlay& gamePlay, ofstream* editFile){
@@ -165,6 +181,6 @@ void DiskManager::saveBricks(const GamePlay& gamePlay, ofstream* editFile){
 }
 void DiskManager::saveBalls(const GamePlay& gamePlay, ofstream* editFile){
     *editFile<<"Balls:";
-    Ball* ball = gamePlay.getBall();
-    *editFile<<endl<<">"<<ball->x<<","<<ball->y<<","<<ball->dirx<<","<<ball->diry<<","<<1/*Type of ball for*/<<","<<ball->BALL_SPEED;
+//    Ball* ball = gamePlay.getBall();
+//    *editFile<<endl<<">"<<ball->x<<","<<ball->y<<","<<ball->dirx<<","<<ball->diry<<","<<1/*Type of ball for*/<<","<<ball->BALL_SPEED;
 }

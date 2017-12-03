@@ -14,4 +14,8 @@ public:
     void Clean();
     void Render(long int frame, SDL_Renderer* gRenderer);
     void Move();
+    node* getHead();
+    node* getTail();
+    void bringTailBack();
+    void moveHeadAhead();
 };

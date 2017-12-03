@@ -14,12 +14,8 @@ class Fire :public Object
 {
     public:
         bool alive;
-        float x;
-        float y;
         float speedx;
         float speedy;
-        int width;
-        int height;
 
 //
 //        enum ANIMATION_FRAMES {FLYING_FRAMES = 1};

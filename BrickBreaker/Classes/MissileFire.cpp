@@ -3,6 +3,7 @@
 
 MissileFire::MissileFire(LTexture* image, float x, float y)
 {
+    this->objectType = ObjectMissileType;
     spriteSheetTexture = image;
 
 

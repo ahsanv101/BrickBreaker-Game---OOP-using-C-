@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <iostream>
 #include"LTexture.h"
+#include"Statics.h"
 
 
 #ifndef OBJECT_H_
@@ -18,7 +19,7 @@ public:
     virtual ~Object();
 
     float x, y, width, height;
-
+    MovingObjectType objectType;
     //virtual void Update(float delta);
     virtual void Render(long int frame, SDL_Renderer* renderer);
     virtual void Move()=0;

@@ -22,7 +22,7 @@ class Menu : public ScreenManager
         Button newGame;
         Button loadGame;
         Button exitGame;
-        Button life;
+
         LTexture gSpriteSheetTexture;
         LTexture backSpriteSheetTexture;
         LTexture buttonSpriteTexture;

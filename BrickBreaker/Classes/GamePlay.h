@@ -22,8 +22,9 @@ class GamePlay : public ScreenManager
 {
     public:
         GamePlay();
-        GamePlay(SDL_Renderer* gRenderer, int levelNumber);
-        GamePlay(SDL_Renderer* gRenderer, Ball* ball, Board* board, LTexture* backTexture, LTexture* batBallTexture);
+        GamePlay(SDL_Renderer* gRenderer, int levelNumber, int lifeCount = 3);
+        GamePlay(SDL_Renderer* gRenderer, Ball* ball, Board* board, LTexture* backTexture, LTexture* batBallTexture, LTexture* buttonSprite, LTexture* fontSprite, int lifeCount= 3);
+        GamePlay(SDL_Renderer* renderer, ShapeLevel levelShape, int lifeCount = 3);
         void show(long int frame);
         void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer);
         void keyboardEvent(const Uint8* event, ScreenManager** selfPointer);
@@ -35,23 +36,24 @@ class GamePlay : public ScreenManager
         void CreateLevel(int);
         int getCurrentLevel();
         void CreateLevel(ShapeLevel);
+        int getLives() const;
 
     private:
+        int lives;
         int levelNumber;
-        SDL_Renderer* renderer;
+        bool isPaused;
         bool loadMedia();
+        void updateLifeButton();
+        void allBallOperations(node* ballNode);
 
         LTexture* backgroundSprite;
         LTexture* batBallSpriteSheet;
         LTexture* PowerSpriteSheet;
+        LTexture* buttonSprite;
+        LTexture* fontSprite;
         bool shoot;
 
         Board* board;
-        PowerUps* power;
-       // Bat* bat;
-        Ball* ball;
-        Fire* fire;
-        Fire* Missile;
 
         Queue q;
         int count = 0;
@@ -61,6 +63,7 @@ class GamePlay : public ScreenManager
         SDL_Rect side3;
 
         Pop_Up* popup;
+        Button life;
 
         float x, y, width, height;
 
@@ -86,6 +89,7 @@ class GamePlay : public ScreenManager
         bool dspeedActivate;
         bool BigbActivate;
         bool SmallbActivate;
+
 };
 
 #endif // GAMEPLAY_H

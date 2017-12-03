@@ -17,7 +17,6 @@ Menu::Menu(SDL_Renderer* renderer){
         newGame = Button("New Game", {(float)SCREEN_WIDTH/2, (float)(SCREEN_HEIGHT/2)}, &gSpriteSheetTexture, &buttonSpriteTexture, Brown);
         loadGame = Button("Load Game", {(float)SCREEN_WIDTH/2, (float)(SCREEN_HEIGHT/2)+70}, &gSpriteSheetTexture, &buttonSpriteTexture, Brown);
         exitGame = Button("Exit Game", {(float)SCREEN_WIDTH/2, (float)(SCREEN_HEIGHT/2)+140}, &gSpriteSheetTexture, &buttonSpriteTexture, Brown);
-        life = Button("Life: 03", {(float)SCREEN_WIDTH/2, (float)(30.0)}, &gSpriteSheetTexture, &buttonSpriteTexture, Life);
     }else{
         std::cout<<"Error loading media in Menu class";
     }
@@ -28,7 +27,6 @@ void Menu::show(long int frame){
     newGame.Draw(renderer);
     loadGame.Draw(renderer);
     exitGame.Draw(renderer);
-    life.Draw(renderer);
     if(popup){
         popup->show();
     }

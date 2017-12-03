@@ -202,6 +202,9 @@ bool Board::detectCollisionWithBrick(Point firePos, Node* brickNode){
     Point brickDestPoint(brickPos.x + BOARD_BRWIDTH, brickPos.y + BOARD_BRHEIGHT);
 
     bool isInXRange = (brickPos.x <= firePos.x && brickDestPoint.x >= firePos.x);
+    if(!isInXRange){
+        cout<<firePos.x<<","<<firePos.y<<endl;
+    }
     return isInXRange && (brickDestPoint.y > firePos.y);
 }
 Node* Board::getHead(){

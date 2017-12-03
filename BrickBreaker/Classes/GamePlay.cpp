@@ -27,8 +27,9 @@
 #include <sstream>
 #include <conio.h>
 
-GamePlay::GamePlay(SDL_Renderer* renderer, int levelNumber)
+GamePlay::GamePlay(SDL_Renderer* renderer, int levelNumber, int lifeCount)
 {
+    this->lives = lifeCount;
     this->renderer = renderer;
     loadMedia();
     blast = false;
@@ -42,6 +43,7 @@ GamePlay::GamePlay(SDL_Renderer* renderer, int levelNumber)
     dspeedActivate = false;
     BigbActivate = false;
     SmallbActivate = false;
+    firemake = false;
     this->side1.h=650;
     this->side1.w=5;
     this->side1.x=0;
@@ -58,13 +60,12 @@ GamePlay::GamePlay(SDL_Renderer* renderer, int levelNumber)
     this->side3.y=0;
 
     popup = NULL;
-    power = NULL;
     Bat* bat = Bat::GetInstance();
     bat->SetValue(batBallSpriteSheet, (float)SCREEN_WIDTH/2, 630);
-    ball = new NormalBall(batBallSpriteSheet, bat->x, bat->y-24);
-    fire  = NULL;
-
-
+    Ball* ball = new NormalBall(batBallSpriteSheet, bat->x, bat->y-24);
+    Ball* ball2 = new NormalBall(batBallSpriteSheet, bat->x, bat->y-24);
+    q.Enqueue(ball);
+    q.Enqueue(ball2);
     /*
     surface = IMG_Load("images/side.png");
     sidetexture = SDL_CreateTextureFromSurface(renderer, surface);
@@ -73,27 +74,85 @@ GamePlay::GamePlay(SDL_Renderer* renderer, int levelNumber)
 
     srand(time(0));
 
-    x = 16;
-    y = 0;
+    x = 24;
+    y = 65;
     width = 768;
     height = 600;
     this->levelNumber = levelNumber;
     CreateLevel(levelNumber);
+    updateLifeButton();
     //CreateLevel(circle);
 }
-GamePlay::GamePlay(SDL_Renderer* gRenderer, Ball* ball, Board* board, LTexture* backTexture, LTexture* batBallTexture){
+GamePlay::GamePlay(SDL_Renderer* renderer, ShapeLevel levelShape, int lifeCount)
+{
+    this->lives = lifeCount;
+    this->renderer = renderer;
+    loadMedia();
+    blast = false;
+    shoot = false;
+    mismake = false;
+    MisActivate = false;
+    FireActivate = false;
+    ThroughActivate = false;
+    NormalActivate = false;
+    IspeedActivate = false;
+    dspeedActivate = false;
+    BigbActivate = false;
+    SmallbActivate = false;
+    firemake = false;
+    this->side1.h=650;
+    this->side1.w=5;
+    this->side1.x=0;
+    this->side1.y=0;
+
+    this->side2.h=5;
+    this->side2.w=1000;
+    this->side2.x=0;
+    this->side2.y=0;
+
+    this->side3.h=650;
+    this->side3.w=5;
+    this->side3.x=1000-5;
+    this->side3.y=0;
+
+    popup = NULL;
+    Bat* bat = Bat::GetInstance();
+    bat->SetValue(batBallSpriteSheet, (float)SCREEN_WIDTH/2, 630);
+    Ball* ball = new NormalBall(batBallSpriteSheet, bat->x, bat->y-24);
+    q.Enqueue(ball);
+    /*
+    surface = IMG_Load("images/side.png");
+    sidetexture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    */
+
+    srand(time(0));
+
+    x = 24;
+    y = 65;
+    width = 768;
+    height = 600;
+    this->levelNumber = 0;
+    CreateLevel(levelShape);
+    updateLifeButton();
+    //CreateLevel(circle);
+}
+GamePlay::GamePlay(SDL_Renderer* gRenderer, Ball* ball, Board* board, LTexture* backTexture, LTexture* batBallTexture, LTexture* buttonSprite, LTexture* fontSprite, int lifeCount){
+    this->lives = lifeCount;
     this->renderer = gRenderer;
     this->backgroundSprite = backTexture;
     this->batBallSpriteSheet = batBallTexture;
-    this->ball = ball;
+    this->fontSprite = fontSprite;
+    this->buttonSprite = buttonSprite;
     this->board = board;
-    this->power = NULL;
-    this->fire = NULL;
+    q.Enqueue(ball);
+    updateLifeButton();
 
     blast = false;
     shoot = false;
     MisActivate = false;
     mismake = false;
+    firemake = false;
     FireActivate = false;
     ThroughActivate = false;
     NormalActivate = false;
@@ -125,6 +184,7 @@ GamePlay::GamePlay(SDL_Renderer* gRenderer, Ball* ball, Board* board, LTexture* 
     y = board->y;
     width = board->width;
     height = board->height;
+
 }
 
 
@@ -140,307 +200,133 @@ GamePlay::~GamePlay(){
 
 void GamePlay::show(long int frame)
 {
-
+    //Rendering Background
     backgroundSprite->Render(0,0,0,0.0,NULL, SDL_FLIP_NONE, renderer);
+    //Rendering Sides
     SDL_SetRenderDrawColor( renderer,100,100,100,255);
     SDL_RenderFillRect(renderer,&(this->side1));
     SDL_RenderFillRect(renderer,&(this->side2));
     SDL_RenderFillRect(renderer,&(this->side3));
+
+    //Rendering Bat
     if (BigbActivate)
     {
+        Bat::GetInstance()->width = 140;
         Bat::GetInstance()->Render2(renderer);
     }
     else if (SmallbActivate)
     {
+        Bat::GetInstance()->width = 75;
         Bat::GetInstance()->Render3(renderer);
     }
-    else
-    Bat::GetInstance()->Render(renderer);
-//    power->Render(frame,renderer);
-//    power->Move();
-    ball->Render(frame,renderer);
-    ball->Move();
-    board->Display(renderer);
-    if(ball->shouldMove){
-        CollisionInfo info = board->detectCollisionWithBricks(Point(ball->x - ball->width/2, ball->y - ball->height/2), ball->type, Point(ball->width, ball->height));
-        ball->didCollide(info);
-        if(info.directionType != None && info.objectType == CollisionObjectBreakableBrickType && info.brick){
-                //cout<<"checkingpoweruprenderer"<<endl;
-            if(board->isLevelComplete()){
-                popup= new LevelComplete(this->renderer);
-            }
-            if(rand()%100<60){
-                power = new PowerUps(PowerSpriteSheet, ball->x, ball->y);
-                q.Enqueue(power);
-            }
-        }
+    else{
+        Bat::GetInstance()->width = 115;
+        Bat::GetInstance()->Render(renderer);
     }
-//    for (int i;i<=3;i++)
-//    {
-//        ball = new NormalBall(&batBallSpriteSheet, bat->x, bat->y-23);
-//        q.Enqueue(ball);
-//
-//    }
 
+    //Rendering Bricks
+    board->Display(renderer);
 
-
+    //Rendering all Moving Objects including Ball
     q.Render(frame,renderer);
-    q.Move();
+
+    bool isPaused = popup != NULL;
+    if(!isPaused){
+        q.Move();
+    }
+
     if (mismake)
     {
-        fire =  new MissileFire(batBallSpriteSheet, Bat::GetInstance()->x, Bat::GetInstance()->y-23);
+        Fire* fire =  new MissileFire(batBallSpriteSheet, Bat::GetInstance()->x, Bat::GetInstance()->y-23);
         MisActivate = true;
-
     }
-
-
-            //fire->Move();
-
-
-   // fire->Move();
-
-
-
-
-
     if (frame%10 ==0 && count<10 && firemake )
     {
-        fire=new NormalFire(batBallSpriteSheet, Bat::GetInstance()->x, Bat::GetInstance()->y-23);
+        Fire* fire=new NormalFire(batBallSpriteSheet, Bat::GetInstance()->x, Bat::GetInstance()->y-23);
         q.Enqueue(fire);
         count++;
         blast = true;
     }
-    if (frame%60 ==0 && count<3 && mball)
-    {
-        delete ball;
-        FireActivate = false;
-        ThroughActivate = false;
-        NormalActivate = false;
-        IspeedActivate = false;
-        dspeedActivate = false;
-        Ball* balls=new NormalBall(batBallSpriteSheet, ball->x, ball->y);
-        //ball->shouldMove = true;
-        //ball->SetDirection(0,-1);
-       // ball->BALL_SPEED=1;
-        q.Enqueue(balls);
-        count++;
+    Fire* fire = NULL;
+    node* qHead = q.getHead();
+    bool liveBallFound = false;
+    while(qHead){
+        node* temp = qHead->next;
+        if(!qHead->unit){
+            qHead = temp;
+            continue;
+        }
+        switch(qHead->unit->objectType){
+        case ObjectBallType:
+            if(isBallAlive(dynamic_cast<Ball*>(qHead->unit))){
+                liveBallFound = true;
+            }
+            allBallOperations(qHead);
+            break;
+        case ObjectFireType:
+        case ObjectMissileType:
+            fire = dynamic_cast<Fire*>(qHead->unit);
+            if(board->detectCollisionWithBricks(Point((int)qHead->unit->x - qHead->unit->width/2, (int)qHead->unit->y - qHead->unit->height/2), (qHead->unit->objectType == ObjectFireType ? (NormalFireType) : (MissileFireType)))){
+                if(temp){
+                    qHead->next->prev = qHead->prev;
+                }else{
+                    q.bringTailBack();
+                }
+                if(qHead->prev){
+                    qHead->prev->next = temp;
+                }else{
+                    q.moveHeadAhead();
+                }
+                delete qHead;
+                qHead = NULL;
+            }
+            break;
+        case ObjectPowerType:
+            PowerUps* power = dynamic_cast<PowerUps*>(qHead->unit);
+            if(detectCollisionBetween(Bat::GetInstance(), power))
+            {
+                switch(power->random)
+                {
+                    case 1: ThroughActivate=true;break;
+                    case 2: FireActivate=true;break;
+                    case 4: IspeedActivate=true;break;
+                    case 5: dspeedActivate=true;break;
+                    case 7: BigbActivate=true;break;
+                    case 8: SmallbActivate=true;break;
+                    case 9: mismake=true;break;
+                    case 10: firemake=false;break;
+                }
+
+            }
+            break;
+        }
+        qHead = temp;
     }
-//    if (mismake)
-//    {
-//        fire = new MissileFire(&batBallSpriteSheet, bat->x, bat->y-23);
-//
-//    }
-//    if (MisActivate)
-//    {
-//
-//        fire->Render(frame,renderer);
-//        fire->Move();
-//
-//    }
 
-
-    if(blast )
-    {
-        //firemake = false;
-        q.Render(frame,renderer);
-        q.Move();
-
-
-
-
-        //fire = new NormalFire(&batBallSpriteSheet, bat->x, bat->y-23);
-        //fire->Render(this->frame,renderer);
-        //fire->Move();
-        //q.Render(this->frame,renderer);
-        //q.Move();
-
+    if(!liveBallFound){
+        lives--;
+        if(lives>=0){
+            Ball* ball = new NormalBall(batBallSpriteSheet, Bat::GetInstance()->x, Bat::GetInstance()->y-24);
+            q.Enqueue(ball);
+        }
+        updateLifeButton();
     }
-    if (blast == false)
-    {
-       q.Clean();
-    }
-
-
-
-    if (MisActivate)
+    IspeedActivate = false;
+    dspeedActivate = false;
+    shoot = false;
+     if (MisActivate)
     {
         mismake = false;
-        fire->Render(frame,renderer);
-        fire->Move();
     }
-    if(mball)
-    {
-
-        q.Render(frame,renderer);
-        //q.Move();
-
+    if(board->isLevelComplete()){
+        if(!popup){
+            popup = new LevelComplete(renderer);
+        }
     }
-//    if (MisActivate)
-//    {
-//        //blast = false;
-//        //delete fire;
-//
-//        Missile->Render(frame,renderer);
-//        Missile->Move();
-//
-//        //blast = true;
-//        //fire->Move();
-//
-//    }
-    if(IspeedActivate)
-    {
-        //dspeedActivate = false;
-        ball->BALL_SPEED = 15;
-    }
-    if (dspeedActivate)
-    {
-        //IspeedActivate = false;
-        ball->BALL_SPEED = 5;
-    }
-
-    if(!isBallAlive(ball)){
-        q.Clean();
-        delete ball;
-
-        //Sleep(1000);
-        loadMedia();
-        blast = true;
-        shoot = false;
-        mball = false;
-        MisActivate =false;
-        FireActivate = false;
-        ThroughActivate = false;
-        NormalActivate = false;
-        IspeedActivate = false;
-        dspeedActivate = false;
-        BigbActivate = false;
-        SmallbActivate = false;
-        mismake = false;
-        firemake = false;
-
-        ball = new NormalBall(batBallSpriteSheet, Bat::GetInstance()->x,Bat::GetInstance()->y-24);
-    }
-    if (NormalActivate)
-    {
-         int speedx = ball->dirx;
-         int speedy = ball->diry;
-         int x = ball->x;
-         int y = ball->y;
-         int sp = ball->BALL_SPEED;
-         delete ball;
-         ball = new NormalBall(batBallSpriteSheet, x,y);
-         ball->dirx = speedx;
-         ball->diry = speedy;
-         ball->BALL_SPEED = sp;
-    }
-    if (FireActivate)
-    {
-         //ThroughActivate = false;
-         int speedx = ball->dirx;
-         int sp = ball->BALL_SPEED;
-         int speedy = ball->diry;
-
-         int x = ball->x;
-         int y = ball->y;
-         delete ball;
-         ball = new FireBall(batBallSpriteSheet, x,y);
-         ball->dirx = speedx;
-         ball->diry = speedy;
-         ball->BALL_SPEED = sp;
-         ball->shouldMove = true;
-    }
-    if (ThroughActivate)
-    {
-         //FireActivate  = false;
-         int speedx = ball->dirx;
-         int speedy = ball->diry;
-         int sp = ball->BALL_SPEED;
-         int x = ball->x;
-         int y = ball->y;
-         bool shouldMove = ball->shouldMove;
-         delete ball;
-         ball = new ThroughBall(batBallSpriteSheet, x,y);
-         ball->dirx = speedx;
-         ball->diry = speedy;
-         ball->BALL_SPEED = sp;
-         ball->shouldMove = true;
-
-    }
-
-
-
-    //Code for Ball-Side Collision Detection
-    CollisionInfo wallCollision;
-    wallCollision.objectType = CollisionObjectWallType;
-    wallCollision.directionType = detectCollisionWithSides(ball);
-    ball->didCollide(wallCollision);
-    if(detectCollisionBetween(Bat::GetInstance(), power))
-    {
-        cout<<"powerupbatcollisionhappening"<<endl;
-        switch(power->random)
-        {
-            case 1: ThroughActivate=true;
-            case 2: FireActivate=true;
-            case 4: IspeedActivate=true;
-            case 5: dspeedActivate=true;
-            case 7: BigbActivate=true;
-            case 8: SmallbActivate=true;
-            case 9: mismake=true;
-            case 10: firemake=true;
-        }
-
-    }
-
-    //Code for Ball-Bat Collision Detection
-    if (detectCollisionBetween(Bat::GetInstance(), ball) && ball->shouldMove){
-//        Mix_PlayChannel( 1, medium, 0 );
-        float ballcenterx = ball->x + ball->width / 2.0f;
-        int hitx = ballcenterx - Bat::GetInstance()->x-12;
-
-        //cout<<hitx<<endl;
-        //ball->SetDirection(-1,1);
-
-        if (hitx>0 && hitx<15)
-        {
-            ball->SetDirection(0.5,-1);
-        }
-        else if (hitx>15 && hitx<30)
-        {
-            ball->SetDirection(1,-1);
-        }
-        else if (hitx>30 && hitx<45)
-        {
-            ball->SetDirection(1.5,-1);
-        }
-        else if (hitx>45)
-        {
-            ball->SetDirection(2,-1);
-        }
-        else if (hitx<0 && hitx>-15)
-        {
-            ball->SetDirection(-0.5,-1);
-        }
-        else if (hitx<-15 && hitx>-30)
-        {
-            ball->SetDirection(-1,-1);
-        }
-        else if (hitx<-30 && hitx>-45)
-        {
-            ball->SetDirection(-1.5,-1);
-        }
-        else if (hitx<-45)
-        {
-            ball->SetDirection(-2,-1);
-        }
-        else
-        {
-            ball->diry*=-1;
-        }
-
-    }
-    if(popup){
+    if(isPaused){
         popup->show();
     }
+    life.Draw(renderer);
 }
 
 
@@ -511,11 +397,9 @@ void GamePlay::CreateLevel(int LevelNumber) {
                 //cout<<brick->breaktype<<endl;
                 board->Enqueue(brick, i, j);
             }
-
             if(i==content.length()-1 && j<=BOARD_HEIGHT)
             {
                 j++;
-
             }
         }
         if(j > BOARD_HEIGHT){
@@ -529,29 +413,28 @@ void GamePlay::click(int x, int y, MouseEventType eventType, ScreenManager** sel
         return;
     }
     if(eventType == RightClickDown){
-            std::cout<<"Pop-Up Button Down"<<std::endl;
+        std::cout<<"Pop-Up Button Down"<<std::endl;
     }else if(eventType == RightClickUp){
-            std::cout<<"Pop-Up Button Up"<<std::endl;
-            popup = new Options(this->renderer);
+        std::cout<<"Pop-Up Button Up"<<std::endl;
+        popup = new Options(this->renderer);
     }
 }
 
 void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
     if(event[ SDL_SCANCODE_SPACE ]){
-        ball->shouldMove = true;
+        shoot = true;
     }
     if(event[ SDL_SCANCODE_RIGHT ]){
-        if(Bat::GetInstance()->x+Bat::GetInstance()->width/2>=this->side3.x || !ball->shouldMove){return;}
+        if(Bat::GetInstance()->x+Bat::GetInstance()->width/2>=this->side3.x){return;}
         Bat::GetInstance()->Move(RIGHT);
     }
     if(event[ SDL_SCANCODE_LEFT ]){
 
-        if (Bat::GetInstance()->x-Bat::GetInstance()->width/2<=this->side1.x+this->side1.w || !ball->shouldMove){return;}
+        if (Bat::GetInstance()->x-Bat::GetInstance()->width/2<=this->side1.x+this->side1.w){return;}
         Bat::GetInstance()->Move(LEFT);
     }
     if(event[ SDL_SCANCODE_DOWN ]){
         FireActivate = true;
-
     }
     if(event[ SDL_SCANCODE_UP ]){
         ThroughActivate = true;
@@ -577,12 +460,198 @@ void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
     if(event[ SDL_SCANCODE_N ]){
         SmallbActivate = true;
     }
-    if(event[ SDL_SCANCODE_G]){
-        popup= new GameOver(this->renderer);
-    }
     if(popup){
         popup->keyboardEvent(event,selfPointer, &popup);
         return;
+    }
+}
+
+void GamePlay::allBallOperations(node* ballNode){
+    Ball* ball = dynamic_cast<Ball*>(ballNode->unit);
+    bool shouldDeleteBall = !isBallAlive(ball);
+    if(ball->shouldMove){
+        CollisionInfo info = board->detectCollisionWithBricks(Point(ball->x - ball->width/2, ball->y - ball->height/2), ball->type, Point(ball->width, ball->height));
+        ball->didCollide(info);
+        if(info.directionType != None && info.objectType == CollisionObjectBreakableBrickType && info.brick){
+                //cout<<"checkingpoweruprenderer"<<endl;
+            if(board->isLevelComplete()){
+                if(!popup){
+                    popup = new LevelComplete(this->renderer);
+                }
+            }
+            if(rand()%100<60){
+                PowerUps* power = new PowerUps(PowerSpriteSheet, ball->x, ball->y);
+                q.Enqueue(power);
+            }
+        }
+    }
+    if(IspeedActivate)
+    {
+        //dspeedActivate = false;
+        ball->BALL_SPEED = 15;
+    }
+    if (dspeedActivate)
+    {
+        //IspeedActivate = false;
+        ball->BALL_SPEED = 5;
+    }
+
+    if(shouldDeleteBall){
+        if(ballNode->next){
+            ballNode->next->prev = ballNode->prev;
+        }else{
+            q.bringTailBack();
+        }
+        if(ballNode->prev){
+            ballNode->prev->next = ballNode->next;
+        }else{
+            q.moveHeadAhead();
+        }
+        ballNode->unit = NULL;
+        delete ballNode;
+        ballNode = NULL;
+        return;
+    }
+    if (NormalActivate)
+    {
+        int speedx = ball->dirx;
+        int speedy = ball->diry;
+        int x = ball->x;
+        int y = ball->y;
+        int sp = ball->BALL_SPEED;
+        bool shouldMove = ball->shouldMove;
+        if(ballNode->next){
+            ballNode->next->prev = ballNode->prev;
+        }else{
+            q.bringTailBack();
+        }
+        if(ballNode->prev){
+            ballNode->prev->next = ballNode->next;
+        }else{
+            q.moveHeadAhead();
+        }
+        ballNode->unit = NULL;
+        delete ballNode;
+        ball = new NormalBall(batBallSpriteSheet, x, y);
+        NormalActivate = false;
+        ball->dirx = speedx;
+        ball->diry = speedy;
+        ball->BALL_SPEED = sp;
+        ball->shouldMove = shouldMove;
+        q.Enqueue(ball);
+    }
+    if (FireActivate)
+    {
+        //ThroughActivate = false;
+        int speedx = ball->dirx;
+        int sp = ball->BALL_SPEED;
+        int speedy = ball->diry;
+        int x = ball->x;
+        int y = ball->y;
+        bool shouldMove = ball->shouldMove;
+        if(ballNode->next){
+            ballNode->next->prev = ballNode->prev;
+        }else{
+            q.bringTailBack();
+        }
+        if(ballNode->prev){
+            ballNode->prev->next = ballNode->next;
+        }else{
+            q.moveHeadAhead();
+        }
+        ballNode->unit = NULL;
+        delete ballNode;
+        ball = new FireBall(batBallSpriteSheet, x, y);
+        FireActivate = false;
+        ball->dirx = speedx;
+        ball->diry = speedy;
+        ball->BALL_SPEED = sp;
+        ball->shouldMove = shouldMove;
+        q.Enqueue(ball);
+    }
+    if (ThroughActivate)
+    {
+        //FireActivate  = false;
+        int speedx = ball->dirx;
+        int speedy = ball->diry;
+        int sp = ball->BALL_SPEED;
+        int x = ball->x;
+        int y = ball->y;
+        bool shouldMove = ball->shouldMove;
+        if(ballNode->next){
+            ballNode->next->prev = ballNode->prev;
+        }else{
+            q.bringTailBack();
+        }
+        if(ballNode->prev){
+            ballNode->prev->next = ballNode->next;
+        }else{
+            q.moveHeadAhead();
+        }
+        ballNode->unit = NULL;
+        delete ballNode;
+        ball = new ThroughBall(batBallSpriteSheet, x, y);
+        ThroughActivate = false;
+        ball->dirx = speedx;
+        ball->diry = speedy;
+        ball->BALL_SPEED = sp;
+        ball->shouldMove = shouldMove;
+        q.Enqueue(ball);
+    }
+
+
+
+    //Code for Ball-Side Collision Detection
+    CollisionInfo wallCollision;
+    wallCollision.objectType = CollisionObjectWallType;
+    wallCollision.directionType = detectCollisionWithSides(ball);
+    ball->didCollide(wallCollision);
+
+    //Code for Ball-Bat Collision Detection
+    if (detectCollisionBetween(Bat::GetInstance(), ball) && ball->shouldMove){
+//        Mix_PlayChannel( 1, medium, 0 );
+        float ballcenterx = ball->x + ball->width / 2.0f;
+        int hitx = ballcenterx - Bat::GetInstance()->x-12;
+        if (hitx>0 && hitx<15)
+        {
+            ball->SetDirection(0.5,-1);
+        }
+        else if (hitx>15 && hitx<30)
+        {
+            ball->SetDirection(1,-1);
+        }
+        else if (hitx>30 && hitx<45)
+        {
+            ball->SetDirection(1.5,-1);
+        }
+        else if (hitx>45)
+        {
+            ball->SetDirection(2,-1);
+        }
+        else if (hitx<0 && hitx>-15)
+        {
+            ball->SetDirection(-0.5,-1);
+        }
+        else if (hitx<-15 && hitx>-30)
+        {
+            ball->SetDirection(-1,-1);
+        }
+        else if (hitx<-30 && hitx>-45)
+        {
+            ball->SetDirection(-1.5,-1);
+        }
+        else if (hitx<-45)
+        {
+            ball->SetDirection(-2,-1);
+        }
+        else
+        {
+            ball->diry*=-1;
+        }
+
+    }
+    if(shoot){
+        ball->shouldMove = true;
     }
 }
 
@@ -590,6 +659,8 @@ bool GamePlay::loadMedia(){
     backgroundSprite = new LTexture();
     batBallSpriteSheet = new LTexture();
     PowerSpriteSheet = new LTexture();
+    buttonSprite = new LTexture();
+    fontSprite = new LTexture();
     if( !backgroundSprite->LoadFromFile( "Images/bgimage.png", renderer  ) )
 	{
 		printf( "Failed to load sprite sheet texture!\n" );
@@ -605,6 +676,16 @@ bool GamePlay::loadMedia(){
 		printf( "Failed to load sprite sheet texture!\n" );
         return false;
 	}
+	if( !fontSprite->LoadFromFile( "Images/final2.png", renderer  ) )
+	{
+		printf( "Failed to load sprite sheet texture!\n" );
+        return false;
+	}
+	if(!buttonSprite->LoadFromFile("Images/button.jpg",renderer))
+    {
+        printf( "Failed to load sprite sheet texture!\n" );
+		return false;
+    }
 	return true;
 }
 bool GamePlay::detectCollisionBetween(Bat* bat, Ball* ball){
@@ -626,7 +707,7 @@ bool GamePlay::detectCollisionBetween(Bat* bat, PowerUps* powerup){
     if(!powerup || !bat){
         return false;
     }
-    bool isInXRange = (powerup->x+(powerup->width) >= bat->x-(bat->width/2)) && (powerup->x-(ball->width/2)) <= (bat->x + (bat->width/2));
+    bool isInXRange = (powerup->x+(powerup->width) >= bat->x-(bat->width/2)) && (powerup->x-(bat->width/2)) <= (bat->x + (bat->width/2));
     float batOriginY = bat->y - bat->height/2;
     float ballMaxY = powerup->y + powerup->height/2;
     return isInXRange && ballMaxY-batOriginY <= 3 && ballMaxY-batOriginY > -1;
@@ -659,148 +740,156 @@ bool GamePlay::isBallAlive(Ball* ball){
 Board* GamePlay::getBoard() const {
     return board;
 }
-Ball* GamePlay::getBall() const {
-    return ball;
-}
 SDL_Rect GamePlay::getBoardBounds(){
     return {x,y,width,height};
 }
 int GamePlay::getCurrentLevel(){
     return levelNumber;
 }
-void GamePlay::CreateLevel(ShapeLevel shapelevel)
-{
+void GamePlay::CreateLevel(ShapeLevel shapelevel){
     board = new Board(x, y, width, height, renderer);
     if(shapelevel==circle)
     {
         int circle_radius = 5; // or whatever you want
 
-for (int i = 0; i <= 2*circle_radius; i++)
-{
-    for (int j = 0; j <= 2*circle_radius; j++)
-    {
-        float distance_to_centre = sqrt((i - circle_radius)*(i - circle_radius) + (j - circle_radius)*(j - circle_radius));
-        if (distance_to_centre > circle_radius-0.5 && distance_to_centre < circle_radius+0.5)
+        for (int i = 0; i <= 2*circle_radius; i++)
         {
-             int bricktype = rand()%2;
-            Brick* brick = new Brick;
-            brick->type=rand()%3;
-            brick->breaktype=bricktype;
-            brick->state = true;
-            board->Enqueue(brick, i, j);
-
-            Brick* adjbrick = new Brick;
-            adjbrick->type=rand()%3;
-            adjbrick->breaktype=rand()%2;
-            adjbrick->state=true;
-            board->Enqueue(adjbrick, j, i+1);
-        }
-        else
-        {
-             continue;
-        }
-    }
-    continue;
-}}
-    else if(shapelevel==diamond)
-    {int n, c, k, space = 1;
-    n=5;
-    space = n - 1;
-
-  for (k = 1; k<=n; k++)
-  {
-    space--;
-
-    for (c = 1; c<= 2*k-1; c++)
-      cout<<"";
-      for(int i=1; i<c; i++)
-      {
-           int bricktype = rand()%2;
-            Brick* brick = new Brick;
-            brick->type=rand()%3;
-            brick->breaktype=bricktype;
-            brick->state = true;
-            board->Enqueue(brick, space+i, k-1);
-      }
-  }
-
-  space = 1;
-
-  for (k = 1; k<= n - 1; k++)
-  {
-    space++;
-
-    for (c = 1 ; c<= 2*(n-k)-1; c++)
-        cout<<"";
-        for(int i=1; i<c; i++)
-      {
-           int bricktype = rand()%2;
-            Brick* brick = new Brick;
-            brick->type=rand()%3;
-            brick->breaktype=bricktype;
-            brick->state = true;
-            board->Enqueue(brick, space+i-2, k+n-1);
-      }
-
-  }
-}
-    else if(shapelevel==wave)
-    {
-    string s;
-    int n = 5;
-    int len = 15;
-
-    //Generate String
-    for (int i=0; i<len; i++)
-    {
-        s[i]='*';
-    }
-    // Create a 2d character array
-    char a[len][len] = { };
-
-    // for counting the rows of the ZigZag
-    int row = 0;
-    bool down;
-
-    for (int i=0; i<len; i++)
-    {
-        // put characters in the matrix
-        a[row][i] = s[i];
-
-        // You have reached the bottom
-        if (row==n-1)
-            down = false;
-        else if (row==0)
-            down = true;
-
-        (down)?(row++):(row--);
-    }
-
-    // Print the Zig-Zag String
-    for (int i=0; i<n; i++)
-    {
-        for (int j=0; j<len; j++)
-        {
-            if(a[i][j]=='*')
+            for (int j = 0; j <= 2*circle_radius; j++)
             {
+                float distance_to_centre = sqrt((i - circle_radius)*(i - circle_radius) + (j - circle_radius)*(j - circle_radius));
+                if (distance_to_centre > circle_radius-0.5 && distance_to_centre < circle_radius+0.5)
+                {
+                     int bricktype = rand()%2;
                     Brick* brick = new Brick;
                     brick->type=rand()%3;
-                    brick->breaktype=rand()%2;
+                    brick->breaktype=bricktype;
                     brick->state = true;
-                    board->Enqueue(brick, j, i);
+                    board->Enqueue(brick, i, j);
 
                     Brick* adjbrick = new Brick;
                     adjbrick->type=rand()%3;
                     adjbrick->breaktype=rand()%2;
                     adjbrick->state=true;
                     board->Enqueue(adjbrick, j, i+1);
+                }
+                else
+                {
+                     continue;
+                }
             }
-
-
+            continue;
         }
-        //cout<<endl;
     }
+    else if(shapelevel==diamond)
+    {
+        int n, c, k, space = 1;
+        n=5;
+        space = n - 1;
+        for (k = 1; k<=n; k++)
+        {
+            space--;
+
+            for (c = 1; c<= 2*k-1; c++)
+                cout<<"";
+            for(int i=1; i<c; i++)
+            {
+                int bricktype = rand()%2;
+                Brick* brick = new Brick;
+                brick->type=rand()%3;
+                brick->breaktype=bricktype;
+                brick->state = true;
+                board->Enqueue(brick, space+i, k-1);
+            }
+        }
+
+        space = 1;
+
+        for (k = 1; k<= n - 1; k++)
+        {
+            space++;
+
+            for (c = 1 ; c<= 2*(n-k)-1; c++)
+                cout<<"";
+            for(int i=1; i<c; i++)
+            {
+                int bricktype = rand()%2;
+                Brick* brick = new Brick;
+                brick->type=rand()%3;
+                brick->breaktype=bricktype;
+                brick->state = true;
+                board->Enqueue(brick, space+i-2, k+n-1);
+            }
+        }
+    }
+    else if(shapelevel==wave)
+    {
+        string s;
+        int n = 5;
+        int len = 15;
+
+        //Generate String
+        for (int i=0; i<len; i++)
+        {
+            s[i]='*';
+        }
+        // Create a 2d character array
+        char a[len][len] = { };
+
+        // for counting the rows of the ZigZag
+        int row = 0;
+        bool down;
+
+        for (int i=0; i<len; i++)
+        {
+            // put characters in the matrix
+            a[row][i] = s[i];
+
+            // You have reached the bottom
+            if (row==n-1)
+                down = false;
+            else if (row==0)
+                down = true;
+
+            (down)?(row++):(row--);
+        }
+
+        // Print the Zig-Zag String
+        for (int i=0; i<n; i++)
+        {
+            for (int j=0; j<len; j++)
+            {
+                if(a[i][j]=='*')
+                {
+                    Brick* brick = new Brick;
+                    brick->type=rand()%3;
+                    brick->breaktype=rand()%2;
+                    brick->state = true;
+                    board->Enqueue(brick, j, i);
+                    Brick* adjbrick = new Brick;
+                    adjbrick->type=rand()%3;
+                    adjbrick->breaktype=rand()%2;
+                    adjbrick->state=true;
+                    board->Enqueue(adjbrick, j, i+1);
+                }
+            }
+            //cout<<endl;
+        }
     }
 }
-
-
+int GamePlay::getLives() const{
+    return lives;
+}
+void GamePlay::updateLifeButton() {
+    int lifeCount = lives < 0 ? 0 : lives;
+    std::string content;
+    std::stringstream ss;
+    ss << lifeCount;
+    std::string str = ss.str();
+    std::string livesSS = "Life: " + str;
+    if(lives<0){
+        if(!popup){
+            popup = new GameOver(renderer);
+        }
+    }
+    life = Button(livesSS, {(float)SCREEN_WIDTH - (20*(livesSS.length()+1)) - 5, (float)(35.0)}, fontSprite, buttonSprite, Life);
+}
