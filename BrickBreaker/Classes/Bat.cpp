@@ -85,7 +85,7 @@ void Bat::SetValue(LTexture* image, float x, float y)
     this->width = spriteClips[ 0 ].w;
     this->height = spriteClips[ 0 ].h;
 
-    friction = 0.99f;
+    friction = 0.01f;
     speedx = 0;
     speedy = 0;
     alive  = true;
@@ -172,19 +172,9 @@ void Bat::Move()
 
 void Bat::Render(SDL_Renderer* gRenderer)
 {
-    spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips[0], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
+    spriteSheetTexture->Render( x - width/2, y - height/2, width == normalwidth ? &spriteClips[0] : (width == bigwidth ? &spriteClips2[0] : &spriteClips3[0]), 0.0, NULL, SDL_FLIP_NONE, gRenderer );
     SDL_SetRenderDrawColor( gRenderer,255,0,0, 255 );
 //    SDL_Rect rect = {x-width/2,y-height/2,width,height};
 //    SDL_RenderFillRect(gRenderer,&rect);
-}
-
-void Bat::Render2(SDL_Renderer* gRenderer)
-{
-    spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips2[0], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
-}
-
-void Bat::Render3(SDL_Renderer* gRenderer)
-{
-    spriteSheetTexture->Render( x - width/2, y - height/2, &spriteClips3[0], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
 }
 

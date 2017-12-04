@@ -7,6 +7,9 @@
 #include <iostream>
 #include "LTexture.h"
 #include "Bat.h"
+
+
+
 using namespace std;
 //enum MMOTION {RRIGHT, LLEFT, UUP, DDOWN};
 
@@ -36,9 +39,8 @@ class Ball : public Object
         void SetDirection(float dirx, float diry);
         virtual void Move();
         virtual void didCollide(CollisionInfo info) = 0;
+        virtual Ball* multiplyBall(LTexture* image);
 };
-
-
 
 
 #endif // BALL_H

@@ -15,11 +15,8 @@ class Bat : public Object
 {
     public:
         bool alive;
-        float x;
-        float y;
         float speedx;
         float speedy;
-        int width;
         int bigwidth;
         int smallwidth;
         int normalwidth;
@@ -46,8 +43,6 @@ class Bat : public Object
         //virtual void Move(int direction, SDL_Rect& side);
         virtual void Move();
         virtual void Render(SDL_Renderer* gRenderer);
-        void Render2(SDL_Renderer* gRenderer);
-        void Render3(SDL_Renderer* gRenderer);
         static Bat* GetInstance();
 
         void SetValue(LTexture* image, float x, float y);

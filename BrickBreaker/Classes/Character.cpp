@@ -8,7 +8,9 @@ Character::Character()
     character_value = 0;
     number_value=0;
 }
-
+Character::~Character(){
+    //dtor
+}
 Character::Character(LTexture* image, float x, float y, char i)
 {
     spriteSheetTexture = image;

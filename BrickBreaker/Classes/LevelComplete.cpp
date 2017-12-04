@@ -46,12 +46,22 @@ void LevelComplete::click(int x, int y, MouseEventType eventType, ScreenManager*
     }else if(eventType == ClickUp){
         GamePlay* gamePlay = dynamic_cast<GamePlay*>(*parentPointer);
         if(nextLevel.pointLiesInBounds(x,y) && nextLevel.getIsClicked()){
-
             std::cout<<"nextLevel Button Up"<<std::endl;
-            *parentPointer = new GamePlay(this->renderer, gamePlay->getCurrentLevel()+1);
+            if(gamePlay->getCurrentLevel()>0){
+                int nextLevel = gamePlay->getCurrentLevel() == 10 ? 1 : gamePlay->getCurrentLevel()+1;
+                *parentPointer = new GamePlay(this->renderer, nextLevel, gamePlay->getLives());
+            }else{
+                *parentPointer = new GamePlay(this->renderer, 1, gamePlay->getLives());
+            }
         }else if(restart.pointLiesInBounds(x,y) && restart.getIsClicked()){
             std::cout<<"Restart Button Up"<<std::endl;
-            *parentPointer = new GamePlay(this->renderer, gamePlay->getCurrentLevel());
+            if(gamePlay->getCurrentLevel()>0){
+                int nextLevel = gamePlay->getCurrentLevel() == 10 ? 1 : gamePlay->getCurrentLevel()+1;
+                *parentPointer = new GamePlay(this->renderer, nextLevel, gamePlay->getLives());
+            }else{
+                ShapeLevel shapeLevel = static_cast<ShapeLevel>(gamePlay->getCurrentLevel()*-1);
+                *parentPointer = new GamePlay(this->renderer, shapeLevel);
+            }
         }else if(quit.pointLiesInBounds(x,y) && quit.getIsClicked()){
             std::cout<<"Quit Button Up"<<std::endl;
             *parentPointer = new Menu(this->renderer);

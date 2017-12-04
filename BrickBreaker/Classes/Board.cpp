@@ -109,13 +109,13 @@ void Board::Display(SDL_Renderer* gRenderer)
 
 
         SDL_Rect srcrect;
-        srcrect.x = 9 + (brick.type * BOARD_BRWIDTH);
+        srcrect.x = 7 + (brick.type * BOARD_BRWIDTH);
         if(brick.breaktype==3)
         {
-            srcrect.y = 61 + ((0) * BOARD_BRHEIGHT);
+            srcrect.y = 59 + ((0) * BOARD_BRHEIGHT);
         }
         else{
-            srcrect.y = 61 + ((brick.breaktype) * BOARD_BRHEIGHT);
+            srcrect.y = 59 + ((brick.breaktype) * BOARD_BRHEIGHT);
         }
         srcrect.w = BOARD_BRWIDTH;
         srcrect.h = BOARD_BRHEIGHT;
@@ -203,7 +203,7 @@ bool Board::detectCollisionWithBrick(Point firePos, Node* brickNode){
 
     bool isInXRange = (brickPos.x <= firePos.x && brickDestPoint.x >= firePos.x);
     if(!isInXRange){
-        cout<<firePos.x<<","<<firePos.y<<endl;
+
     }
     return isInXRange && (brickDestPoint.y > firePos.y);
 }
@@ -216,7 +216,7 @@ Brick* Board::removeBrickAt(Node* node, BallType balltype)
     if(balltype==NormalBallType)
     {
 
-        if(node->brick->breaktype!=3)
+        if(node->brick->type!=3)
         {
             if(node->brick->breaktype==0)
             {
@@ -276,7 +276,7 @@ Brick* Board::removeBrickAt(Node* node, BallType balltype)
     }
     else if(balltype==ThroughBallType)
     {
-        shouldDelete = node->brick->breaktype!=3;
+        shouldDelete = node->brick->type!=3;
     }
     if(shouldDelete){
         node->brick->state = false;
@@ -290,8 +290,12 @@ Brick* Board::removeBrickAt(Node* node, BallType balltype)
         if(node == head){
             head = node->next;
         }
+        if(node == tail){
+            tail = node->prev;
+        }
         Brick* brick = node->brick;
         delete node;
+        cout<<"1"<<endl;
         return brick;
     }
     return NULL;
@@ -311,9 +315,9 @@ Node* Board::accessat(int i, int j)
 }
 void Board::lowerbricktype(Node* node)
 {
-    if(node->brick->breaktype != 3 && node->brick->breaktype!=0)
+    if(node->brick->type != 3 && node->brick->breaktype!=0)
     {
-        node->brick->breaktype=node->brick->breaktype-1;
+        node->brick->breaktype--;
     }
     else if(node->brick->breaktype==0)
     {
@@ -327,6 +331,9 @@ void Board::lowerbricktype(Node* node)
         }
         if(node == head){
             head = node->next;
+        }
+        if(node == tail){
+            tail = tail->prev;
         }
         Brick* brick = node->brick;
         delete node;

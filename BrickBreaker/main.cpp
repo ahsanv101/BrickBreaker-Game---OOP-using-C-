@@ -191,6 +191,7 @@ bool loadMedia(){
 
 void close()
 {
+    //splash.Free();
 
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
@@ -199,6 +200,7 @@ void close()
 	gRenderer = NULL;
 
 	//Quit SDL subsystems
+	Mix_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }

@@ -11,9 +11,9 @@
 class Word
 {
     public:
+        ~Word();
         Word();
         Word(LTexture* image, float x, float y, std::string a);
-        SDL_Renderer* gRenderer;
         int length;
         Character* chars;
         void Render(SDL_Renderer* gRenderer, bool debug);

@@ -40,9 +40,17 @@ void GameOver::click(int x, int y, MouseEventType eventType, ScreenManager** par
         if(restart.pointLiesInBounds(x,y) && restart.getIsClicked()){
             std::cout<<"Restart Button Up"<<std::endl;
             GamePlay* gamePlay = dynamic_cast<GamePlay*>(*parentPointer);
-            *parentPointer = new GamePlay(this->renderer, gamePlay->getCurrentLevel());
+            int currentLevel = gamePlay->getCurrentLevel();
+            delete *parentPointer;
+            if(currentLevel>0){
+                *parentPointer = new GamePlay(this->renderer, currentLevel);
+            }else{
+                ShapeLevel shapeLevel = static_cast<ShapeLevel>(currentLevel*-1);
+                *parentPointer = new GamePlay(this->renderer, shapeLevel);
+            }
         }else if(quit.pointLiesInBounds(x,y) && quit.getIsClicked()){
             std::cout<<"Quit Button Up"<<std::endl;
+            delete *parentPointer;
             *parentPointer = new Menu(this->renderer);
         }
         restart.setIsClicked(false);

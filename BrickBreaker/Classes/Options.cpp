@@ -3,6 +3,7 @@
 #include "GamePlay.h"
 #include "Menu.h"
 #include "Options.h"
+#include "DiskManager.h"
 #include <iostream>
 
 Options::Options(){
@@ -55,10 +56,17 @@ void Options::click(int x, int y, MouseEventType eventType, ScreenManager** pare
             *selfPointer = NULL;
         }else if(save.pointLiesInBounds(x,y) && save.getIsClicked()){
             std::cout<<"Save Button Up"<<std::endl;
+            GamePlay* gamePlay = dynamic_cast<GamePlay*>(*parentPointer);
+            DiskManager::SaveGame(*gamePlay);
         }else if(restart.pointLiesInBounds(x,y) && restart.getIsClicked()){
             std::cout<<"Restart Button Up"<<std::endl;
             GamePlay* gamePlay = dynamic_cast<GamePlay*>(*parentPointer);
-            *parentPointer = new GamePlay(this->renderer, gamePlay->getCurrentLevel());
+            if(gamePlay->getCurrentLevel()>0){
+                *parentPointer = new GamePlay(this->renderer, gamePlay->getCurrentLevel());
+            }else{
+                ShapeLevel shapeLevel = static_cast<ShapeLevel>(gamePlay->getCurrentLevel()*-1);
+                *parentPointer = new GamePlay(this->renderer, shapeLevel);
+            }
         }else if(quit.pointLiesInBounds(x,y) && quit.getIsClicked()){
             std::cout<<"Quit Button Up"<<std::endl;
             *parentPointer = new Menu(this->renderer);

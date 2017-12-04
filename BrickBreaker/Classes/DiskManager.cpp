@@ -1,5 +1,7 @@
 #include "DiskManager.h"
 #include "NormalBall.h"
+#include "ThroughBall.h"
+#include "FireBall.h"
 
 #include <iostream>
 #include <fstream>
@@ -23,12 +25,52 @@ void DiskManager::SaveGame(const GamePlay& gameplay){
 
     //Saving Bat
     *editFile<<endl<<"Bat:";
-    *editFile<<endl<<">"<<Bat::GetInstance()->width;
+    *editFile<<endl<<">"<<Bat::GetInstance()->width<<","<<Bat::GetInstance()->x<<","<<Bat::GetInstance()->y;
 
     *editFile<<endl<<"Game:";
-    *editFile<<endl<<">"<<gameplay.getLives();
+    *editFile<<endl<<">"<<gameplay.getLives()<<","<<gameplay.getCurrentLevel();
     //Should save score, lives, levelCount and more...
     editFile->close();
+}
+void DiskManager::saveBricks(const GamePlay& gamePlay, ofstream* editFile){
+    *editFile<<endl<<"Bricks:";
+    Board* board = gamePlay.getBoard();
+    Node* temp = board->getHead();
+    for(int j = 0; j <= BOARD_HEIGHT; j++){
+        *editFile<<endl<<">";
+        for(int i = 0; i<BOARD_WIDTH; i++){
+            if(temp->position == i && temp->y == j){
+                if(temp->brick->state){
+                    *editFile<<(temp->brick->type == 3 ? 3 : temp->brick->breaktype);
+                }else{
+                    *editFile<<"-";
+                }
+                temp = temp->next;
+            }else{
+                *editFile<<"-";
+            }
+            if(!temp){
+                *editFile<<endl;
+                return;
+            }
+        }
+    }
+}
+void DiskManager::saveBalls(const GamePlay& gamePlay, ofstream* editFile){
+    *editFile<<"Balls:";
+    node* qHead = gamePlay.getQHead();
+    while(qHead){
+        node* temp = qHead->next;
+        if(!qHead->unit){
+            qHead = temp;
+            continue;
+        }
+        if(qHead->unit->objectType == ObjectBallType){
+            Ball* ball = dynamic_cast<Ball*>(qHead->unit);
+            *editFile<<endl<<">"<<ball->x<<","<<ball->y<<","<<ball->dirx<<","<<ball->diry<<","<<ball->type<<","<<ball->BALL_SPEED;
+        }
+        qHead = temp;
+    }
 }
 
 GamePlay* DiskManager::LoadGame(SDL_Renderer* renderer){
@@ -48,6 +90,7 @@ GamePlay* DiskManager::LoadGame(SDL_Renderer* renderer){
     LTexture* batBallTexture = new LTexture;
     LTexture* buttonSprite = new LTexture();
     LTexture* fontSprite = new LTexture();
+    LTexture* powerSprite = new LTexture();
     if( !backgroundTexture->LoadFromFile( "Images/bgimage.png", renderer  ) )
 	{
 		printf( "Failed to load sprite sheet texture!\n" );
@@ -64,16 +107,25 @@ GamePlay* DiskManager::LoadGame(SDL_Renderer* renderer){
     {
         printf( "Failed to load sprite sheet texture!\n" );
     }
+    if(!powerSprite->LoadFromFile( "Images/powerups.png", renderer  ) )
+	{
+		printf( "Failed to load sprite sheet texture!\n" );
+	}
 
     //Defining Objects of GamePlay
     Bat* bat = Bat::GetInstance();
-    bat->SetValue(batBallTexture, (float)SCREEN_WIDTH/2, 630);
-    Board* board = new Board(16, 65, 768, 600, renderer);
-    float ballx, bally, ballDirX, ballDirY;
-    int ballSpeed;
+    Board* board = new Board(24, 65, 768, 600, renderer);
+    Queue* q = new Queue();
 
+    float ballx, bally, ballDirX, ballDirY, batX, batY;
+    int ballSpeed, batWidth, levelNumber, lifeCount;
+    BallType ballType = NormalBallType;
+
+
+    //Reading ball info and loading them in the queue
     if(name2.find("Ball") != string::npos){
         while(readfile >> name2){
+            cout<<name2<<endl;
             if(name2.find(">") == string::npos){
                 break;
             }
@@ -94,7 +146,7 @@ GamePlay* DiskManager::LoadGame(SDL_Renderer* renderer){
                     ballDirY = atof(name2.substr(i, commaIndex-i).c_str());
                     break;
                 case 4:
-                    //ball->diry = atof(name2.substr(i, commaIndex-i));
+                    ballType = static_cast<BallType>(atoi(name2.substr(i, commaIndex-i).c_str()));
                     break;
                 case 5:
                     ballSpeed = atoi(name2.substr(i, commaIndex-i).c_str());
@@ -106,13 +158,24 @@ GamePlay* DiskManager::LoadGame(SDL_Renderer* renderer){
                 i = commaIndex;
                 j++;
             }
+            Ball* ball = NULL;
+            if(ballType == NormalBallType){
+                ball = new NormalBall(batBallTexture, ballx, bally);
+            }else if(ballType == ThroughBallType){
+                ball = new ThroughBall(batBallTexture, ballx, bally);
+            }else{
+                ball = new FireBall(batBallTexture, ballx, bally);
+            }
+            ball->dirx = ballDirX;
+            ball->diry = ballDirY;
+            ball->type = ballType;
+            ball->SetDirection(ballDirX, ballDirY);
+            ball->BALL_SPEED = ballSpeed;
+            q->Enqueue(ball);
         }
     }
 
-    Ball* ball = new NormalBall(batBallTexture, ballx, bally);
-    ball->SetDirection(ballDirX, ballDirY);
-    ball->BALL_SPEED = ballSpeed;
-
+    //Reading bricks info and loading them in the board.
     if(name2.find("Brick") != string::npos){
         int k = 0;
         while(readfile >> name2 && k <= BOARD_HEIGHT){
@@ -135,7 +198,7 @@ GamePlay* DiskManager::LoadGame(SDL_Renderer* renderer){
                     brick->breaktype = 0;
                     brick->type=3;
                 }else
-                if(name2[l]=='-')
+                if(name2[l]!='0' && bricktype == 0)
                 {
                     continue;
                 }
@@ -144,43 +207,72 @@ GamePlay* DiskManager::LoadGame(SDL_Renderer* renderer){
             k++;
         }
     }
-    if(name2.find("Bat") != string::npos){
-        if(readfile >> name2){
-            if(name2.find(">") == string::npos){
 
-            }
+    //Running cursor to find bat details
+    do{
+        if(name2.find("Bat") != string::npos){
+            break;
         }
-    }
-    readfile.close();
-    GamePlay* gamePlay = new GamePlay(renderer, ball, board, backgroundTexture, batBallTexture, buttonSprite, fontSprite);
-    return gamePlay;
-}
-void DiskManager::saveBricks(const GamePlay& gamePlay, ofstream* editFile){
-    *editFile<<endl<<"Bricks:";
-    Board* board = gamePlay.getBoard();
-    Node* temp = board->getHead();
-    for(int j = 0; j < BOARD_HEIGHT; j++){
-        *editFile<<endl<<">";
-        for(int i = 0; i<BOARD_WIDTH && temp->y == j; i++){
-            if(temp->position == i){
-                if(temp->brick->state){
-                    *editFile<<(temp->brick->type == 3 ? 3 : temp->brick->breaktype);
-                }else{
-                    *editFile<<"-";
+    }while(readfile >> name2);
+    //reading bat details and making a new bat instance
+    if(name2.length() > 0){
+        if(readfile >> name2){
+            if(name2.find(">") != string::npos){
+                int j = 0;
+                for(int i = 1; i < name2.length(); i++){
+                    string::size_type commaIndex = name2.find(",", i);
+                    switch(j){
+                    case 0:
+                        batWidth = atoi(name2.substr(i, commaIndex-i).c_str());
+                        break;
+                    case 1:
+                        batX = atof(name2.substr(i, commaIndex-i).c_str());
+                        break;
+                    case 2:
+                        batY = atof(name2.substr(i, commaIndex-i).c_str());
+                        break;
+                    }
+                    if(commaIndex == string::npos){
+                        break;
+                    }
+                    i = commaIndex;
+                    j++;
                 }
-                temp = temp->next;
-            }else{
-                *editFile<<"-";
-            }
-            if(!temp){
-                *editFile<<endl;
-                return;
+                bat->SetValue(batBallTexture, batX, batY);
+                bat->width = batWidth;
             }
         }
     }
-}
-void DiskManager::saveBalls(const GamePlay& gamePlay, ofstream* editFile){
-    *editFile<<"Balls:";
-//    Ball* ball = gamePlay.getBall();
-//    *editFile<<endl<<">"<<ball->x<<","<<ball->y<<","<<ball->dirx<<","<<ball->diry<<","<<1/*Type of ball for*/<<","<<ball->BALL_SPEED;
+
+    //Reading GameInstance Details
+    if(readfile >> name2){
+        if(name2.find("Game") != string::npos){
+            if(readfile >> name2){
+                if(name2.find(">") != string::npos){
+                    int j = 0;
+                    for(int i = 1; i < name2.length(); i++){
+                        string::size_type commaIndex = name2.find(",", i);
+                        switch(j){
+                        case 0:
+                            lifeCount = atoi(name2.substr(i, commaIndex-i).c_str());
+                            break;
+                        case 1:
+                            levelNumber = atoi(name2.substr(i, commaIndex-i).c_str());
+                            break;
+                        }
+                        if(commaIndex == string::npos){
+                            break;
+                        }
+                        i = commaIndex;
+                        j++;
+                    }
+                }
+            }
+        }
+    }
+
+    readfile.close();
+    GamePlay* gamePlay = new GamePlay(renderer, q, board, backgroundTexture, batBallTexture, buttonSprite, fontSprite, powerSprite, levelNumber, lifeCount);
+
+    return gamePlay;
 }

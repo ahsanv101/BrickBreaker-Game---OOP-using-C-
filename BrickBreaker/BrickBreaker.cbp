@@ -37,7 +37,7 @@
 			<Add directory="MINGW_Lib/include/SDL2" />
 		</Compiler>
 		<Linker>
-			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image" />
+			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer" />
 			<Add directory="MINGW_Lib/lib" />
 		</Linker>
 		<Unit filename="Classes/Ball.cpp" />
@@ -47,8 +47,6 @@
 		<Unit filename="Classes/Board.cpp" />
 		<Unit filename="Classes/Board.h" />
 		<Unit filename="Classes/Brick.h" />
-		<Unit filename="Classes/Bricks.cpp" />
-		<Unit filename="Classes/Bricks.h" />
 		<Unit filename="Classes/Button.cpp" />
 		<Unit filename="Classes/Button.h" />
 		<Unit filename="Classes/Character.cpp" />
@@ -94,7 +92,6 @@
 		<Unit filename="Classes/ThroughBall.h" />
 		<Unit filename="Classes/Word.cpp" />
 		<Unit filename="Classes/Word.h" />
-		<Unit filename="Classes/bricks.txt" />
 		<Unit filename="Classes/node (2).h" />
 		<Unit filename="Classes/q.cpp" />
 		<Unit filename="Classes/q.h" />

@@ -19,6 +19,7 @@ private:
     SDL_Rect spriteClips;
     LTexture* spriteSheetTexture;
 public:
+    ~Character();
     Character();
     Character(LTexture* image, float x, float y, char i);
     virtual void Render(SDL_Renderer* gRenderer, bool debug);

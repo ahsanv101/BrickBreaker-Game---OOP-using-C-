@@ -21,9 +21,8 @@
 class GamePlay : public ScreenManager
 {
     public:
-        GamePlay();
         GamePlay(SDL_Renderer* gRenderer, int levelNumber, int lifeCount = 3);
-        GamePlay(SDL_Renderer* gRenderer, Ball* ball, Board* board, LTexture* backTexture, LTexture* batBallTexture, LTexture* buttonSprite, LTexture* fontSprite, int lifeCount= 3);
+        GamePlay(SDL_Renderer* gRenderer, Queue* q, Board* board, LTexture* backTexture, LTexture* batBallTexture, LTexture* buttonSprite, LTexture* fontSprite, LTexture* PowerSpriteSheet, int levelNumber, int lifeCount = 3);
         GamePlay(SDL_Renderer* renderer, ShapeLevel levelShape, int lifeCount = 3);
         void show(long int frame);
         void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer);
@@ -34,15 +33,20 @@ class GamePlay : public ScreenManager
         Ball* getBall() const;
         SDL_Rect getBoardBounds();
         void CreateLevel(int);
-        int getCurrentLevel();
+        int getCurrentLevel() const;
         void CreateLevel(ShapeLevel);
         int getLives() const;
+        node* getQHead() const;
+
 
     private:
+        void init();
+
         int lives;
         int levelNumber;
         bool isPaused;
         bool loadMedia();
+        bool loadSounds();
         void updateLifeButton();
         void allBallOperations(node* ballNode);
 
@@ -55,7 +59,7 @@ class GamePlay : public ScreenManager
 
         Board* board;
 
-        Queue q;
+        Queue* q;
         int count = 0;
 
         SDL_Rect side1;
@@ -74,11 +78,11 @@ class GamePlay : public ScreenManager
         CollisionType detectCollisionWithSides(Ball*);
         bool isBallAlive(Ball*);
 
-        Mix_Chunk *medium = NULL;
-        Mix_Chunk *powers = NULL;
-        Mix_Chunk *smash = NULL;
-        Mix_Chunk *missi = NULL;
-        Mix_Chunk *fir = NULL;
+        Mix_Chunk* medium;
+        Mix_Chunk* powers;
+        Mix_Chunk* smash;
+        Mix_Chunk* missi;
+        Mix_Chunk* fir;
         bool holdball;
         bool blast;
         bool mball;
@@ -92,7 +96,7 @@ class GamePlay : public ScreenManager
         bool dspeedActivate;
         bool BigbActivate;
         bool SmallbActivate;
-
+        bool isObjectAlive(Object* ball);
 };
 
 #endif // GAMEPLAY_H

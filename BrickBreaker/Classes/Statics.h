@@ -16,7 +16,7 @@ struct CollisionInfo { CollisionObjectType objectType; CollisionType directionTy
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 650;
 const int BOARD_WIDTH = 15;
-const int BOARD_HEIGHT = 7;
+const int BOARD_HEIGHT = 8;
 const int BOARD_BRWIDTH = 63;
 const int BOARD_BRHEIGHT = 31;
 const Point BallSize = Point();

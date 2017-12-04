@@ -81,7 +81,9 @@ void Menu::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
 
 }
 Menu::~Menu(){
-
+    gSpriteSheetTexture.Free();
+    backSpriteSheetTexture.Free();
+    buttonSpriteTexture.Free();
 }
 
 bool Menu::loadMedia()

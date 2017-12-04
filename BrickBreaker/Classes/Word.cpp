@@ -17,8 +17,6 @@ Word::Word(LTexture* image, float x, float y, std::string str)
     for(int i = 0; i<length; i++){
         chars[i] = Character(spriteSheetTexture, (float)(x-(length*20)+(i*40)), (float)(y)-30, this->str[i]);
     }
-
-
 }
 Word::Word(){
     chars = NULL;
@@ -26,8 +24,14 @@ Word::Word(){
     x = 0.0f;
     y=0.0f;
     spriteSheetTexture = NULL;
-    gRenderer = NULL;
     str = "";
+}
+Word::~Word(){
+    if(chars){
+        delete chars;
+    }
+    chars = NULL;
+    spriteSheetTexture = NULL;
 }
 void Word::Render(SDL_Renderer* gRenderer, bool debug)
 {

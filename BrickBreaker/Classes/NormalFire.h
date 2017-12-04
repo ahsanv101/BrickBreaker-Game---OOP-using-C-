@@ -14,12 +14,8 @@ class NormalFire :public Fire
 {
     public:
         bool alive;
-        float x;
-        float y;
         float speedx;
         float speedy;
-        int width;
-        int height;
         float friction; //lower speed means more friction
 
         enum ANIMATION_FRAMES {FLYING_FRAMES = 2};
