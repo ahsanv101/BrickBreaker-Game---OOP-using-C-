@@ -52,6 +52,7 @@ void GamePlay::init(){
     IspeedActivate = false;
     dspeedActivate = false;
     firemake = false;
+    mball = false;
 
     this->side1.h=650;
     this->side1.w=5;
@@ -216,9 +217,7 @@ void GamePlay::show(long int frame)
     Fire* fire = NULL;
     node* qHead = q->getHead();
     bool liveBallFound = false;
-    int qLength = 0;
     while(qHead){
-        qLength++;
         node* temp = qHead->next;
         if(!qHead->unit){
             qHead = temp;
@@ -312,7 +311,6 @@ void GamePlay::show(long int frame)
         }
         qHead = temp;
     }
-    cout<<qLength<<endl;
     if(!liveBallFound){
         lives--;
         if(lives>=0){
@@ -480,7 +478,7 @@ void GamePlay::allBallOperations(node* ballNode){
             Mix_PlayChannel( -1, smash, 0 );
         }
         if(info.directionType != None && info.objectType == CollisionObjectBreakableBrickType && info.brick){
-            if(rand()%100<100){
+            if(rand()%100<5){
 
                 PowerUps* power = new PowerUps(PowerSpriteSheet, ball->x, ball->y);
                 q->Enqueue(power);

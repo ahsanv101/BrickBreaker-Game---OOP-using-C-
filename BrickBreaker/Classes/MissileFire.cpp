@@ -21,9 +21,6 @@ MissileFire::MissileFire(LTexture* image, float x, float y)
     this->width = spriteClips[ 0 ].w;
     this->height = spriteClips[ 0 ].h;
 
-    friction = 0.50f;
-    speedx = 0;
-    speedy = 0;
     alive  = true;
 }
 

@@ -1151,14 +1151,14 @@
 
 1511165039 w:\habib university\sophomore\3rd semester\oop cs-224\final project\brickbreaker\classes\brick.h
 
-1512357261 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\ball.cpp
+1512362437 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\ball.cpp
 	"Ball.h"
 	"NormalBall.h"
 	"ThroughBall.h"
 	"FireBall.h"
 	<math.h>
 
-1512357281 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\ball.h
+1512362696 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\ball.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -1227,7 +1227,7 @@
 
 1512232555 
 
-1512293366 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\object.h
+1512362441 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\object.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -1604,7 +1604,7 @@
 
 1511165039 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\brick.h
 
-1512339615 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\bat.h
+1512362441 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\bat.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -1614,11 +1614,11 @@
 	"Board.h"
 	"Statics.h"
 
-1512339605 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\bat.cpp
+1512362437 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\bat.cpp
 	"Bat.h"
 	"Board.h"
 
-1512353525 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\board.cpp
+1512362437 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\board.cpp
 	"Board.h"
 	"Statics.h"
 	"Brick.h"
@@ -1629,10 +1629,10 @@
 
 1511160986 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\bricks.cpp
 
-1512340468 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\fire.cpp
+1512362437 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\fire.cpp
 	"Fire.h"
 
-1512323943 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\fire.h
+1512362441 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\fire.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -1640,7 +1640,7 @@
 	<iostream>
 	"LTexture.h"
 
-1512361945 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.cpp
+1512362998 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.cpp
 	"GamePlay.h"
 	"Bat.h"
 	"NormalBall.h"
@@ -1668,7 +1668,7 @@
 	<sstream>
 	<conio.h>
 
-1512358492 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.h
+1512362675 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameplay.h
 	"Bat.h"
 	"Ball.h"
 	"Board.h"
@@ -1684,7 +1684,7 @@
 	"PowerUps.h"
 	<typeinfo>
 
-1512133379 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalball.h
+1512362441 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalball.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -1704,11 +1704,11 @@
 	"Ball.h"
 	<math.h>
 
-1512324235 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalfire.cpp
+1512363024 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalfire.cpp
 	"NormalFire.h"
 	"Fire.h"
 
-1512340606 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalfire.h
+1512362610 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\normalfire.h
 	"Fire.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -1737,7 +1737,7 @@
 	"LTexture.h"
 	"Statics.h"
 
-1512361348 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\main.cpp
+1512362437 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\main.cpp
 	<SDL.h>
 	<SDL_mixer.h>
 	<SDL_image.h>
@@ -2362,11 +2362,11 @@
 	"Character.h"
 	"Word.h"
 
-1512351881 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\statics.h
+1512362437 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\statics.h
 	"Point.h"
 	"Brick.h"
 
-1512362063 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\menu.cpp
+1512362437 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\menu.cpp
 	"Menu.h"
 	"Button.h"
 	"GamePlay.h"
@@ -2392,7 +2392,7 @@
 	"Word.h"
 	"Statics.h"
 
-1512361485 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\character.h
+1512362437 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\character.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -2401,7 +2401,7 @@
 	"Point.h"
 	<string>
 
-1512361144 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\word.h
+1512362437 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\word.h
 	<string>
 	"Character.h"
 	<SDL.h>
@@ -2416,11 +2416,11 @@
 	<SDL.h>
 	<iostream>
 
-1512361608 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\character.cpp
+1512362437 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\character.cpp
 	"Character.h"
 	<iostream>
 
-1512361617 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\word.cpp
+1512362437 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\word.cpp
 	<string>
 	<iostream>
 	"LTexture.h"
@@ -2559,11 +2559,11 @@
 	"Button.h"
 	"Statics.h"
 
-1512324243 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\missilefire.cpp
+1512363018 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\missilefire.cpp
 	"MissileFire.h"
 	"Fire.h"
 
-1512340644 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\missilefire.h
+1512362616 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\missilefire.h
 	"Fire.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -2571,7 +2571,7 @@
 	<iostream>
 	"LTexture.h"
 
-1512359367 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\diskmanager.cpp
+1512362437 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\diskmanager.cpp
 	"DiskManager.h"
 	"NormalBall.h"
 	"ThroughBall.h"
@@ -2605,7 +2605,7 @@
 	"Button.h"
 	"Statics.h"
 
-1512339048 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\powerups.h
+1512362437 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\powerups.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -2618,7 +2618,7 @@
 	"Ball.h"
 	<math.h>
 
-1512133367 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\fireball.h
+1512362441 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\fireball.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -2629,7 +2629,7 @@
 	"Bat.h"
 	"Ball.h"
 
-1512361077 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameover.cpp
+1512362437 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\gameover.cpp
 	"Pop-Up.h"
 	"Button.h"
 	"GamePlay.h"
@@ -2653,7 +2653,7 @@
 	"Button.h"
 	"Statics.h"
 
-1512133362 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\throughball.h
+1512362441 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\throughball.h
 	"Object.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -2664,7 +2664,7 @@
 	"Bat.h"
 	"Ball.h"
 
-1512341781 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\levelselection.h
+1512362437 w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\levelselection.h
 	"ScreenManager.h"
 	"Button.h"
 	"Statics.h"
@@ -2678,7 +2678,7 @@
 	"Ball.h"
 	<math.h>
 
-1512355207 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\levelcomplete.cpp
+1512362437 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\levelcomplete.cpp
 	"Pop-Up.h"
 	"Button.h"
 	"GamePlay.h"
@@ -2686,7 +2686,7 @@
 	"LevelComplete.h"
 	<iostream>
 
-1512360830 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\levelselection.cpp
+1512362437 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\levelselection.cpp
 	"Pop-Up.h"
 	"Button.h"
 	"GamePlay.h"
@@ -2694,7 +2694,7 @@
 	"LevelSelection.h"
 	<iostream>
 
-1512349183 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\options.cpp
+1512362437 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\options.cpp
 	"Pop-Up.h"
 	"Button.h"
 	"GamePlay.h"
@@ -2703,7 +2703,7 @@
 	"DiskManager.h"
 	<iostream>
 
-1512357900 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\powerups.cpp
+1512362437 source:w:\habib university\sophomore\3rd semester\oop cs-224\final project\mainproject\brickbreaker\classes\powerups.cpp
 	"PowerUps.h"
 	"string"
 	<stdio.h>

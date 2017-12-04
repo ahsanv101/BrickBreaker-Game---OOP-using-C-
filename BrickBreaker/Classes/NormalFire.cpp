@@ -25,8 +25,6 @@ NormalFire::NormalFire(LTexture* image, float x, float y)
     this->width = spriteClips[ 0 ].w;
     this->height = spriteClips[ 0 ].h;
 
-    friction = 0.50f;
-
     alive  = true;
 }
 
