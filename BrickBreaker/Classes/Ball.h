@@ -14,28 +14,19 @@ class Ball : public Object
 {
     public:
         bool alive;
-        float dirx;
-        float diry;
-        float speedx;
-        float speedy;
-        float friction; //lower speed means more friction
-        bool shouldMove;
+        float dirx; //x-direction of ball
+        float diry; //y-direction of ball
+        float speedx; //speed in x- direction
+        float speedy; //speed in y- direction
+        float friction;
+        bool shouldMove; //checking move
         int BALL_SPEED = 9;
         BallType type;
-//        SDL_Rect spriteClips[ FLYING_FRAMES ];
-//        LTexture* spriteSheetTexture;
-//        void SetDirection(float dirx, float diry);
-
-//    public:
-//        Ball(LTexture* image, float x, float y);
-//        Ball();
-//        virtual ~Ball();
-//       // virtual void Move(int direction);
         virtual void Move(float x, float y) = 0;
         virtual void Render(long int frame, SDL_Renderer* gRenderer) = 0;
-        void SetDirection(float dirx, float diry);
+        void SetDirection(float dirx, float diry); //Changes direction when collides with object
         virtual void Move();
-        virtual void didCollide(CollisionInfo info) = 0;
+        virtual void didCollide(CollisionInfo info) = 0; // collision detection with objects. //changes direction of ball according to the object with which this collided
 };
 
 

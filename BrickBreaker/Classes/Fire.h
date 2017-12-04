@@ -16,19 +16,8 @@ class Fire :public Object
         bool alive;
         float speedx;
         float speedy;
-
-//
-//        enum ANIMATION_FRAMES {FLYING_FRAMES = 1};
-//        SDL_Rect spriteClips[ FLYING_FRAMES ];
-//        LTexture* spriteSheetTexture;
-
     public:
-
-
-//        void SetAlive(bool);
-//        bool GetAlive();
-       // virtual void Move(int direction) = 0;
-        virtual void Move()=0;
+        virtual void Move()=0; //moving fire in y-direction
         virtual void Render(long int frame, SDL_Renderer* gRenderer) = 0;
 };
 

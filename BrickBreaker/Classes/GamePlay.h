@@ -22,12 +22,13 @@ class GamePlay : public ScreenManager
 {
     public:
         GamePlay();
+        //level and lives
         GamePlay(SDL_Renderer* gRenderer, int levelNumber, int lifeCount = 3);
         GamePlay(SDL_Renderer* gRenderer, Ball* ball, Board* board, LTexture* backTexture, LTexture* batBallTexture, LTexture* buttonSprite, LTexture* fontSprite, int lifeCount= 3);
         GamePlay(SDL_Renderer* renderer, ShapeLevel levelShape, int lifeCount = 3);
         void show(long int frame);
         void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer);
-        void keyboardEvent(const Uint8* event, ScreenManager** selfPointer);
+        void keyboardEvent(const Uint8* event, ScreenManager** selfPointer); //keyboard events
         ~GamePlay();
 
         Board* getBoard() const;
@@ -46,6 +47,7 @@ class GamePlay : public ScreenManager
         void updateLifeButton();
         void allBallOperations(node* ballNode);
 
+        //all the spites
         LTexture* backgroundSprite;
         LTexture* batBallSpriteSheet;
         LTexture* PowerSpriteSheet;
@@ -73,12 +75,13 @@ class GamePlay : public ScreenManager
         CollisionType detectCollisionBetween(const SDL_Rect& wall, Ball*);
         CollisionType detectCollisionWithSides(Ball*);
         bool isBallAlive(Ball*);
-
+        //all music
         Mix_Chunk *medium = NULL;
         Mix_Chunk *powers = NULL;
         Mix_Chunk *smash = NULL;
         Mix_Chunk *missi = NULL;
         Mix_Chunk *fir = NULL;
+        //all powerups
         bool holdball;
         bool blast;
         bool mball;
