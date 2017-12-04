@@ -15,10 +15,10 @@ using namespace std;
 class FireBall :public Ball
 {
     public:
-        enum ANIMATION_FRAMES {FLYING_FRAMES = 3};
+        enum ANIMATION_FRAMES {FLYING_FRAMES = 3}; //
         SDL_Rect spriteClips[ FLYING_FRAMES ];
         LTexture* spriteSheetTexture;
-        //void SetDirection(float dirx, float diry);
+
 
     public:
         FireBall(LTexture* image, float x, float y);
@@ -26,9 +26,7 @@ class FireBall :public Ball
         virtual ~FireBall();
         void SetAlive(bool);
         bool GetAlive();
-       // virtual void Move(int direction);
         virtual void Move(float xx, float yy);
-
         virtual void Render(long int frame,SDL_Renderer* gRenderer);
         void didCollide(CollisionInfo info);
 };

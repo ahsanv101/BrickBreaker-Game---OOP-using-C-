@@ -20,13 +20,14 @@
 
 class GamePlay : public ScreenManager
 {
-    public:
+public:
+        //levels, lives, and loading from savedInstance
         GamePlay(SDL_Renderer* gRenderer, int levelNumber, int lifeCount = 3);
         GamePlay(SDL_Renderer* gRenderer, Queue* q, Board* board, LTexture* backTexture, LTexture* batBallTexture, LTexture* buttonSprite, LTexture* fontSprite, LTexture* PowerSpriteSheet, int levelNumber, int lifeCount = 3);
         GamePlay(SDL_Renderer* renderer, ShapeLevel levelShape, int lifeCount = 3);
         void show(long int frame);
         void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer);
-        void keyboardEvent(const Uint8* event, ScreenManager** selfPointer);
+        void keyboardEvent(const Uint8* event, ScreenManager** selfPointer); //keyboard events
         ~GamePlay();
 
         Board* getBoard() const;
@@ -50,6 +51,7 @@ class GamePlay : public ScreenManager
         void updateLifeButton();
         void allBallOperations(node* ballNode);
 
+        //all the spites
         LTexture* backgroundSprite;
         LTexture* batBallSpriteSheet;
         LTexture* PowerSpriteSheet;

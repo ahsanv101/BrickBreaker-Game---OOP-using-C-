@@ -18,17 +18,13 @@ class ThroughBall :public Ball
         enum ANIMATION_FRAMES {FLYING_FRAMES = 3};
         SDL_Rect spriteClips[ FLYING_FRAMES ];
         LTexture* spriteSheetTexture;
-        //void SetDirection(float dirx, float diry);
-
     public:
         ThroughBall(LTexture* image, float x, float y);
         ThroughBall();
         virtual ~ThroughBall();
         void SetAlive(bool);
         bool GetAlive();
-       // virtual void Move(int direction);
         virtual void Move(float xx, float yy);
-
         virtual void Render(long int frame,SDL_Renderer* gRenderer);
         void didCollide(CollisionInfo info);
 };

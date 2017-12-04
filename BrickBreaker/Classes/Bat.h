@@ -20,7 +20,6 @@ class Bat : public Object
         int bigwidth;
         int smallwidth;
         int normalwidth;
-        int height;
         float friction; //lower speed means more friction
 
         enum ANIMATION_FRAMES {FLYING_FRAMES = 1};
