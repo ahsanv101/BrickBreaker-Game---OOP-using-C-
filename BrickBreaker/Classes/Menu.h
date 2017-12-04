@@ -5,6 +5,7 @@
 #include "Button.h"
 #include "Statics.h"
 #include "Pop-Up.h"
+#include "SDL_mixer.h"
 
 
 class Menu : public ScreenManager
@@ -28,6 +29,8 @@ class Menu : public ScreenManager
         LTexture buttonSpriteTexture;
         bool loadMedia();
         Pop_Up* popup;
+        Mix_Music *gMusic = NULL;
+        Mix_Chunk *gScratch = NULL;
 
 
 };

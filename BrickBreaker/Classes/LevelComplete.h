@@ -19,6 +19,8 @@ class LevelComplete: public Pop_Up
         Button restart;
         Button nextLevel;
         Button quit;
+        Mix_Chunk *gScratch = NULL;
+        Mix_Chunk *gamewon = NULL;
         LTexture gSpriteSheetTexture;
         LTexture backSpriteSheetTexture;
         LTexture buttonSpriteTexture;

@@ -9,6 +9,7 @@ LevelComplete::LevelComplete(){
     renderer = NULL;
 }
 LevelComplete::LevelComplete(SDL_Renderer* renderer){
+
     this->renderer = renderer;
     if(loadMedia()){
         nextLevel = Button(" Next ", {(float)SCREEN_WIDTH/2, (float)(SCREEN_HEIGHT/2)}, &gSpriteSheetTexture, &buttonSpriteTexture, Brown);
@@ -21,6 +22,7 @@ LevelComplete::LevelComplete(SDL_Renderer* renderer){
 }
 void LevelComplete::show()
 {
+    Mix_PlayChannel( -1, gamewon, 0 );
     backSpriteSheetTexture.Render(275,180,0,0.0,NULL,SDL_FLIP_NONE,renderer);
     nextLevel.Draw(renderer);
     restart.Draw(renderer);
@@ -29,18 +31,22 @@ void LevelComplete::show()
 void LevelComplete::click(int x, int y, MouseEventType eventType, ScreenManager** parentPointer, Pop_Up** selfPointer){
     if(eventType == ClickDown){
         if(nextLevel.pointLiesInBounds(x,y)){
+                Mix_PlayChannel( -1, gScratch, 0 );
             nextLevel.setIsClicked(true);
             std::cout<<"nextLevel Button Down"<<std::endl;
         }else if(restart.pointLiesInBounds(x,y)){
+            Mix_PlayChannel( -1, gScratch, 0 );
             restart.setIsClicked(true);
             std::cout<<"Restart Button Down"<<std::endl;
         }else if(quit.pointLiesInBounds(x,y)){
+            Mix_PlayChannel( -1, gScratch, 0 );
             quit.setIsClicked(true);
             std::cout<<"Quit Button Down"<<std::endl;
         }
     }else if(eventType == ClickUp){
         GamePlay* gamePlay = dynamic_cast<GamePlay*>(*parentPointer);
         if(nextLevel.pointLiesInBounds(x,y) && nextLevel.getIsClicked()){
+
             std::cout<<"nextLevel Button Up"<<std::endl;
             *parentPointer = new GamePlay(this->renderer, gamePlay->getCurrentLevel()+1);
         }else if(restart.pointLiesInBounds(x,y) && restart.getIsClicked()){
@@ -83,5 +89,18 @@ bool LevelComplete::loadMedia()
         printf( "Failed to load sprite sheet texture!\n" );
 		return false;
     }
+    gamewon= Mix_LoadWAV( "sounds/game_won.wav" );
+	if( gamewon== NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		return false;
+	}
+	gScratch= Mix_LoadWAV( "sounds/click.mp3" );
+	if( gScratch == NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		return false;
+	}
+
 	return true;
 }

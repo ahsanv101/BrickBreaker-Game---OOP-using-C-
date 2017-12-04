@@ -6,9 +6,11 @@
 #include <iostream>
 
 GameOver::GameOver(){
+
     renderer = NULL;
 }
 GameOver::GameOver(SDL_Renderer* renderer){
+    //Mix_PlayChannel( -1, over, 0 );
     this->renderer = renderer;
     if(loadMedia()){
         restart = Button("Restart", {(float)SCREEN_WIDTH/2, (float)(SCREEN_HEIGHT/2)-50}, &gSpriteSheetTexture, &buttonSpriteTexture, Red);
@@ -20,6 +22,7 @@ GameOver::GameOver(SDL_Renderer* renderer){
 }
 void GameOver::show()
 {
+     Mix_PlayChannel( -1, over, 0 );
     backSpriteSheetTexture.Render(275,80,0,0.0,NULL,SDL_FLIP_NONE,renderer);
     restart.Draw(renderer);
     quit.Draw(renderer);
@@ -71,5 +74,11 @@ bool GameOver::loadMedia()
         printf( "Failed to load sprite sheet texture!\n" );
 		return false;
     }
+    over= Mix_LoadWAV( "sounds/gameover.wav" );
+	if(over == NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		return false;
+	}
 	return true;
 }

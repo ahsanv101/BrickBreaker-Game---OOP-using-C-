@@ -9,6 +9,7 @@ Options::Options(){
     renderer = NULL;
 }
 Options::Options(SDL_Renderer* renderer){
+
     this->renderer = renderer;
     if(loadMedia()){
         resume = Button("Resume", {(float)SCREEN_WIDTH/2, (float)(SCREEN_HEIGHT/2)-50}, &gSpriteSheetTexture, &buttonSpriteTexture, Green);
@@ -31,15 +32,20 @@ void Options::show()
 void Options::click(int x, int y, MouseEventType eventType, ScreenManager** parentPointer, Pop_Up** selfPointer){
     if(eventType == ClickDown){
         if(resume.pointLiesInBounds(x,y)){
+
+            Mix_PlayChannel( -1, gScratch, 0 );
             resume.setIsClicked(true);
             std::cout<<"Resume Button Down"<<std::endl;
         }else if(save.pointLiesInBounds(x,y)){
+            Mix_PlayChannel( -1, gScratch, 0 );
             save.setIsClicked(true);
             std::cout<<"Save Button Down"<<std::endl;
         }else if(restart.pointLiesInBounds(x,y)){
+            Mix_PlayChannel( -1, gScratch, 0 );
             restart.setIsClicked(true);
             std::cout<<"Restart Button Down"<<std::endl;
         }else if(quit.pointLiesInBounds(x,y)){
+            Mix_PlayChannel( -1, gScratch, 0 );
             quit.setIsClicked(true);
             std::cout<<"Quit Button Down"<<std::endl;
         }
@@ -88,5 +94,11 @@ bool Options::loadMedia()
         printf( "Failed to load sprite sheet texture!\n" );
 		return false;
     }
+    gScratch= Mix_LoadWAV( "sounds/click.mp3" );
+	if( gScratch == NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		return false;
+	}
 	return true;
 }

@@ -74,8 +74,11 @@ class GamePlay : public ScreenManager
         CollisionType detectCollisionWithSides(Ball*);
         bool isBallAlive(Ball*);
 
-        Mix_Chunk *gScratch = NULL;
         Mix_Chunk *medium = NULL;
+        Mix_Chunk *powers = NULL;
+        Mix_Chunk *smash = NULL;
+        Mix_Chunk *missi = NULL;
+        Mix_Chunk *fir = NULL;
         bool holdball;
         bool blast;
         bool mball;

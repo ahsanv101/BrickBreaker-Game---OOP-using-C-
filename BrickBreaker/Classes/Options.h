@@ -23,6 +23,8 @@ class Options: public Pop_Up
         LTexture gSpriteSheetTexture;
         LTexture backSpriteSheetTexture;
         LTexture buttonSpriteTexture;
+        Mix_Music *gMusic = NULL;
+        Mix_Chunk *gScratch = NULL;
 
     protected:
         bool loadMedia();

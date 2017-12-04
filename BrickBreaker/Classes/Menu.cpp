@@ -23,10 +23,16 @@ Menu::Menu(SDL_Renderer* renderer){
 
 }
 void Menu::show(long int frame){
+    if( Mix_PlayingMusic() == 0 )
+    {
+        //Play the music
+        Mix_PlayMusic( gMusic, -1 );
+    }
     backSpriteSheetTexture.Render(0,0,0,0.0,NULL,SDL_FLIP_NONE,renderer);
     newGame.Draw(renderer);
     loadGame.Draw(renderer);
     exitGame.Draw(renderer);
+
     if(popup){
         popup->show();
     }
@@ -38,12 +44,18 @@ void Menu::click(int x, int y, MouseEventType eventType, ScreenManager** selfPoi
     }
     if(eventType == ClickDown){
         if(newGame.pointLiesInBounds(x,y)){
+            Mix_PlayChannel( -1, gScratch, 0 );
+
             newGame.setIsClicked(true);
             std::cout<<"New Game Button Down"<<std::endl;
         }else if(loadGame.pointLiesInBounds(x,y)){
+            Mix_PlayChannel( -1, gScratch, 0 );
+
             loadGame.setIsClicked(true);
             std::cout<<"Load Game Button Down"<<std::endl;
         }else if(exitGame.pointLiesInBounds(x,y)){
+            Mix_PlayChannel( -1, gScratch, 0 );
+
             exitGame.setIsClicked(true);
             std::cout<<"Exit Game Button Down"<<std::endl;
         }
@@ -90,5 +102,17 @@ bool Menu::loadMedia()
         printf( "Failed to load sprite sheet texture!\n" );
 		return false;
     }
+    gMusic = Mix_LoadMUS( "sounds/theme.wav" );
+	if( gMusic == NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		return false;
+	}
+    gScratch= Mix_LoadWAV( "sounds/click.mp3" );
+	if( gScratch == NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		return false;
+	}
 	return true;
 }

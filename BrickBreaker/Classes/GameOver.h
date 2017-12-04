@@ -1,6 +1,6 @@
 #ifndef GAMEOVER_H_INCLUDED
 #define GAMEOVER_H_INCLUDED
-
+#include "SDL_mixer.h"
 #include "ScreenManager.h"
 #include "Button.h"
 #include "Statics.h"
@@ -21,6 +21,7 @@ class GameOver: public Pop_Up
         LTexture gSpriteSheetTexture;
         LTexture backSpriteSheetTexture;
         LTexture buttonSpriteTexture;
+        Mix_Chunk *over = NULL;
     protected:
         bool loadMedia();
 };

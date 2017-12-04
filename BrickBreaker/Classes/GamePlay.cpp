@@ -29,6 +29,7 @@
 
 GamePlay::GamePlay(SDL_Renderer* renderer, int levelNumber, int lifeCount)
 {
+    Mix_HaltMusic();
     this->lives = lifeCount;
     this->renderer = renderer;
     loadMedia();
@@ -85,6 +86,7 @@ GamePlay::GamePlay(SDL_Renderer* renderer, int levelNumber, int lifeCount)
 }
 GamePlay::GamePlay(SDL_Renderer* renderer, ShapeLevel levelShape, int lifeCount)
 {
+    Mix_HaltMusic();
     this->lives = lifeCount;
     this->renderer = renderer;
     loadMedia();
@@ -138,6 +140,7 @@ GamePlay::GamePlay(SDL_Renderer* renderer, ShapeLevel levelShape, int lifeCount)
     //CreateLevel(circle);
 }
 GamePlay::GamePlay(SDL_Renderer* gRenderer, Ball* ball, Board* board, LTexture* backTexture, LTexture* batBallTexture, LTexture* buttonSprite, LTexture* fontSprite, int lifeCount){
+
     this->lives = lifeCount;
     this->renderer = gRenderer;
     this->backgroundSprite = backTexture;
@@ -238,11 +241,13 @@ void GamePlay::show(long int frame)
     if (mismake)
     {
         Fire* fire =  new MissileFire(batBallSpriteSheet, Bat::GetInstance()->x, Bat::GetInstance()->y-23);
+        Mix_PlayChannel( -1,missi, 0 );
         MisActivate = true;
     }
     if (frame%10 ==0 && count<10 && firemake )
     {
         Fire* fire=new NormalFire(batBallSpriteSheet, Bat::GetInstance()->x, Bat::GetInstance()->y-23);
+        Mix_PlayChannel( -1, fir, 0 );
         q.Enqueue(fire);
         count++;
         blast = true;
@@ -285,6 +290,7 @@ void GamePlay::show(long int frame)
             PowerUps* power = dynamic_cast<PowerUps*>(qHead->unit);
             if(detectCollisionBetween(Bat::GetInstance(), power))
             {
+                 Mix_PlayChannel( -1, powers, 0 );
                 switch(power->random)
                 {
                     case 1: ThroughActivate=true;break;
@@ -316,6 +322,7 @@ void GamePlay::show(long int frame)
     shoot = false;
      if (MisActivate)
     {
+
         mismake = false;
     }
     if(board->isLevelComplete()){
@@ -609,6 +616,7 @@ void GamePlay::allBallOperations(node* ballNode){
 
     //Code for Ball-Bat Collision Detection
     if (detectCollisionBetween(Bat::GetInstance(), ball) && ball->shouldMove){
+            Mix_PlayChannel( -1, medium, 0 );
 //        Mix_PlayChannel( 1, medium, 0 );
         float ballcenterx = ball->x + ball->width / 2.0f;
         int hitx = ballcenterx - Bat::GetInstance()->x-12;
@@ -686,6 +694,36 @@ bool GamePlay::loadMedia(){
         printf( "Failed to load sprite sheet texture!\n" );
 		return false;
     }
+    medium= Mix_LoadWAV( "sounds/ball collision.wav" );
+	if( medium == NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		return false;
+	}
+	smash= Mix_LoadWAV( "sounds/brick smash.wav" );
+	if( smash== NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		return false;
+	}
+	powers= Mix_LoadWAV( "sounds/power up 2.wav" );
+	if( powers == NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		return false;
+	}
+	missi= Mix_LoadWAV( "sounds/Missile.wav" );
+	if( missi == NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		return false;
+	}
+	fir= Mix_LoadWAV( "sounds/fire.wav" );
+	if( fir == NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		return false;
+	}
 	return true;
 }
 bool GamePlay::detectCollisionBetween(Bat* bat, Ball* ball){

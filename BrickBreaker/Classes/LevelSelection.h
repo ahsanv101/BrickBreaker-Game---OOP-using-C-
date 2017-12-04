@@ -17,7 +17,8 @@ class LevelSelection: public Pop_Up
 
     private:
         Button l1,l2,l3,l4,l5,l6,l7,l8,l9,l10;
-        Button circleBtn,diamondBtn,waveBtn,backButton;
+        Mix_Chunk *gScratch = NULL;
+        Button circle,diamond,wave,backButton;
         LTexture gSpriteSheetTexture;
         LTexture backSpriteSheetTexture;
         LTexture buttonSpriteTexture;
