@@ -36,7 +36,7 @@ FireBall::FireBall(LTexture* image, float x, float y)
     this->width = spriteClips[ 0 ].w;
     this->height = spriteClips[ 0 ].h;
 
-    friction = 0.50f;
+   // friction = 0.50f;
     SetDirection(-1,-1);
 }
 
@@ -46,15 +46,15 @@ FireBall::~FireBall()
     spriteSheetTexture = NULL;
 }
 
-void FireBall::SetAlive(bool alive)
-{
-    this->alive = alive;
-}
-
-bool FireBall::GetAlive()
-{
-    return alive;
-}
+//void FireBall::SetAlive(bool alive)
+//{
+//    this->alive = alive;
+//}
+//
+//bool FireBall::GetAlive()
+//{
+//    return alive;
+//}
 
 
 void FireBall::Move(float xx, float yy)

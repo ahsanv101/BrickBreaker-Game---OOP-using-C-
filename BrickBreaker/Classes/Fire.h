@@ -13,7 +13,7 @@ using namespace std;
 class Fire :public Object
 {
     public:
-        bool alive;
+       // bool alive;
         float speedx;
         float speedy;
     public:

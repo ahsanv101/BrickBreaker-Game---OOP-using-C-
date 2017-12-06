@@ -17,13 +17,12 @@ public:
     Object();
     Object(SDL_Renderer* renderer);
     virtual ~Object(); //destroys all child class
-
     float x, y, width, height; //position and width and height
     MovingObjectType objectType;
     //virtual void Update(float delta);
     virtual void Render(long int frame, SDL_Renderer* renderer); //Renders object
-    virtual void Move()=0; //virtual functions to move
-    bool Collides(Object* other);
+    virtual void Move()=0; //virtual abstract functions to move
+
 protected:
     SDL_Renderer* renderer;
 

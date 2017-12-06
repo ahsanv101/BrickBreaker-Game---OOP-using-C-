@@ -34,8 +34,16 @@ void Ball::didCollide(CollisionInfo info){
     if(info.directionType == None){
         return;
     }
-    if(info.objectType == CollisionObjectBreakableBrickType || info.objectType == CollisionObjectUnbreakableBrickType || info.objectType == CollisionObjectWallType){
-        info.directionType == Vertical ? diry *= -1 : dirx *= -1;
-    }
+    if(info.objectType == CollisionObjectBreakableBrickType || info.objectType == CollisionObjectUnbreakableBrickType || info.objectType == CollisionObjectWallType)
+        {
+            if (info.directionType == Vertical)
+            {
+              diry *= -1;
+            }
+            else
+            {
+              dirx *= -1;
+            }
+        }
 }
 

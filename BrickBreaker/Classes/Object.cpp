@@ -22,10 +22,3 @@ void Entity::Update(float delta) {
 void Object::Render(long int frame, SDL_Renderer* renderer) {
 }
 
-bool Object::Collides(Object* other) {
-    if (x + width > other->x && x < other->x + other->width &&
-        y + height > other->y && y < other->y + other->height) {
-        return true;
-    }
-    return false;
-}

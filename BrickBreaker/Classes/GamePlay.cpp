@@ -40,9 +40,7 @@ void GamePlay::init(){
     smash = NULL;
     missi = NULL;
     fir = NULL;
-
     Mix_HaltMusic();
-
     shoot = false;
     mismake = false;
     MisActivate = false;
@@ -53,7 +51,6 @@ void GamePlay::init(){
     dspeedActivate = false;
     firemake = false;
     mball = false;
-
     this->side1.h=650;
     this->side1.w=5;
     this->side1.x=0;

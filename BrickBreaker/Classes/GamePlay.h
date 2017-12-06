@@ -29,7 +29,6 @@ public:
         void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer);
         void keyboardEvent(const Uint8* event, ScreenManager** selfPointer); //keyboard events
         ~GamePlay();
-
         Board* getBoard() const;
         Ball* getBall() const;
         SDL_Rect getBoardBounds();
@@ -38,8 +37,6 @@ public:
         void CreateLevel(ShapeLevel);
         int getLives() const;
         node* getQHead() const;
-
-
     private:
         void init();
 

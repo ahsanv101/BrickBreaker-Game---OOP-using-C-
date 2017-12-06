@@ -21,7 +21,7 @@ MissileFire::MissileFire(LTexture* image, float x, float y)
     this->width = spriteClips[ 0 ].w;
     this->height = spriteClips[ 0 ].h;
 
-    alive  = true;
+    //alive  = true;
 }
 
 
@@ -30,15 +30,15 @@ MissileFire::~MissileFire()
     spriteSheetTexture = NULL;
 }
 
-void MissileFire::SetAlive(bool alive)
-{
-    this->alive = alive;
-}
-
-bool MissileFire::GetAlive()
-{
-    return alive;
-}
+//void MissileFire::SetAlive(bool alive)
+//{
+//    this->alive = alive;
+//}
+//
+//bool MissileFire::GetAlive()
+//{
+//    return alive;
+//}
 
 
 void MissileFire::Move()

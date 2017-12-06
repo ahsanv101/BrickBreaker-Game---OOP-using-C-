@@ -21,8 +21,6 @@ class NormalFire :public Fire
         NormalFire(LTexture* image, float x, float y);
         NormalFire();
         virtual ~NormalFire();
-        void SetAlive(bool);
-        bool GetAlive();
         virtual void Move();
         virtual void Render(long int frame, SDL_Renderer* gRenderer);
 };

@@ -25,23 +25,13 @@ NormalFire::NormalFire(LTexture* image, float x, float y)
     this->width = spriteClips[ 0 ].w;
     this->height = spriteClips[ 0 ].h;
 
-    alive  = true;
+    //alive  = true;
 }
 
 
 NormalFire::~NormalFire()
 {
     spriteSheetTexture = NULL;
-}
-
-void NormalFire::SetAlive(bool alive)
-{
-    this->alive = alive;
-}
-
-bool NormalFire::GetAlive()
-{
-    return alive;
 }
 
 

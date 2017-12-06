@@ -17,21 +17,6 @@ NormalBall::NormalBall(LTexture* image, float x, float y)
     spriteClips[ 0 ].w = 24;
     spriteClips[ 0 ].h = 24;
 
-
-//    //Frame 1
-//    spriteClips[ 1 ].x = 128;
-//    spriteClips[ 1 ].y =   0;
-//    spriteClips[ 1 ].w = 128;
-//    spriteClips[ 1 ].h = 96;
-//
-//    //Frame 2
-//    spriteClips[ 2 ].x = 256;
-//    spriteClips[ 2 ].y = 0;
-//    spriteClips[ 2 ].w = 128;
-//    spriteClips[ 2 ].h = 96;
-
-//    x=0;
-//    y=0;
     this->x = x;
     this->y = y;
 
@@ -39,7 +24,7 @@ NormalBall::NormalBall(LTexture* image, float x, float y)
     this->height = spriteClips[ 0 ].h;
     this->shouldMove = false;
 
-    friction = 0.50f;
+    //friction = 0.50f;
     SetDirection(-1,-1);
 }
 
@@ -49,15 +34,15 @@ NormalBall::~NormalBall()
     spriteSheetTexture = NULL;
 }
 
-void NormalBall::SetAlive(bool alive)
-{
-    this->alive = alive;
-}
-
-bool NormalBall::GetAlive()
-{
-    return alive;
-}
+//void NormalBall::SetAlive(bool alive)
+//{
+//    this->alive = alive;
+//}
+//
+//bool NormalBall::GetAlive()
+//{
+//    return alive;
+//}
 
 
 

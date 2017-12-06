@@ -14,13 +14,12 @@ using namespace std;
 class Bat : public Object
 {
     public:
-        bool alive;
         float speedx;
         float speedy;
         int bigwidth;
         int smallwidth;
         int normalwidth;
-        float friction; //lower speed means more friction
+        //float friction; //lower speed means more friction
 
         enum ANIMATION_FRAMES {FLYING_FRAMES = 1};
         SDL_Rect spriteClips[ FLYING_FRAMES ];
@@ -37,9 +36,6 @@ class Bat : public Object
         void SetAlive(bool);
         bool GetAlive();
         virtual void Move(int direction);
-        float GetReflection(float hitx);
-        bool Collides(Board* other);
-        //virtual void Move(int direction, SDL_Rect& side);
         virtual void Move();
         virtual void Render(SDL_Renderer* gRenderer);
         static Bat* GetInstance();

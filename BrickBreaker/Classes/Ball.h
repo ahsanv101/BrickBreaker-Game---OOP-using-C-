@@ -16,12 +16,12 @@ using namespace std;
 class Ball : public Object
 {
     public:
-        bool alive;
+       // bool alive;
         float dirx; //x-direction of ball
         float diry; //y-direction of ball
         float speedx; //speed in x- direction
         float speedy; //speed in y- direction
-        float friction;
+        //float friction;
         bool shouldMove; //checking move
         int BALL_SPEED = 9;
         BallType type;

@@ -35,7 +35,7 @@ ThroughBall::ThroughBall(LTexture* image, float x, float y)
     this->width = spriteClips[ 0 ].w;
     this->height = spriteClips[ 0 ].h;
 
-    friction = 0.50f;
+    //friction = 0.50f;
     SetDirection(-1,-1);
 }
 
@@ -45,15 +45,15 @@ ThroughBall::~ThroughBall()
     spriteSheetTexture = NULL;
 }
 
-void ThroughBall::SetAlive(bool alive)
-{
-    this->alive = alive;
-}
-
-bool ThroughBall::GetAlive()
-{
-    return alive;
-}
+//void ThroughBall::SetAlive(bool alive)
+//{
+//    this->alive = alive;
+//}
+//
+//bool ThroughBall::GetAlive()
+//{
+//    return alive;
+//}
 
 
 void ThroughBall::Move(float xx, float yy)
