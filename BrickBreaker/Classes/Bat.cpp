@@ -79,11 +79,9 @@ void Bat::Move(int direction)
 void Bat::Move(){}
 
 
-void Bat::Render(SDL_Renderer* gRenderer)
+void Bat::Render(long int frame, SDL_Renderer* gRenderer)
 {
     spriteSheetTexture->Render( x - width/2, y - height/2, width == normalwidth ? &spriteClips[0] : (width == bigwidth ? &spriteClips2[0] : &spriteClips3[0]), 0.0, NULL, SDL_FLIP_NONE, gRenderer );
     SDL_SetRenderDrawColor( gRenderer,255,0,0, 255 );
-//    SDL_Rect rect = {x-width/2,y-height/2,width,height};
-//    SDL_RenderFillRect(gRenderer,&rect);
 }
 

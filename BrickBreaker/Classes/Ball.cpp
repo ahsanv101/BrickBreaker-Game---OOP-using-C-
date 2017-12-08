@@ -29,6 +29,7 @@ Ball* Ball::multiplyBall(LTexture* image){
     ball->type = type;
     ball->diry = diry;
     ball->dirx = dirx*-1;
+    return ball;
 }
 void Ball::didCollide(CollisionInfo info){
     if(info.directionType == None){

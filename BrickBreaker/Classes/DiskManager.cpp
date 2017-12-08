@@ -125,7 +125,6 @@ GamePlay* DiskManager::LoadGame(SDL_Renderer* renderer){
     //Reading ball info and loading them in the queue
     if(name2.find("Ball") != string::npos){
         while(readfile >> name2){
-            cout<<name2<<endl;
             if(name2.find(">") == string::npos){
                 break;
             }

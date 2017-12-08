@@ -2,7 +2,6 @@
 
 Object::Object(SDL_Renderer* renderer) {
     this->renderer = renderer;
-
     x = 0;
     y = 0;
     width = 1;
@@ -12,13 +11,5 @@ Object::Object(SDL_Renderer* renderer) {
 Object::~Object() {
 }
 Object::Object() {
-}
-
-/*
-void Entity::Update(float delta) {
-}
-*/
-
-void Object::Render(long int frame, SDL_Renderer* renderer) {
 }
 

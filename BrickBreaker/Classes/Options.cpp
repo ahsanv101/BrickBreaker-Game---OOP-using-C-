@@ -53,6 +53,7 @@ void Options::click(int x, int y, MouseEventType eventType, ScreenManager** pare
     }else if(eventType == ClickUp){
         if(resume.pointLiesInBounds(x,y) && resume.getIsClicked()){
             std::cout<<"Resume Button Up"<<std::endl;
+            delete this;
             *selfPointer = NULL;
         }else if(save.pointLiesInBounds(x,y) && save.getIsClicked()){
             std::cout<<"Save Button Up"<<std::endl;
@@ -62,14 +63,21 @@ void Options::click(int x, int y, MouseEventType eventType, ScreenManager** pare
             std::cout<<"Restart Button Up"<<std::endl;
             GamePlay* gamePlay = dynamic_cast<GamePlay*>(*parentPointer);
             if(gamePlay->getCurrentLevel()>0){
-                *parentPointer = new GamePlay(this->renderer, gamePlay->getCurrentLevel());
+                int levelCount = gamePlay->getCurrentLevel();
+                delete *parentPointer;
+                *parentPointer = new GamePlay(this->renderer, levelCount);
+                delete this;
             }else{
                 ShapeLevel shapeLevel = static_cast<ShapeLevel>(gamePlay->getCurrentLevel()*-1);
+                delete *parentPointer;
                 *parentPointer = new GamePlay(this->renderer, shapeLevel);
+                delete this;
             }
         }else if(quit.pointLiesInBounds(x,y) && quit.getIsClicked()){
             std::cout<<"Quit Button Up"<<std::endl;
+            delete *parentPointer;
             *parentPointer = new Menu(this->renderer);
+            delete this;
         }
         resume.setIsClicked(false);
         save.setIsClicked(false);

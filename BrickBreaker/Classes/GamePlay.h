@@ -23,7 +23,7 @@ class GamePlay : public ScreenManager
 public:
         //levels, lives, and loading from savedInstance
         GamePlay(SDL_Renderer* gRenderer, int levelNumber, int lifeCount = 3);
-        GamePlay(SDL_Renderer* gRenderer, Queue* q, Board* board, LTexture* backTexture, LTexture* batBallTexture, LTexture* buttonSprite, LTexture* fontSprite, LTexture* PowerSpriteSheet, int levelNumber, int lifeCount = 3);
+        GamePlay(SDL_Renderer* gRenderer, Queue* qu, Board* board, LTexture* backTexture, LTexture* batBallTexture, LTexture* buttonSprite, LTexture* fontSprite, LTexture* PowerSpriteSheet, int levelNumber, int lifeCount = 3);
         GamePlay(SDL_Renderer* renderer, ShapeLevel levelShape, int lifeCount = 3);
         void show(long int frame);
         void click(int x, int y, MouseEventType eventType, ScreenManager** selfPointer);
@@ -39,7 +39,6 @@ public:
         node* getQHead() const;
     private:
         void init();
-
         int lives;
         int levelNumber;
         bool isPaused;

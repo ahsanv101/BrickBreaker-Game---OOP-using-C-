@@ -49,22 +49,33 @@ void LevelComplete::click(int x, int y, MouseEventType eventType, ScreenManager*
             std::cout<<"nextLevel Button Up"<<std::endl;
             if(gamePlay->getCurrentLevel()>0){
                 int nextLevel = gamePlay->getCurrentLevel() == 10 ? 1 : gamePlay->getCurrentLevel()+1;
-                *parentPointer = new GamePlay(this->renderer, nextLevel, gamePlay->getLives());
+                int lives = gamePlay->getLives();
+                delete *parentPointer;
+                *parentPointer = new GamePlay(this->renderer, nextLevel, lives);
             }else{
-                *parentPointer = new GamePlay(this->renderer, 1, gamePlay->getLives());
+                int lives = gamePlay->getLives();
+                delete *parentPointer;
+                *parentPointer = new GamePlay(this->renderer, 1, lives);
             }
+            delete this;
         }else if(restart.pointLiesInBounds(x,y) && restart.getIsClicked()){
             std::cout<<"Restart Button Up"<<std::endl;
             if(gamePlay->getCurrentLevel()>0){
                 int nextLevel = gamePlay->getCurrentLevel() == 10 ? 1 : gamePlay->getCurrentLevel()+1;
-                *parentPointer = new GamePlay(this->renderer, nextLevel, gamePlay->getLives());
+                int lives = gamePlay->getLives();
+                delete *parentPointer;
+                *parentPointer = new GamePlay(this->renderer, nextLevel, lives);
             }else{
                 ShapeLevel shapeLevel = static_cast<ShapeLevel>(gamePlay->getCurrentLevel()*-1);
+                delete *parentPointer;
                 *parentPointer = new GamePlay(this->renderer, shapeLevel);
             }
+            delete this;
         }else if(quit.pointLiesInBounds(x,y) && quit.getIsClicked()){
             std::cout<<"Quit Button Up"<<std::endl;
+            delete *parentPointer;
             *parentPointer = new Menu(this->renderer);
+            delete this;
         }
         nextLevel.setIsClicked(false);
         restart.setIsClicked(false);

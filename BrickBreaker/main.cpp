@@ -42,7 +42,6 @@ bool init();
 bool loadMedia();
 LTexture splash;
 void close();
-bool checkCollision( SDL_Rect , SDL_Rect  );
 
 int main( int argc, char* args[] )
 {

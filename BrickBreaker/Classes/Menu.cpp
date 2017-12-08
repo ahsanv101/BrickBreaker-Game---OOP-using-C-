@@ -63,13 +63,14 @@ void Menu::click(int x, int y, MouseEventType eventType, ScreenManager** selfPoi
 
         if(newGame.pointLiesInBounds(x,y) && newGame.getIsClicked()){
             std::cout<<"New Game Button Up"<<std::endl;
-            //*selfPointer = new GamePlay(this->renderer);
             popup = new LevelSelection(this->renderer);
         }else if(loadGame.pointLiesInBounds(x,y) && loadGame.getIsClicked()){
-            std::cout<<"Load Game Button Up"<<std::endl;
+            std::cout<<"Load Game Button Up "<<std::endl;
+            delete *selfPointer;
             *selfPointer = DiskManager::LoadGame(this->renderer);
         }else if(exitGame.pointLiesInBounds(x,y) && exitGame.getIsClicked()){
             std::cout<<"Exit Game Button Up"<<std::endl;
+            delete *selfPointer;
             *selfPointer = NULL;
         }
         newGame.setIsClicked(false);

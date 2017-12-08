@@ -19,8 +19,7 @@ public:
     virtual ~Object(); //destroys all child class
     float x, y, width, height; //position and width and height
     MovingObjectType objectType;
-    //virtual void Update(float delta);
-    virtual void Render(long int frame, SDL_Renderer* renderer); //Renders object
+    virtual void Render(long int frame, SDL_Renderer* renderer)=0; //Renders object
     virtual void Move()=0; //virtual abstract functions to move
 
 protected:

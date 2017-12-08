@@ -44,14 +44,17 @@ void GameOver::click(int x, int y, MouseEventType eventType, ScreenManager** par
             delete *parentPointer;
             if(currentLevel>0){
                 *parentPointer = new GamePlay(this->renderer, currentLevel);
+                delete this;
             }else{
                 ShapeLevel shapeLevel = static_cast<ShapeLevel>(currentLevel*-1);
                 *parentPointer = new GamePlay(this->renderer, shapeLevel);
+                delete this;
             }
         }else if(quit.pointLiesInBounds(x,y) && quit.getIsClicked()){
             std::cout<<"Quit Button Up"<<std::endl;
             delete *parentPointer;
             *parentPointer = new Menu(this->renderer);
+            delete this;
         }
         restart.setIsClicked(false);
         quit.setIsClicked(false);

@@ -295,7 +295,6 @@ Brick* Board::removeBrickAt(Node* node, BallType balltype)
         }
         Brick* brick = node->brick;
         delete node;
-        cout<<"1"<<endl;
         return brick;
     }
     return NULL;

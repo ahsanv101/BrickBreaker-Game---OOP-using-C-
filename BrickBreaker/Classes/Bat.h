@@ -37,7 +37,7 @@ class Bat : public Object
         bool GetAlive();
         virtual void Move(int direction);
         virtual void Move();
-        virtual void Render(SDL_Renderer* gRenderer);
+        virtual void Render(long int frame, SDL_Renderer* gRenderer);
         static Bat* GetInstance();
 
         void SetValue(LTexture* image, float x, float y);

@@ -12,6 +12,7 @@ enum ButtonColorType {Brown, Green, Red, Life};
 enum CollisionObjectType {CollisionObjectBallType, CollisionObjectBreakableBrickType, CollisionObjectUnbreakableBrickType, CollisionObjectWallType, CollisionObjectBatType};
 enum MOTION {RIGHT, LEFT, UP, DOWN};
 enum MovingObjectType {ObjectFireType, ObjectMissileType, ObjectBallType, ObjectPowerType};
+enum PowerType {PowerThroughBall, PowerFireBall, PowerMultiBall, PowerFastBall, PowerSlowBall, PowerShrinkBat, PowerExpandBat, PowerMissile, PowerFire, PowerBomb, PowerLife};
 struct CollisionInfo { CollisionObjectType objectType; CollisionType directionType; Brick* brick = NULL;};
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 650;

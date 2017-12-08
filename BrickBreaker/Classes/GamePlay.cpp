@@ -51,6 +51,7 @@ void GamePlay::init(){
     dspeedActivate = false;
     firemake = false;
     mball = false;
+    isPaused = false;
     this->side1.h=650;
     this->side1.w=5;
     this->side1.x=0;
@@ -126,7 +127,8 @@ GamePlay::GamePlay(SDL_Renderer* gRenderer, Queue* qu, Board* board, LTexture* b
     this->PowerSpriteSheet = PowerSpriteSheet;
     this->board = board;
 
-    (this->q) = q;
+    delete this->q;
+    (this->q) = qu;
     updateLifeButton();
 
     x = board->x;
@@ -134,6 +136,7 @@ GamePlay::GamePlay(SDL_Renderer* gRenderer, Queue* qu, Board* board, LTexture* b
     width = board->width;
     height = board->height;
     Bat::GetInstance()->width = Bat::GetInstance()->normalwidth;
+    isPaused = true;
 }
 
 
@@ -144,7 +147,6 @@ GamePlay::~GamePlay(){
     if (PowerSpriteSheet) PowerSpriteSheet->Free();
     if (buttonSprite) buttonSprite->Free();
     if (fontSprite) fontSprite->Free();
-
     if (q) delete q;
     if (board) delete board;
 
@@ -178,7 +180,7 @@ void GamePlay::show(long int frame)
     SDL_RenderFillRect(renderer,&(this->side3));
 
     //Rendering Bat
-    Bat::GetInstance()->Render(renderer);
+    Bat::GetInstance()->Render(frame, renderer);
 
     //Rendering Bricks
     board->Display(renderer);
@@ -264,19 +266,19 @@ void GamePlay::show(long int frame)
             if(detectCollisionBetween(Bat::GetInstance(), power))
             {
                 Mix_PlayChannel( -1, powers, 0 );
-                switch(power->random)
+                switch(power->powerType)
                 {
-                    case 1: ThroughActivate=true;break;
-                    case 2: FireActivate=true;break;
-                    case 3: mball=true;break;
-                    case 4: IspeedActivate=true;break;
-                    case 5: dspeedActivate=true;break;
-                    case 7: Bat::GetInstance()->width = Bat::GetInstance()->bigwidth;break;
-                    case 8: Bat::GetInstance()->width = Bat::GetInstance()->smallwidth;break;
-                    case 9: mismake=true;break;
-                    case 10: firemake=true;break;
-                    case 11: lives--; updateLifeButton(); break;
-                    case 12: lives++; updateLifeButton(); break;
+                    case PowerThroughBall: ThroughActivate=true;break;
+                    case PowerFireBall: FireActivate=true;break;
+                    case PowerMultiBall: mball=true;break;
+                    case PowerFastBall: IspeedActivate=true;break;
+                    case PowerSlowBall: dspeedActivate=true;break;
+                    case PowerShrinkBat: Bat::GetInstance()->width = Bat::GetInstance()->smallwidth;break;
+                    case PowerExpandBat: Bat::GetInstance()->width = Bat::GetInstance()->bigwidth;break;
+                    case PowerMissile: mismake=true;break;
+                    case PowerFire: firemake=true;break;
+                    case PowerBomb: lives--; updateLifeButton(); break;
+                    case PowerLife: lives++; updateLifeButton(); break;
                 }
                 if(temp){
                     qHead->next->prev = qHead->prev;
@@ -335,12 +337,10 @@ void GamePlay::show(long int frame)
             Ball* ball = dynamic_cast<Ball*>(qHead2->unit);
             if(IspeedActivate)
             {
-                //dspeedActivate = false;
                 ball->BALL_SPEED = 15;
             }
             if (dspeedActivate)
             {
-                //IspeedActivate = false;
                 ball->BALL_SPEED = 5;
             }
             if(mball){
@@ -422,13 +422,19 @@ void GamePlay::click(int x, int y, MouseEventType eventType, ScreenManager** sel
 void GamePlay::keyboardEvent(const Uint8* event, ScreenManager** selfPointer){
     if(event[ SDL_SCANCODE_SPACE ]){
         shoot = true;
+        isPaused = false;
+    }
+    if(event[ SDL_SCANCODE_M ]){
+        if(!mball){
+            mball = true;
+        }
     }
     if(event[ SDL_SCANCODE_P ]){
         if(!popup){
             popup = new Options(this->renderer);
         }
     }
-    if(event[ SDL_SCANCODE_RIGHT ] || event[ SDL_SCANCODE_LEFT ]){
+    if((event[ SDL_SCANCODE_RIGHT ] || event[ SDL_SCANCODE_LEFT ]) && !isPaused){
         MOTION direction = event[ SDL_SCANCODE_RIGHT ] ? RIGHT : LEFT;
         if(event[ SDL_SCANCODE_RIGHT ]){
             if(Bat::GetInstance()->x+Bat::GetInstance()->width/2>=this->side3.x || popup){return;}
@@ -475,11 +481,10 @@ void GamePlay::allBallOperations(node* ballNode){
             Mix_PlayChannel( -1, smash, 0 );
         }
         if(info.directionType != None && info.objectType == CollisionObjectBreakableBrickType && info.brick){
-            if(rand()%100<5){
+            if(rand()%100<40){
 
                 PowerUps* power = new PowerUps(PowerSpriteSheet, ball->x, ball->y);
                 q->Enqueue(power);
-                cout<<"2(";
             }
         }
     }
@@ -640,7 +645,6 @@ void GamePlay::allBallOperations(node* ballNode){
         {
             ball->diry*=-1;
         }
-
     }
     if(shoot){
         ball->shouldMove = true;
@@ -716,7 +720,7 @@ bool GamePlay::detectCollisionBetween(Bat* bat, Ball* ball){
     bool isInXRange = (ball->x+(ball->width) >= bat->x-(bat->width/2)) && (ball->x-(ball->width/2)) <= (bat->x + (bat->width/2));
     float batOriginY = bat->y - bat->height/2;
     float ballMaxY = ball->y + ball->height/2;
-    return isInXRange && ballMaxY-batOriginY <= 3 && ballMaxY-batOriginY > -1;
+    return isInXRange && ballMaxY-batOriginY < ball->BALL_SPEED && ballMaxY-batOriginY >= 0;
 }
 CollisionType GamePlay::detectCollisionWithSides(Ball* ball){
     CollisionType type = detectCollisionBetween(side2, ball);

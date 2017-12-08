@@ -112,57 +112,70 @@ void LevelSelection::click(int x, int y, MouseEventType eventType, ScreenManager
             std::cout<<"L1 Button Up"<<std::endl;
             delete *parentPointer;
             *parentPointer = new GamePlay(this->renderer, 1);
-            //*selfPointer = NULL;
+            delete this;
         }else if(l2.pointLiesInBounds(x,y) && l2.getIsClicked()){
             std::cout<<"L2 Button Up"<<std::endl;
             delete *parentPointer;
             *parentPointer = new GamePlay(this->renderer, 2);
+            delete this;
         }else if(l3.pointLiesInBounds(x,y) && l3.getIsClicked()){
             std::cout<<"L3 Button Up"<<std::endl;
             delete *parentPointer;
             *parentPointer = new GamePlay(this->renderer, 3);
+            delete this;
         }else if(l4.pointLiesInBounds(x,y) && l4.getIsClicked()){
             std::cout<<"L4 Button Up"<<std::endl;
             delete *parentPointer;
             *parentPointer = new GamePlay(this->renderer, 4);
+            delete this;
         }else if(l5.pointLiesInBounds(x,y) && l5.getIsClicked()){
             std::cout<<"L5 Button Up"<<std::endl;
             delete *parentPointer;
             *parentPointer = new GamePlay(this->renderer, 5);
+            delete this;
         }else if(l6.pointLiesInBounds(x,y) && l6.getIsClicked()){
             std::cout<<"L6 Button Up"<<std::endl;
             delete *parentPointer;
             *parentPointer = new GamePlay(this->renderer, 6);
+            delete this;
         }else if(l7.pointLiesInBounds(x,y) && l7.getIsClicked()){
             std::cout<<"L7 Button Up"<<std::endl;
             delete *parentPointer;
             *parentPointer = new GamePlay(this->renderer, 7);
+            delete this;
         }else if(l8.pointLiesInBounds(x,y) && l8.getIsClicked()){
             std::cout<<"L8 Button Up"<<std::endl;
             delete *parentPointer;
             *parentPointer = new GamePlay(this->renderer, 8);
+            delete this;
         }else if(l9.pointLiesInBounds(x,y) && l9.getIsClicked()){
             std::cout<<"L9 Button Up"<<std::endl;
             delete *parentPointer;
             *parentPointer = new GamePlay(this->renderer, 9);
+            delete this;
         }else if(l10.pointLiesInBounds(x,y) && l10.getIsClicked()){
             std::cout<<"L10 Button Up"<<std::endl;
             delete *parentPointer;
             *parentPointer = new GamePlay(this->renderer, 10);
+            delete this;
         }else if(circleBtn.pointLiesInBounds(x,y) && circleBtn.getIsClicked()){
             std::cout<<"Circle Button Up"<<std::endl;
             delete *parentPointer;
             *parentPointer = new GamePlay(this->renderer, circle);
+            delete this;
         }else if(diamondBtn.pointLiesInBounds(x,y) && diamondBtn.getIsClicked()){
             std::cout<<"Diamond Button Up"<<std::endl;
             delete *parentPointer;
             *parentPointer = new GamePlay(this->renderer, diamond);
+            delete this;
         }else if(waveBtn.pointLiesInBounds(x,y) && waveBtn.getIsClicked()){
             std::cout<<"Wave Button Up"<<std::endl;
             delete *parentPointer;
             *parentPointer = new GamePlay(this->renderer, wave);
+            delete this;
         }else if(backButton.pointLiesInBounds(x,y) && backButton.getIsClicked()){
             std::cout<<"Back Button Up"<<std::endl;
+            delete this;
             *selfPointer= NULL;
         }
         l1.setIsClicked(false);
