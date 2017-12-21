@@ -168,6 +168,9 @@ bool Board::detectCollisionWithBricks(Point firePos, FireType fireType){
     }
     return false;
 }
+
+int previousX = -1;
+int previousY = -1;
 CollisionType Board::detectCollisionWithBrick(Point objectPos, Point objectSize, Node* brickNode){
     int i = brickNode->position;
     int j = brickNode->y;
@@ -182,12 +185,22 @@ CollisionType Board::detectCollisionWithBrick(Point objectPos, Point objectSize,
     //Vertical Collision Detection
     if(isInXRange){
         bool didCollide = (brickPos.y > objectPos.y && brickPos.y < objectDestPoint.y) || (brickDestPoint.y > objectPos.y && brickDestPoint.y < objectDestPoint.y);
+        if(didCollide && previousX == i && previousY == j){
+            cout<<"Ball collided to brick of position("<<i<<","<<j<<") and ball origin ("<<objectPos.x<<","<<objectPos.y<<")"<<endl;
+        }
+        previousX = i;
+        previousY = j;
         return didCollide ? Vertical : None;
     }
     //Horizontal Collision Detection
     bool isInYRange = (brickPos.y <= objectPos.y && brickDestPoint.y >= objectCenterPoint.y) || (brickPos.y <= objectCenterPoint.y && brickDestPoint.y >= objectDestPoint.y);
     if(isInYRange){
         bool didCollide = (brickPos.x > objectPos.x && brickPos.x < objectDestPoint.x) || (brickDestPoint.x > objectPos.x && brickDestPoint.x < objectDestPoint.x);
+        if(didCollide && previousX == i && previousY == j){
+            cout<<"Ball collided to brick of position("<<i<<","<<j<<") and ball origin ("<<objectPos.x<<","<<objectPos.y<<")"<<endl;
+        }
+        previousX = i;
+        previousY = j;
         return didCollide ? Horizontal : None;
     }
     return None;

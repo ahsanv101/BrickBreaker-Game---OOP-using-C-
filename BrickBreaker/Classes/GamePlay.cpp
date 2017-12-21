@@ -797,7 +797,7 @@ void GamePlay::CreateLevel(ShapeLevel shapelevel){
                     brick->type=rand()%3;
                     brick->breaktype=bricktype;
                     brick->state = true;
-                    board->Enqueue(brick, j, i);
+                    board->Enqueue(brick, 3+j, i);
                 }
                 else
                 {
@@ -825,7 +825,7 @@ void GamePlay::CreateLevel(ShapeLevel shapelevel){
                 brick->type=rand()%3;
                 brick->breaktype=bricktype;
                 brick->state = true;
-                board->Enqueue(brick, space+i, k-1);
+                board->Enqueue(brick, space+i+3, k-1);
             }
         }
 
@@ -844,7 +844,7 @@ void GamePlay::CreateLevel(ShapeLevel shapelevel){
                 brick->type=rand()%3;
                 brick->breaktype=bricktype;
                 brick->state = true;
-                board->Enqueue(brick, space+i-2, k+n-1);
+                board->Enqueue(brick, space+i-2+3, k+n-1);
             }
         }
     }

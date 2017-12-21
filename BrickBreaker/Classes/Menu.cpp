@@ -49,8 +49,10 @@ void Menu::click(int x, int y, MouseEventType eventType, ScreenManager** selfPoi
             newGame.setIsClicked(true);
             std::cout<<"New Game Button Down"<<std::endl;
         }else if(loadGame.pointLiesInBounds(x,y)){
-            Mix_PlayChannel( -1, gScratch, 0 );
-
+            ScreenManager* loadedGame = DiskManager::LoadGame(this->renderer);
+            if(!loadedGame){
+                Mix_PlayChannel( -1, ggScratch, 0 );
+            }
             loadGame.setIsClicked(true);
             std::cout<<"Load Game Button Down"<<std::endl;
         }else if(exitGame.pointLiesInBounds(x,y)){
@@ -66,8 +68,11 @@ void Menu::click(int x, int y, MouseEventType eventType, ScreenManager** selfPoi
             popup = new LevelSelection(this->renderer);
         }else if(loadGame.pointLiesInBounds(x,y) && loadGame.getIsClicked()){
             std::cout<<"Load Game Button Up "<<std::endl;
-            delete *selfPointer;
-            *selfPointer = DiskManager::LoadGame(this->renderer);
+            ScreenManager* loadedGame = DiskManager::LoadGame(this->renderer);
+            if(loadedGame){
+                delete *selfPointer;
+                *selfPointer = loadedGame;
+            }
         }else if(exitGame.pointLiesInBounds(x,y) && exitGame.getIsClicked()){
             std::cout<<"Exit Game Button Up"<<std::endl;
             delete *selfPointer;
@@ -112,6 +117,12 @@ bool Menu::loadMedia()
 		return false;
 	}
     gScratch= Mix_LoadWAV( "sounds/click.mp3" );
+	if( gScratch == NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		return false;
+	}
+	ggScratch= Mix_LoadWAV( "sounds/error.mp3" );
 	if( gScratch == NULL )
 	{
 		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );

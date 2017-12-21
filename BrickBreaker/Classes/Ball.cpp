@@ -39,12 +39,13 @@ void Ball::didCollide(CollisionInfo info){
         {
             if (info.directionType == Vertical)
             {
-              diry *= -1;
+                diry *= -1;
             }
             else
             {
-              dirx *= -1;
+                dirx *= -1;
             }
+            this->Move();
         }
 }
 

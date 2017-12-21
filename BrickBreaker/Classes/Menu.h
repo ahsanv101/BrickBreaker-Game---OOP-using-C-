@@ -31,6 +31,7 @@ class Menu : public ScreenManager
         Pop_Up* popup;
         Mix_Music *gMusic = NULL;
         Mix_Chunk *gScratch = NULL;
+        Mix_Chunk *ggScratch = NULL;
 
 
 };
